@@ -1,0 +1,270 @@
+/* Gruvbox Color Palette */
+:root {
+  /* Dark background colors */
+  --bg-hard: #1d2021;
+  --bg-medium: #282828;
+  --bg-soft: #32302f;
+ 
+  /* Light foreground colors */
+  --fg-hard: #ebdbb2;
+  --fg-medium: #d5c4a1;
+  --fg-soft: #bdae93;
+ 
+  /* Grayscale */
+  --gray0: #fbf1c7;
+  --gray1: #ebdbb2;
+  --gray2: #d5c4a1;
+  --gray3: #bdae93;
+  --gray4: #a89984;
+  --gray5: #928374;
+  --gray6: #665c54;
+  --gray7: #504945;
+  --gray8: #3c3836;
+  --gray9: #282828;
+  --gray10: #1d2021;
+ 
+  /* Colors */
+  --red: #cc241d;
+  --red-bright: #fb4934;
+  --green: #98971a;
+  --green-bright: #b8bb26;
+  --yellow: #d79921;
+  --yellow-bright: #fabd2f;
+  --blue: #458588;
+  --blue-bright: #83a598;
+  --purple: #b16286;
+  --purple-bright: #d3869b;
+  --aqua: #689d6a;
+  --aqua-bright: #8ec07c;
+  --orange: #d65d0e;
+  --orange-bright: #fe8019;
+ 
+  /* Semantic colors */
+  --primary: var(--blue);
+  --primary-bright: var(--blue-bright);
+  --secondary: var(--purple);
+  --secondary-bright: var(--purple-bright);
+  --accent: var(--orange);
+  --accent-bright: var(--orange-bright);
+  --success: var(--green);
+  --success-bright: var(--green-bright);
+  --warning: var(--yellow);
+  --warning-bright: var(--yellow-bright);
+  --error: var(--red);
+  --error-bright: var(--red-bright);
+ 
+  /* Base colors */
+  --background: var(--bg-medium);
+  --surface: var(--bg-soft);
+  --text: var(--fg-medium);
+  --text-secondary: var(--fg-soft);
+  --border: var(--gray7);
+}
+
+body {
+  background-color: var(--background);
+  color: var(--text);
+  font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+  margin: 0;
+  padding: 0;
+}
+
+
+.page-header {
+  background: var(--bg-hard);
+  padding: 2rem 0;
+  border-bottom: 2px solid var(--border);
+  margin-bottom: 2rem;
+}
+
+.section {
+  margin-bottom: 3rem;
+}
+
+.title {
+  color: var(--fg-hard);
+  font-size: 2.5rem;
+  font-weight: 700;
+  margin-bottom: 1rem;
+}
+
+.subtitle {
+  color: var(--fg-medium);
+  font-size: 1.25rem;
+  font-weight: 400;
+  margin-bottom: 0.5rem;
+}
+
+.text-secondary {
+  color: var(--text-secondary);
+}
+
+
+
+.anime-info {
+  padding: 1rem;
+}
+
+
+.anime-meta {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 0.5rem;
+}
+
+.anime-year {
+  color: var(--text-secondary);
+  font-size: 0.875rem;
+}
+
+.anime-episodes {
+  color: var(--text-secondary);
+  font-size: 0.875rem;
+}
+
+/* Badges */
+.badge {
+  display: inline-block;
+  padding: 0.25rem 0.5rem;
+  border-radius: 4px;
+  font-size: 0.75rem;
+  font-weight: 600;
+  text-transform: uppercase;
+}
+
+.badge-rating {
+  background: var(--warning);
+  color: var(--bg-hard);
+}
+
+.badge-status {
+  background: var(--success);
+  color: var(--bg-hard);
+}
+
+.badge-genre {
+  background: var(--surface);
+  color: var(--fg-medium);
+  border: 1px solid var(--border);
+}
+
+/* Tags */
+.genres {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.5rem;
+  margin-top: 0.5rem;
+}
+
+.genre-tag {
+  background: var(--bg-soft);
+  color: var(--fg-medium);
+  padding: 0.25rem 0.5rem;
+  border-radius: 12px;
+  font-size: 0.75rem;
+  border: 1px solid var(--border);
+}
+
+.btn {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  padding: 0.75rem 1.5rem;
+  border-radius: 6px;
+  font-weight: 600;
+  text-decoration: none;
+  border: none;
+  transition: all 0.2s ease;
+  font-size: 20px;
+  background-color: var(--yellow);
+  color: white;
+}
+
+.btn:hover{
+  background-color: var(--yellow-bright);
+}
+
+.btn-primary {
+  background: var(--primary);
+  color: var(--fg-hard);
+}
+
+.btn-primary:hover {
+  background: var(--primary-bright);
+}
+
+.btn-secondary {
+  background: var(--surface);
+  color: var(--fg-medium);
+  border: 1px solid var(--border);
+}
+
+.btn-secondary:hover {
+  background: var(--bg-soft);
+  border-color: var(--primary);
+}
+
+/* Search and Filters */
+.search-bar {
+  display: flex;
+  gap: 1rem;
+  margin-bottom: 2rem;
+}
+
+.search-input {
+  flex: 1;
+  padding: 0.75rem 1rem;
+  background: var(--surface);
+  border: 1px solid var(--border);
+  border-radius: 6px;
+  color: var(--text);
+  font-size: 1rem;
+}
+
+.search-input:focus {
+  outline: none;
+  border-color: var(--primary);
+  box-shadow: 0 0 0 2px rgba(69, 133, 136, 0.2);
+}
+
+.filter-section {
+  background: var(--surface);
+  padding: 1.5rem;
+  border-radius: 8px;
+  border: 1px solid var(--border);
+  margin-bottom: 2rem;
+}
+
+/* Rating Stars */
+.rating {
+  display: flex;
+  gap: 0.25rem;
+  color: var(--warning);
+}
+
+/* Loading State */
+.loading {
+  display: flex;
+  justify-content: center;
+  padding: 2rem;
+  color: var(--text-secondary);
+}
+
+/* Responsive */
+@media (max-width: 768px) {
+  .anime-grid {
+    grid-template-columns: repeat(auto-fill, minmax(150px, 1fr));
+    gap: 1rem;
+  }
+  
+  .search-bar {
+    flex-direction: column;
+  }
+  
+  .title {
+    font-size: 2rem;
+  }
+}
+
+/* You can add global styles to this file, and also import other style files */

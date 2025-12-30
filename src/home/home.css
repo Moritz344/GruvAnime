@@ -1,0 +1,21 @@
+.container{
+  margin-top: 100px;
+}
+.anime-grid {
+  display: grid;
+  justify-content: center;
+  grid-template-columns: repeat(8,230px);
+  gap: 0px;
+  margin: 50px;
+  margin-top: 20px;
+}
+
+.anime-grid-rec {
+  display: grid;
+  justify-content: center;
+  grid-template-columns: repeat(8,230px);
+  margin: 50px;
+  margin-top: 20px;
+  border-radius: 10px;
+}
+

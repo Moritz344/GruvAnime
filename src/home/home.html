@@ -1,0 +1,20 @@
+<app-topbar></app-topbar>
+<div class="container">
+    @if (topAnimeData) {
+    <h1 style="display: flex;justify-content: center; margin-bottom:0px">Popular Anime </h1>
+    <div class="anime-grid">
+      @for (data of topAnimeData; track $index) {
+          <app-popular [data]="data"></app-popular>
+      }
+    </div>
+    }
+
+    @if (recAnimeData) {
+    <h1 style="display: flex;justify-content: center; margin-bottom:0px">Recent Anime Recommendations</h1>
+    <div class="anime-grid-rec">
+      @for (data of recAnimeData; track $index) {
+          <app-anime-rec [data]="data"></app-anime-rec>
+      }
+    </div>
+    }
+</div>

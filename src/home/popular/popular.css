@@ -1,0 +1,43 @@
+
+
+.anime-card {
+  border-radius: 8px;
+  overflow: hidden;
+  border: 1px solid var(--border);
+  transition: transform 0.2s ease, box-shadow 0.2s ease;
+  cursor: pointer;
+}
+
+.anime-card {
+  width: 200px;
+  height: 300px;
+}
+
+.anime-items{
+  position: relative;
+}
+
+.anime-title {
+  width: 200px;
+  height: 300px;
+  position: absolute;
+  top: 240px;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  background: linear-gradient(to bottom, rgba(0, 0, 0, 0.8), transparent);
+  padding: 1rem 0.5rem 0.5rem;
+}
+
+.anime-title span {
+  color: white;
+  font-size: 0.9rem;
+  font-weight: 600;
+  text-shadow: 1px 1px 2px rgba(0, 0, 0, 0.8);
+}
+
+.anime-card:hover {
+  transform: translateY(-8px) scale(1.04);
+  border-color: var(--primary);
+}
+

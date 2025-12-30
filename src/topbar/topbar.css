@@ -1,0 +1,33 @@
+.container{
+  position: absolute;
+  left: 15px;
+  top: 30px;
+  right: 0px;
+  margin: 0 auto;
+  padding: 0 1rem;
+}
+.container-items{
+  display: flex;
+  flex-direction: row;
+  gap: 10px;
+  transition: 0.3s ease;
+}
+.container-items a{
+}
+
+.container-items img{
+  float: left;
+  margin-right: 5px;
+  margin-bottom:2px;
+}
+
+.github{
+  position: absolute;
+  top: 0;
+  right: 70px;
+}
+
+
+.container-items button:hover{
+  transform: scale(1.04);
+}
