@@ -3,11 +3,29 @@
 
 .items img{
   float: right;
-  width: 200px;
-  height: 200px;
+  width: 250px;
+  height: 250px;
   object-fit: cover;
   border-radius: 10px;
-  margin-left: 5px;
+  margin-right: -20px;
+  margin-top: -20px;
+  mask: linear-gradient(to right, transparent 0%, transparent 10%, black 50%, black 100%);
+}
+
+.genre-container{
+  display: flex;
+  flex-direction: row;
+  gap: 5px;
+  color: white;
+  position: absolute;
+  bottom: 20px;
+  left: 20px;
+}
+
+.genre{
+  background-color: var(--green);
+  padding: 5px;
+  border-radius: 10px;
 }
 
 .items h1{
@@ -16,9 +34,10 @@
 
 .desc{
   margin-top: 5px;
-  height: 270px;
+  height: 120px;
+  max-height: 120px;
   color: white;
-  font-size: 20px;
+  font-size: 15px;
   font-weight: bold;
 }
 
@@ -31,6 +50,7 @@
   box-sizing: border-box;
   margin-right: 50px;
   transition: 0.3s ease;
+  position: relative;
 }
 
 .items:hover{

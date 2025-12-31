@@ -5,5 +5,11 @@
     <div class="desc">
       <p>{{ trimmedDesc }}</p>
     </div>
+      <div class="genre-container">
+      @for (genre of data.genres; track $index) {
+          <span class="genre">{{ genre.name }} </span>
+      }
+      </div>
+
   </div>
 </div>

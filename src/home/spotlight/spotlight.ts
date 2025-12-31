@@ -28,6 +28,7 @@ export class Spotlight implements OnInit {
       } else {
         this.trimmedTitel = this.data.title;
       }
+      console.log(this.data);
     }
   }
 
