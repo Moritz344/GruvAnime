@@ -1,1 +1,9 @@
-<p>spotlight works!</p>
+<div class="container" *ngIf="data">
+  <div class="items">
+    <img draggable="false" [src]="data.images?.jpg?.image_url">
+    <h1>{{ data.title }}</h1>
+    <div class="desc">
+      <p>{{ trimmedDesc }}</p>
+    </div>
+  </div>
+</div>

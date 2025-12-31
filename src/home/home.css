@@ -1,14 +1,76 @@
 .container{
   margin-top: 100px;
 }
+
+body{
+}
+
 .anime-grid {
   display: grid;
-  justify-content: center;
-  grid-template-columns: repeat(8,230px);
-  gap: 0px;
-  margin: 50px;
-  margin-top: 20px;
+  grid-template-columns: repeat(15,1fr);
+  gap: 20px;
+  overflow-x: auto;
+  overflow-y: auto;
+  scrollbar-width: none; 
+  -ms-overflow-style: none;
+  cursor: grab;
+  user-select: none;
+  padding: 10px;
 }
+
+
+.spotlight-container {
+  position: relative;
+  width: 100%;
+  margin: 30px 20px;
+}
+
+.scroll-buttons{
+  display: flex;
+  justify-content: right;
+  margin-top: 20px;
+  margin-right: 40px;
+  gap: 5px;
+}
+
+.right{
+  transform: rotate(180deg);
+}
+
+.scroll-buttons button{
+  background-color: transparent;
+  border-radius: 20px;
+  border: 1px solid white;
+  width: 30px;
+  height: 30px;
+  opacity: 0.7;
+}
+
+.scroll-buttons img{
+  width: 15px;
+  height: 15px;
+}
+
+.scroll-buttons button:hover{
+  opacity: 1;
+  transform: scale(1.02);
+}
+
+.spotlight-grid{
+  display: flex;
+  overflow-x: auto;
+  overflow-y: hidden;
+  scrollbar-width: none; 
+  -ms-overflow-style: none;
+  cursor: grab;
+  user-select: none;
+  padding: 10px;
+}
+
+.spotlight-grid::-webkit-scrollbar {
+  display: none; 
+}
+
 
 .anime-grid-rec {
   display: grid;

@@ -1,20 +1,60 @@
 <app-topbar></app-topbar>
 <div class="container">
-    @if (topAnimeData) {
-    <h1 style="display: flex;justify-content: center; margin-bottom:0px">Popular Anime </h1>
-    <div class="anime-grid">
-      @for (data of topAnimeData; track $index) {
-          <app-popular [data]="data"></app-popular>
-      }
+    <div class="spotlight-container">
+      <div class="spotlight-grid" 
+           #spotlightGrid
+           (mousedown)="startDrag($event,spotlightGrid)"
+           (mousemove)="drag($event,spotlightGrid)"
+           (mouseup)="endDrag(spotlightGrid)"
+           (mouseleave)="endDrag(spotlightGrid)"
+           >
+       @for (d of spotlightData; track $index) {
+          <app-spotlight [data]="d"></app-spotlight>
+        }
+      </div>
+      <div class="scroll-buttons">
+        <button (click)="scroll('left',spotlightGrid)"><img class="left" src="arrow.svg"></button>
+        <button (click)="scroll('right',spotlightGrid)"><img class="right" src="arrow.svg"></button>
+      </div>
     </div>
+
+    @if (topAnimeData) {
+    <h1 style="display: flex;justify-content: left; margin-bottom:0px;margin-left: 10px">Popular Anime </h1>
+      <div class="anime-grid" #popular
+        (mousedown)="startDrag($event,popular)"
+        (mousemove)="drag($event,popular)"
+        (mouseup)="endDrag(popular)"
+        (mouseleave)="endDrag(popular)">
+
+        @for (data of topAnimeData; track $index) {
+            <app-anime-block [data]="data"></app-anime-block>
+        }
+        </div>
     }
+      <div class="scroll-buttons">
+        <button (click)="scroll('left',popular.nativeElement)"><img class="left" src="arrow.svg"></button>
+        <button (click)="scroll('right',popular.nativeElement)"><img class="right" src="arrow.svg"></button>
+      </div>
 
     @if (recAnimeData) {
-    <h1 style="display: flex;justify-content: center; margin-bottom:0px">Recent Anime Recommendations</h1>
-    <div class="anime-grid-rec">
+    <h1 style="display: flex;justify-content: left; margin-bottom:0px;margin-left: 10px">Recent Anime Recommendations</h1>
+    <div class="anime-grid" #rec
+      (mousedown)="startDrag($event,rec)"
+      (mousemove)="drag($event,rec)"
+      (mouseup)="endDrag(rec)"
+      (mouseleave)="endDrag(rec)"
+
+    >
       @for (data of recAnimeData; track $index) {
-          <app-anime-rec [data]="data"></app-anime-rec>
+          <app-anime-block [data]="data"></app-anime-block>
       }
     </div>
     }
+      <div class="scroll-buttons">
+        <button (click)="scroll('left',rec.nativeElement)"><img class="left" src="arrow.svg"></button>
+        <button (click)="scroll('right',rec.nativeElement)"><img class="right" src="arrow.svg"></button>
+      </div>
+      <br>
+      <br>
+      <br>
 </div>
