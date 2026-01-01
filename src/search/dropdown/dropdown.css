@@ -1,0 +1,33 @@
+.container{
+  background: var(--gray8);
+  padding: 10px;
+  cursor: pointer;
+}
+
+.header-container{
+  display: inline-flex;
+  width: 200px;
+}
+
+span{
+  user-select: none;
+}
+
+.expand-data button{
+  background: transparent;
+  color: white;
+  width: 80px;
+  border: none;
+  user-select: none;
+}
+
+.expand-data button:hover{
+  cursor: pointer;
+  background-color: rgba(1,1,1,0.5);
+}
+
+.arrow{
+  border: none;
+  background: transparent;
+  transform: rotate(270deg);
+}

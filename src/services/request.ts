@@ -70,4 +70,28 @@ export class Request {
     return this.http.get(url);
   }
 
+  searchManga() {
+    const url = this.base_url + "manga?";
+    return this.http.get(url);
+
+  }
+
+  searchAnime(filter: { keyword: string, type: string, score: number, min_score: number, max_score: number, status: string, rating: string, sfw: boolean, genres: string[], genres_exclude: string[], order_by: string }, page: string, limit: string) {
+    const params = new URLSearchParams();
+    if (filter.keyword) {
+      params.append("q", filter.keyword);
+    }
+
+    if (filter.type) {
+      params.append("type", filter.type);
+    }
+
+
+    params.append("limit", limit);
+    params.append("page", page);
+    const url = this.base_url + "anime?" + params;
+    return this.http.get(url);
+
+  }
+
 }

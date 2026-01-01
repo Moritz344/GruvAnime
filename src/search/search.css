@@ -1,0 +1,38 @@
+.container{
+  margin-top: 130px;
+  margin-left: 10px;
+}
+
+.container-top-items{
+  display: flex;
+  justify-content: left;
+  margin-left: 20px;
+  margin-top: 50px;
+}
+
+
+.container-top-items input {
+    background: var(--surface);
+    border-radius: 5px;
+    border: none;
+    color: var(--text);
+    font-size: 1rem;
+    width: 500px;
+    height: 40px;
+}
+
+.search-type{
+  margin-right: 10px;
+}
+
+
+.filter-container{
+  display: grid;
+  grid-template-columns: repeat(5,100px);
+  gap: 10px;
+  margin-left: 20px;
+  justify-content: left;
+  margin-top: 10px;
+}
+
+

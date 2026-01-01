@@ -15,6 +15,38 @@
 .container-items a{
 }
 
+.search-container{
+  position: absolute;
+  top: 0px;
+  top: 10px;
+  right: 150px;
+}
+
+
+.search-input {
+  background: var(--surface);
+  border-radius: 5px;
+  border: none;
+  color: var(--text);
+  font-size: 1rem;
+  width: 200px;
+  height: 30px;
+}
+
+.search-container button{
+  position: absolute;
+  top: 0px;
+  right: 0px;
+  height: 30px;
+  background: var(--gray8);
+  border-radius: 6px;
+  border: none;
+}
+
+.search-input:focus {
+  outline: none;
+}
+
 .container-items img{
   float: left;
   margin-right: 5px;

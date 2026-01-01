@@ -1,0 +1,17 @@
+<div class="container">
+  <div class="header-container">
+    @if (!selected) {
+      <span (click)="onExpand()">{{ header }}</span>
+    }@else {
+      <span (click)="onExpand()">{{ selected }}</span>
+    }
+    <button class="arrow" (click)="onExpand()"><img src="arrow.svg"></button>
+  </div>
+  @if (expand) {
+    <div class="expand-data">
+      @for (d of data; track $index) {
+        <button (click)="setSelected(d)">{{ d }}</button> <br>
+      }
+    </div>
+  }
+</div>

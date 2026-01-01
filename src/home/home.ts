@@ -49,7 +49,6 @@ export class Home implements OnInit {
   initTopMangaData() {
     this.api.getTopManga("manga", "bypopularity", "14").subscribe((response: any) => {
       this.topMangaData = response.data;
-      console.log(response.data);
       this.cdr.detectChanges();
     });
   }
