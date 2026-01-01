@@ -9,7 +9,7 @@
            (mouseleave)="endDrag(spotlightGrid)"
            >
        @for (d of spotlightData; track $index) {
-          <app-spotlight [data]="d"></app-spotlight>
+          <app-spotlight (mouseenter)="onHover()" [data]="d"></app-spotlight>
         }
       </div>
       <div class="scroll-buttons">
@@ -36,6 +36,25 @@
         <button (click)="scroll('right',popular.nativeElement)"><img class="right" src="arrow.svg"></button>
       </div>
 
+    @if (topMangaData) {
+    <h1 style="display: flex;justify-content: left; margin-bottom:0px;margin-left: 10px">Popular Manga</h1>
+      <div class="anime-grid" #manga
+        (mousedown)="startDrag($event,manga)"
+        (mousemove)="drag($event,manga)"
+        (mouseup)="endDrag(manga)"
+        (mouseleave)="endDrag(manga)">
+
+        @for (data of topMangaData; track $index) {
+            <app-anime-block [data]="data"></app-anime-block>
+        }
+        </div>
+    }
+      <div class="scroll-buttons">
+        <button (click)="scroll('left',manga.nativeElement)"><img class="left" src="arrow.svg"></button>
+        <button (click)="scroll('right',manga.nativeElement)"><img class="right" src="arrow.svg"></button>
+      </div>
+
+
     @if (recAnimeData) {
     <h1 style="display: flex;justify-content: left; margin-bottom:0px;margin-left: 10px">Recent Anime Recommendations</h1>
     <div class="anime-grid" #rec
@@ -54,7 +73,22 @@
         <button (click)="scroll('left',rec.nativeElement)"><img class="left" src="arrow.svg"></button>
         <button (click)="scroll('right',rec.nativeElement)"><img class="right" src="arrow.svg"></button>
       </div>
-      <br>
-      <br>
-      <br>
+    @if (recMangaData) {
+    <h1 style="display: flex;justify-content: left; margin-bottom:0px;margin-left: 10px">Recent Manga Recommendations</h1>
+    <div class="anime-grid" #rec_manga
+      (mousedown)="startDrag($event,rec_manga)"
+      (mousemove)="drag($event,rec_manga)"
+      (mouseup)="endDrag(rec_manga)"
+      (mouseleave)="endDrag(rec_manga)"
+
+    >
+      @for (data of recMangaData; track $index) {
+          <app-anime-block [data]="data"></app-anime-block>
+      }
+    </div>
+    }
+      <div class="scroll-buttons">
+        <button (click)="scroll('left',rec_manga.nativeElement)"><img class="left" src="arrow.svg"></button>
+        <button (click)="scroll('right',rec_manga.nativeElement)"><img class="right" src="arrow.svg"></button>
+      </div>
 </div>

@@ -9,13 +9,12 @@ body{
   display: grid;
   grid-template-columns: repeat(15,1fr);
   gap: 20px;
-  overflow-x: auto;
-  overflow-y: auto;
+  overflow: auto;
   scrollbar-width: none; 
   -ms-overflow-style: none;
   cursor: grab;
   user-select: none;
-  padding: 10px;
+  padding: 20px;
 }
 
 

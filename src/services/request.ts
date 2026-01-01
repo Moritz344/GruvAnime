@@ -25,6 +25,26 @@ export class Request {
     return this.http.get(url);
 
   }
+  getTopManga(type: string, filter: string, limit: string) {
+    const params = new URLSearchParams();
+
+    params.append("filter", filter);
+    params.append("limit", limit);
+
+    const url = this.base_url + "top/manga?" + params;
+
+    return this.http.get(url);
+
+  }
+
+  getMangaRec() {
+    const params = new URLSearchParams();
+    params.append("page", "1");
+    params.append("limit", "7");
+    const url = this.base_url + "recommendations/manga?" + params;
+    return this.http.get(url);
+
+  }
 
   getAnimeRec() {
     const params = new URLSearchParams();

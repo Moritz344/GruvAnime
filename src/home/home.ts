@@ -12,16 +12,23 @@ import { Spotlight } from './spotlight/spotlight';
   styleUrl: './home.css',
 })
 
-// TODO: show random anime => spotlight
 
 export class Home implements OnInit {
   @ViewChild('spotlightGrid') spotlightGrid!: ElementRef;
   @ViewChild('popular') popular!: ElementRef;
   @ViewChild('rec') rec!: ElementRef;
+  @ViewChild('rec_manga') rec_manga!: ElementRef;
+  @ViewChild('manga') manga!: ElementRef;
 
   topAnimeData: any;
   recAnimeData: any;
   spotlightData: any[] = [];
+
+  topMangaData: any;
+  recMangaData: any;
+
+  currentHoverData: any;
+  isHover: boolean = false;
 
   isDragging = false;
   startX = 0;
@@ -36,6 +43,25 @@ export class Home implements OnInit {
     });
   }
 
+  onHover() { }
+
+  initTopMangaData() {
+    this.api.getTopManga("manga", "bypopularity", "14").subscribe((response: any) => {
+      this.topMangaData = response.data;
+      console.log(response.data);
+      this.cdr.detectChanges();
+    });
+  }
+
+  initMangaRec() {
+    this.api.getMangaRec().subscribe((response: any) => {
+      this.recMangaData = response.data;
+      this.recMangaData = this.recMangaData.slice(0, 14);
+      this.cdr.detectChanges();
+    });
+
+  }
+
   initAnimeRec() {
     this.api.getAnimeRec().subscribe((response: any) => {
       this.recAnimeData = response.data;
@@ -48,7 +74,6 @@ export class Home implements OnInit {
     this.api.getAnimeSpotlight().subscribe((response: any) => {
       this.spotlightData = response.data;
       this.cdr.detectChanges();
-      console.log(this.spotlightData);
     });
   }
 
@@ -108,6 +133,8 @@ export class Home implements OnInit {
     this.initTopAnimeData();
     this.initAnimeRec();
     this.initSpotlightData();
+    this.initTopMangaData();
+    this.initMangaRec();
   }
 
 }
