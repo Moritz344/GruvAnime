@@ -17,6 +17,13 @@ body{
   padding: 20px;
 }
 
+.hover-container{
+  position: fixed;
+  background-color: var(--bg-hard);
+  width: 500px;
+  padding: 10px;
+  border-radius: 10px;
+}
 
 .spotlight-container {
   position: relative;

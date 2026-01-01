@@ -29,6 +29,8 @@ export class Home implements OnInit {
 
   currentHoverData: any;
   isHover: boolean = false;
+  hoverX: number = 0;
+  hoverY: number = 0;
 
   isDragging = false;
   startX = 0;
@@ -43,7 +45,6 @@ export class Home implements OnInit {
     });
   }
 
-  onHover() { }
 
   initTopMangaData() {
     this.api.getTopManga("manga", "bypopularity", "14").subscribe((response: any) => {

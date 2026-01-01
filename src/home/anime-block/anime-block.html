@@ -3,8 +3,11 @@
       <div class="anime-card">
         <div class="anime-items">
           <img draggable="false" [src]="data.images.jpg.image_url">
+          <div class="anime-score" *ngIf="data.score">
+            <span> <img src="score.png" width="15" height="15">{{ data.score }}</span>
+          </div>
           <div class="anime-title">
-            <span>{{ title }}</span>
+            <span style="display: flex;justify-content: center">{{ title }}</span>
           </div>
         </div>
     </div>

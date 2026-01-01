@@ -1,8 +1,9 @@
 import { Component, Input, OnInit, ChangeDetectorRef } from '@angular/core';
+import { CommonModule } from '@angular/common';
 
 @Component({
   selector: 'app-anime-block',
-  imports: [],
+  imports: [CommonModule],
   templateUrl: './anime-block.html',
   styleUrl: './anime-block.css',
 })
