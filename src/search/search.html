@@ -1,10 +1,31 @@
 <app-topbar></app-topbar>
 <div class="container">
   <div class="container-top-items">
-    <input [(ngModel)]="searchFilter.keyword" spellcheck="false" placeholder="Search...">
+    <input (keydown.code.enter)="search()" [(ngModel)]="searchFilter.keyword" spellcheck="false" placeholder="Search...">
+    <button (click)="search()"><img src="search.svg"></button>
   </div>
     <div class="filter-container">
-      <app-dropdown header="Types" [data]="types" (dropdownSelected)="onFilter($event)"></app-dropdown>
-      <app-dropdown header="Rating" [data]="rating" (dropdownSelected)="onFilter($event)"></app-dropdown>
+      <app-dropdown header="Types" [data]="types"  (dropdownSelected)="onSetType($event)"></app-dropdown>
+      <app-dropdown header="Rating" [data]="ratings" (reset)="onReset($event)"  (dropdownSelected)="onFilter($event)"></app-dropdown>
+      <app-dropdown header="Status" [data]="status"  (reset)="onReset($event)" (dropdownSelected)="onFilter($event)"></app-dropdown>
+      <app-dropdown header="Order By" [data]="order_by"  (reset)="onReset($event)" (dropdownSelected)="onFilter($event)"></app-dropdown>
+      <app-dropdown header="Sort" [data]="sort"  (reset)="onReset($event)" (dropdownSelected)="onFilter($event)"></app-dropdown>
+      <app-dropdown header="Genres" [multipleSelectable]="true" [data]="genres" (reset)="onReset($event)" (dropdownSelected)="onFilter($event)"></app-dropdown>
+      <app-dropdown header="Excluded Genres" [multipleSelectable]="true" (reset)="onReset($event)" [data]="excluded_genres" (dropdownSelected)="onFilter($event)"></app-dropdown>
     </div>
+
+  <pre style="margin-top:60px">
+    <span>{{ searchFilter | json }}  </span>
+  </pre>
+
+
+    @if (searchResult.length > 0) {
+    <div class="search-container">
+        @for (result of searchResult; track $index) {
+          <app-anime-block [data]="result"></app-anime-block>
+      }
+    </div>
+    }@else {
+      <span style="display:flex;justify-content: center;margin-top: 100px;font-size: 20px">Nothing found...</span>
+    }
 </div>

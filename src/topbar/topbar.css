@@ -23,6 +23,7 @@
 }
 
 
+
 .search-input {
   background: var(--surface);
   border-radius: 5px;
@@ -41,6 +42,10 @@
   background: var(--gray8);
   border-radius: 6px;
   border: none;
+}
+
+.search-container button:hover{
+  background: rgba(1,1,1,0.5);
 }
 
 .search-input:focus {

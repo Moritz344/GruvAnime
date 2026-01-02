@@ -1,16 +1,23 @@
 <div class="container">
   <div class="header-container">
-    @if (!selected) {
-      <span (click)="onExpand()">{{ header }}</span>
-    }@else {
-      <span (click)="onExpand()">{{ selected }}</span>
-    }
-    <button class="arrow" (click)="onExpand()"><img src="arrow.svg"></button>
+      @if (multipleSelectable) {
+          <div class="layout">
+            <span (click)="onExpand()">{{ header }}: {{ selected[0] }} <span *ngIf="selected.length > 0">+{{ selected.length }}</span> </span> <br>
+            <button *ngIf="selected.length > 0" (click)="onReset('selected')" class="reset"><img src="reset.svg"></button>
+            <button class="arrow" (click)="onExpand()"><img src="arrow.svg"></button>
+          </div>
+      }@else {
+        <div class="layout">
+          <span (click)="onExpand()">{{ header }}: {{ selectedNormal }}</span> 
+          <button *ngIf="selectedNormal.length > 0" (click)="onReset('normal')" class="reset"><img src="reset.svg"></button>
+          <button class="arrow" (click)="onExpand()"><img src="arrow.svg"></button>
+        </div>
+      }
   </div>
   @if (expand) {
     <div class="expand-data">
       @for (d of data; track $index) {
-        <button (click)="setSelected(d)">{{ d }}</button> <br>
+        <button (click)="setSelected(d)">{{ d.name }}</button> <br>
       }
     </div>
   }

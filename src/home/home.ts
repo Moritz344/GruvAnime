@@ -2,7 +2,7 @@ import { Component, OnInit, ChangeDetectorRef, ViewChild, ElementRef } from '@an
 import { CommonModule } from '@angular/common';
 import { Topbar } from '../topbar/topbar';
 import { Request } from '../services/request';
-import { AnimeBlock } from './anime-block/anime-block';
+import { AnimeBlock } from '../anime-block/anime-block';
 import { Spotlight } from './spotlight/spotlight';
 
 @Component({

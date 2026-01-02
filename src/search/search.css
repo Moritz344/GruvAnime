@@ -19,20 +19,49 @@
     font-size: 1rem;
     width: 500px;
     height: 40px;
+    outline: none;
+}
+
+.container-top-items button{
+  border: none;
+  background: var(--gray8);
+  border-radius: 5px;
+}
+
+.container-top-items button:hover{
+  background-color: rgba(1,1,1,0.5);
 }
 
 .search-type{
   margin-right: 10px;
 }
 
+.search-container{
+  display: grid;
+  grid-template-columns: repeat(8,1fr);
+  gap: 10px;
+  justify-content: center;
+  margin-top: 50px;
+  margin: 20px;
+}
+
 
 .filter-container{
+  position: absolute;
   display: grid;
-  grid-template-columns: repeat(5,100px);
-  gap: 10px;
+  grid-template-columns: repeat(7,250px);
+  gap: 5px;
   margin-left: 20px;
   justify-content: left;
   margin-top: 10px;
+}
+
+.reset{
+  border:none;
+  background:var(--gray8);
+  width: 40px;
+  border-radius: 5px;
+  max-height: 40px;
 }
 
 
