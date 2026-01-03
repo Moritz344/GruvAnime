@@ -36,6 +36,8 @@ export class Home implements OnInit {
   startX = 0;
   scrollLeft = 0;
 
+  scrollRight: number = 0;
+
   constructor(private api: Request, private cdr: ChangeDetectorRef) { }
 
   initTopAnimeData() {

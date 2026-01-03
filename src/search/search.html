@@ -5,21 +5,17 @@
     <button (click)="search()"><img src="search.svg"></button>
   </div>
     <div class="filter-container">
-      <app-dropdown header="Types" [data]="types"  (dropdownSelected)="onSetType($event)"></app-dropdown>
+      <app-dropdown header="Types" [data]="types" default="Anime"  (dropdownSelected)="onSetType($event)"></app-dropdown>
       <app-dropdown header="Rating" [data]="ratings" (reset)="onReset($event)"  (dropdownSelected)="onFilter($event)"></app-dropdown>
       <app-dropdown header="Status" [data]="status"  (reset)="onReset($event)" (dropdownSelected)="onFilter($event)"></app-dropdown>
       <app-dropdown header="Order By" [data]="order_by"  (reset)="onReset($event)" (dropdownSelected)="onFilter($event)"></app-dropdown>
-      <app-dropdown header="Sort" [data]="sort"  (reset)="onReset($event)" (dropdownSelected)="onFilter($event)"></app-dropdown>
+      <app-dropdown header="Sort" [data]="sort" (reset)="onReset($event)" (dropdownSelected)="onFilter($event)"></app-dropdown>
       <app-dropdown header="Genres" [multipleSelectable]="true" [data]="genres" (reset)="onReset($event)" (dropdownSelected)="onFilter($event)"></app-dropdown>
       <app-dropdown header="Excluded Genres" [multipleSelectable]="true" (reset)="onReset($event)" [data]="excluded_genres" (dropdownSelected)="onFilter($event)"></app-dropdown>
     </div>
 
-  <pre style="margin-top:60px">
-    <span>{{ searchFilter | json }}  </span>
-  </pre>
 
-
-    @if (searchResult.length > 0) {
+    @if (searchResult && searchResult.length > 0) {
     <div class="search-container">
         @for (result of searchResult; track $index) {
           <app-anime-block [data]="result"></app-anime-block>
@@ -27,5 +23,17 @@
     </div>
     }@else {
       <span style="display:flex;justify-content: center;margin-top: 100px;font-size: 20px">Nothing found...</span>
+    }
+
+
+    @if (paginationData) {
+        <div class="page-container">
+          <span>Page: {{ paginationData.current_page }}/{{ paginationData.last_visible_page }}</span>
+        </div>
+      <div class="pagination-container">
+        <button (click)="onPreviousPage()">Previous</button>
+        <button *ngIf="paginationData.has_next_page" (click)="onNextPage()">Next</button>
+      </div>
+
     }
 </div>

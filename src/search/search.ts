@@ -6,6 +6,7 @@ import { Request } from '../services/request';
 import { Dropdown } from './dropdown/dropdown';
 import { Topbar } from '../topbar/topbar';
 import { AnimeBlock } from '../anime-block/anime-block';
+import { Subject, debounceTime } from 'rxjs';
 
 @Component({
   selector: 'app-search',
@@ -20,10 +21,14 @@ export class Search implements OnInit {
 
   searchFilter: { keyword: string, score: number, type: string, min_score: number, max_score: number, status: string, rating: string, sfw: boolean, genres: string[], genres_exclude: string[], order_by: string, sort: string } = { type: "", keyword: "", score: 0, min_score: 0, max_score: 0, status: "", rating: "", sfw: false, genres: [], genres_exclude: [], order_by: "", sort: "" };
   searchResult: any;
+  lastSearchResult: any;
 
-  isLoading: boolean = false;
+  searching: boolean = false;
 
   currentType: string = "";
+
+  searchSubject = new Subject<void>;
+  private searchCooldown = 500; // 500ms cooldown
 
   types: { name: string, value: string }[] = [{ name: "Anime", value: "anime" }, { name: "Manga", value: "manga" }];
   status: { name: string, value: string }[] = [{ name: "Airing", value: "airing" }, { name: "Complete", value: "complete" }, { name: "Upcoming", value: "upcoming" }];
@@ -75,9 +80,20 @@ export class Search implements OnInit {
   order_by: { name: string, value: string }[] = [{ name: "Title", value: "title" }, { name: "Start Date", value: "start_date" }, { name: "End Date", value: "end_date" }, { name: "Episodes", value: "episodes" }, { name: "Score", value: "score" }, { name: "Scored By", value: "scored_by" }, { name: "Rank", value: "rank" }, { name: "Popularity", value: "popularity" }];
   sort: { name: string, value: string }[] = [{ name: "Descending", value: "desc" }, { name: "Ascending", value: "asc" }];
 
+  currentPage: number = 1;
+  searchLimit: string = "24";
+  paginationData: any;
+
+
   // TODO: make own dropdown component
 
-  constructor(private route: ActivatedRoute, private api: Request, private cdr: ChangeDetectorRef) { }
+  constructor(private route: ActivatedRoute, private api: Request, private cdr: ChangeDetectorRef) {
+    this.searchSubject.pipe(
+      debounceTime(this.searchCooldown)
+    ).subscribe(() => {
+      this.performSearch();
+    });
+  }
 
   initRoutes() {
     let keyword = "";
@@ -95,7 +111,8 @@ export class Search implements OnInit {
   }
 
   onSetType(item: any) {
-    this.currentType = item.value;
+    this.currentType = item.item;
+    this.search();
   }
 
   onFilter(element: { item: string, title: string }) {
@@ -171,16 +188,55 @@ export class Search implements OnInit {
     console.log(this.searchFilter);
   }
 
+  onNextPage() {
+    if (this.paginationData.last_visible_page > this.currentPage) {
+      this.currentPage += 1;
+      this.search();
+      this.cdr.detectChanges();
+      console.log(this.currentPage);
+    }
+  }
+
+  onPreviousPage() {
+    if (this.currentPage > 1) {
+      this.currentPage -= 1;
+      this.search();
+      this.cdr.detectChanges();
+    }
+  }
+
+  checkPage() {
+    if (this.currentPage > this.paginationData.last_visible_page) {
+      this.currentPage = 1;
+      this.search();
+    }
+  }
+
   search() {
+    this.searchSubject.next();
+  }
+
+  performSearch() {
+    this.searching = true;
     if (this.currentType == "anime") {
       console.log("searching");
-      this.api.searchAnime(this.searchFilter, "1", "24").subscribe((response: any) => {
+      this.api.searchAnime(this.searchFilter, this.currentPage.toString(), this.searchLimit).subscribe((response: any) => {
         this.searchResult = response.data;
         console.log(this.searchResult);
+        this.paginationData = response.pagination;
+        this.checkPage();
+        console.log(this.paginationData);
         this.cdr.detectChanges();
+        this.searching = false;
       });
     } else if (this.currentType == "manga") {
-      this.api.searchManga().subscribe((response: any) => {
+      console.log("type: manga");
+      this.api.searchManga(this.searchFilter, this.currentPage.toString(), this.searchLimit).subscribe((response: any) => {
+        this.searchResult = response.data;
+        this.paginationData = response.pagination;
+        this.checkPage();
+        this.searching = false;
+        this.cdr.detectChanges();
         console.log(response);
       });
     }
@@ -188,7 +244,7 @@ export class Search implements OnInit {
 
   ngOnInit() {
     this.initRoutes();
-    this.search();
+    this.performSearch(); // Initial search without debounce
   }
 
 }

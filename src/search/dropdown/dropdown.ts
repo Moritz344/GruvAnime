@@ -14,6 +14,7 @@ export class Dropdown implements OnInit {
   @Input() data: { name: string, value: string }[] = [{ name: "", value: "" }];
   @Output() dropdownSelected = new EventEmitter<{ item: string, title: string }>();
   @Output() reset = new EventEmitter<any>();
+  @Input() default: string = "";
 
   selected: string[] = [];
   selectedNormal: string = "";
@@ -32,6 +33,10 @@ export class Dropdown implements OnInit {
     }
   }
 
+  initDefault() {
+    this.selectedNormal = this.default;
+  }
+
   onExpand() {
     this.expand = !this.expand;
   }
@@ -47,6 +52,8 @@ export class Dropdown implements OnInit {
     this.expand = false;
   }
 
-  ngOnInit() { }
+  ngOnInit() {
+    this.initDefault();
+  }
 
 }
