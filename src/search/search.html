@@ -6,27 +6,45 @@
   </div>
     <div class="filter-container">
       <app-dropdown header="Types" [data]="types" default="Anime"  (dropdownSelected)="onSetType($event)"></app-dropdown>
-      <app-dropdown header="Rating" [data]="ratings" (reset)="onReset($event)"  (dropdownSelected)="onFilter($event)"></app-dropdown>
-      <app-dropdown header="Status" [data]="status"  (reset)="onReset($event)" (dropdownSelected)="onFilter($event)"></app-dropdown>
-      <app-dropdown header="Order By" [data]="order_by"  (reset)="onReset($event)" (dropdownSelected)="onFilter($event)"></app-dropdown>
-      <app-dropdown header="Sort" [data]="sort" (reset)="onReset($event)" (dropdownSelected)="onFilter($event)"></app-dropdown>
+      @if (currentType == "anime") {
+        <app-dropdown header="Rating" [data]="ratings" (reset)="onReset($event)"  (dropdownSelected)="onFilter($event)"></app-dropdown>
+      }
+
+      @if (currentType == "anime") {
+        <app-dropdown header="Status" [data]="status"  (reset)="onReset($event)" (dropdownSelected)="onFilter($event)"></app-dropdown>
+      }@else {
+        <app-dropdown header="Status" [data]="statusManga"  (reset)="onReset($event)" (dropdownSelected)="onFilter($event)"></app-dropdown>
+      }
+
+      @if (currentType == "anime") {
+        <app-dropdown header="Order By" [data]="order_by"  (reset)="onReset($event)" (dropdownSelected)="onFilter($event)"></app-dropdown>
+      }@else {
+        <app-dropdown header="Order By" [data]="order_by_manga"  (reset)="onReset($event)" (dropdownSelected)="onFilter($event)"></app-dropdown>
+      }
+      <app-dropdown header="Sort" [data]="sort" default="Descending" (reset)="onReset($event)" (dropdownSelected)="onFilter($event)"></app-dropdown>
       <app-dropdown header="Genres" [multipleSelectable]="true" [data]="genres" (reset)="onReset($event)" (dropdownSelected)="onFilter($event)"></app-dropdown>
       <app-dropdown header="Excluded Genres" [multipleSelectable]="true" (reset)="onReset($event)" [data]="excluded_genres" (dropdownSelected)="onFilter($event)"></app-dropdown>
     </div>
 
 
-    @if (searchResult && searchResult.length > 0) {
+    @if (searchResult && searchResult.length > 0 && !searching ) {
     <div class="search-container">
         @for (result of searchResult; track $index) {
           <app-anime-block [data]="result"></app-anime-block>
-      }
+        }
     </div>
-    }@else {
+    }@else if (searchResult.length == 0){
       <span style="display:flex;justify-content: center;margin-top: 100px;font-size: 20px">Nothing found...</span>
     }
 
+    @if (searching) {
+        <div class="loader-container">
+          <div class="loader"></div>
+        </div>
+    }
 
-    @if (paginationData) {
+
+    @if (paginationData && !searching) {
         <div class="page-container">
           <span>Page: {{ paginationData.current_page }}/{{ paginationData.last_visible_page }}</span>
         </div>

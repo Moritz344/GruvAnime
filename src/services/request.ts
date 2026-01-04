@@ -102,7 +102,6 @@ export class Request {
     if (filter.genres_exclude[0] == "") {
       filter.genres_exclude.shift();
     }
-    console.log(filter.genres_exclude);
     if (filter.genres.length > 0) {
       console.log(filter.genres.length);
       params.append("genres", filter.genres.join(","));
