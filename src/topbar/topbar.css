@@ -1,24 +1,33 @@
 .container{
   position: absolute;
-  left: 15px;
-  top: 30px;
+  left: 0px;
+  top: 5px;
   right: 0px;
   margin: 0 auto;
-  padding: 0 1rem;
+  padding: 10px;
+  background-color: var(--bg-medium);
+
 }
+
+.screen{
+  position: absolute;
+  top: 0;
+  width: 100vw;
+  height: 100vh;
+  background: transparent;
+}
+
 .container-items{
   display: flex;
+  justify-content: center;
   flex-direction: row;
   gap: 10px;
   transition: 0.3s ease;
 }
-.container-items a{
-}
 
 .search-container{
   position: absolute;
-  top: 0px;
-  top: 10px;
+  top: 15px;
   right: 150px;
 }
 
@@ -60,11 +69,68 @@
 
 .github{
   position: absolute;
-  top: 0;
+  top: 7px;
   right: 70px;
 }
 
-
-.container-items button:hover{
-  transform: scale(1.04);
+.anime-wrapper{
+  position: relative;
 }
+
+.anime-hover-container{
+  position: absolute;
+  top: 100%;
+  left: -15px;
+  background-color: var(--gray8);
+  padding: 10px;
+  border: 1px solid white;
+  z-index: 9999;
+}
+
+.anime-hover-container button{
+  border:none;
+  color: white;
+  background: transparent;
+  font-size: 15px;
+}
+
+.anime-hover-container button:hover{
+  color: var(--yellow);
+}
+
+.manga-hover-container{
+  position: absolute;
+  top: 100%;
+  left: 70px;
+  background-color: var(--gray8);
+  padding: 10px;
+  border: 1px solid white;
+  z-index: 9999;
+}
+
+.manga-hover-container button{
+  border:none;
+  color: white;
+  background: transparent;
+  font-size: 15px;
+}
+
+.manga-hover-container button:hover{
+  color: var(--yellow);
+}
+
+
+.btn{
+  background-color: transparent;
+  border: none;
+  color: white;
+  font-size: 20px;
+  font-weight: bold;
+  transition: 0.3s ease;
+}
+
+.btn:hover{
+  color: var(--yellow-bright);
+}
+
+

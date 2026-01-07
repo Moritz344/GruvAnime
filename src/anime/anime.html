@@ -1,1 +1,29 @@
-<p>anime works!</p>
+
+<app-topbar></app-topbar>
+<div class="container">
+  @if (data.length > 0) {
+    <div class="anime-container" *ngIf="!loading">
+      @for (d of data; track $index) {
+        <app-anime-block [data]="d"></app-anime-block>
+      }
+    </div>
+      @if (paginationData) {
+        <div class="page-container">
+            <span>Page: {{ paginationData.current_page }}/{{ paginationData.last_visible_page }}</span>
+          </div>
+        <div class="pagination-container" *ngIf="!loading">
+          <button (click)="onPreviousPage()">Previous</button>
+          <button *ngIf="paginationData.has_next_page" (click)="onNextPage()">Next</button>
+        </div>
+
+      }
+
+      @if (loading) {
+          <div class="loader-container">
+            <div class="loader"></div>
+          </div>
+      }
+    }@else {
+    <span style="display: flex;justify-content: center;margin-top: 100px;font-size: 30px">Nothing found...</span>
+  }
+</div>

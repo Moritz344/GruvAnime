@@ -1,0 +1,39 @@
+.container{
+  margin-top: 70px;
+}
+
+.loader-container{
+  display: flex;
+  justify-content: center;
+  margin-top: 100px;
+}
+
+.anime-container{
+  display: grid;
+  grid-template-columns: repeat(8,1fr);
+  gap: 10px;
+  margin: 50px;
+}
+.page-container{
+  display: flex;
+  justify-content: center;
+}
+
+.pagination-container{
+  display: flex;
+  justify-content: center;
+  gap: 5px;
+  margin: 20px;
+}
+
+.pagination-container button{
+  border: none;
+  background-color: var(--gray8);
+  color: white;
+  border-radius: 5px;
+  padding: 10px;
+}
+
+.pagination-container button:hover{
+  background-color: rgba(1,1,1,0.5);
+}

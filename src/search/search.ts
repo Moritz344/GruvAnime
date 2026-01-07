@@ -1,4 +1,4 @@
-import { Component, OnInit, ChangeDetectorRef } from '@angular/core';
+import { Component, OnInit, ChangeDetectorRef, AfterContentInit } from '@angular/core';
 import { ActivatedRoute, RouterModule, Router } from '@angular/router';
 import { CommonModule } from '@angular/common';
 import { FormsModule } from '@angular/forms';
@@ -14,11 +14,9 @@ import { Subject, debounceTime } from 'rxjs';
   templateUrl: './search.html',
   styleUrl: './search.css',
 })
-export class Search implements OnInit {
+export class Search implements OnInit, AfterContentInit {
 
-  // TODO: pagination
-  // TODO: loading indicator
-  // TODO: type filter
+  // TODO: search again if its searching for too long
 
   searchFilter: { keyword: string, score: number, type: string, min_score: number, max_score: number, status: string, rating: string, sfw: boolean, genres: string[], genres_exclude: string[], order_by: string, sort: string } = { type: "", keyword: "", score: 0, min_score: 0, max_score: 0, status: "", rating: "", sfw: false, genres: [], genres_exclude: [], order_by: "", sort: "" };
   searchResult: any;
@@ -250,8 +248,9 @@ export class Search implements OnInit {
   }
 
   ngOnInit() {
+  }
+  ngAfterContentInit() {
     this.initRoutes();
     this.performSearch();
   }
-
 }

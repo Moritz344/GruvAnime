@@ -27,6 +27,7 @@ export class Home implements OnInit {
   topMangaData: any;
   recMangaData: any;
 
+
   currentHoverData: any;
   isHover: boolean = false;
   hoverX: number = 0;
@@ -49,7 +50,7 @@ export class Home implements OnInit {
 
 
   initTopMangaData() {
-    this.api.getTopManga("manga", "bypopularity", "14").subscribe((response: any) => {
+    this.api.getTopManga("14", "manga", "bypopularity").subscribe((response: any) => {
       this.topMangaData = response.data;
       this.cdr.detectChanges();
     });

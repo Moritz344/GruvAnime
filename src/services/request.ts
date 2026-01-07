@@ -14,8 +14,12 @@ export class Request {
 
   constructor(private http: HttpClient) { }
 
-  getTopAnime(type: string, filter: string, limit: string) {
+  getTopAnime(type: string, filter: string, limit: string, page?: number) {
     const params = new URLSearchParams();
+
+    if (page) {
+      params.append("page", page.toString());
+    }
 
     params.append("filter", filter);
     params.append("limit", limit);
@@ -25,16 +29,55 @@ export class Request {
     return this.http.get(url);
 
   }
-  getTopManga(type: string, filter: string, limit: string) {
+  getTopManga(limit: string, type?: string, filter?: string, page?: number) {
     const params = new URLSearchParams();
 
-    params.append("filter", filter);
+    if (filter) {
+      params.append("filter", filter);
+    }
+    if (type) {
+      params.append("type", type);
+    }
+
     params.append("limit", limit);
+
+
+    if (page) {
+      params.append("page", page.toString());
+      params.append("sfw", "true");
+      params.append("limit", limit);
+    }
 
     const url = this.base_url + "top/manga?" + params;
 
     return this.http.get(url);
 
+  }
+
+  getUpcomingManga(limit: string, page: number) {
+    const params = new URLSearchParams();
+
+    params.append("status", "upcoming");
+    params.append("page", page.toString());
+    params.append("order_by", "popularity");
+    params.append("sfw", "true");
+    params.append("limit", limit);
+
+    const url = this.base_url + "manga?" + params;
+    return this.http.get(url);
+  }
+
+  getCompleteManga(limit: string, page: number) {
+    const params = new URLSearchParams();
+
+    params.append("status", "complete");
+    params.append("order_by", "popularity");
+    params.append("page", page.toString());
+    params.append("sfw", "true");
+    params.append("limit", limit);
+
+    const url = this.base_url + "manga?" + params;
+    return this.http.get(url);
   }
 
   getMangaRec() {
@@ -184,6 +227,31 @@ export class Request {
     const url = this.base_url + "anime?" + params;
     return this.http.get(url);
 
+  }
+
+  getUpcomingAnime(limit: string, page: number) {
+    const params = new URLSearchParams();
+
+    params.append("status", "upcoming");
+    params.append("order_by", "popularity");
+    params.append("page", page.toString());
+    params.append("limit", limit);
+
+    const url = this.base_url + "anime?" + params;
+    return this.http.get(url);
+  }
+
+  getAiringAnime(limit: string, page: number) {
+    const params = new URLSearchParams();
+
+    params.append("status", "airing");
+    params.append("order_by", "popularity");
+    params.append("page", page.toString());
+    params.append("sfw", "true");
+    params.append("limit", limit);
+
+    const url = this.base_url + "anime?" + params;
+    return this.http.get(url);
   }
 
 }

@@ -1,4 +1,4 @@
-import { Component } from '@angular/core';
+import { Component, HostListener, OnInit, OnDestroy } from '@angular/core';
 import { RouterModule, Router } from '@angular/router';
 import { CommonModule } from '@angular/common';
 import { FormsModule } from '@angular/forms';
@@ -9,11 +9,65 @@ import { FormsModule } from '@angular/forms';
   templateUrl: './topbar.html',
   styleUrl: './topbar.css',
 })
-export class Topbar {
+export class Topbar implements OnInit {
 
   searchValue: string = "";
 
+  onAnimeHover: boolean = false;
+  onMangaHover: boolean = false;
+
+  onAnime() {
+    this.onMangaHover = false;
+    this.onAnimeHover = true;
+  }
+
+  onManga() {
+    this.onAnimeHover = false;
+    this.onMangaHover = true;
+  }
+
+  onAnimeLeave() {
+    this.onAnimeHover = false;
+  }
+
+  onMangaLeave() {
+    this.onMangaHover = false;
+  }
+
+  onAnimeOption(option: string) {
+    this.onAnimeHover = false;
+    console.log(option);
+    if (option == "trending") {
+      this.router.navigate(["/anime/trending"]);
+    } else if (option == "upcoming") {
+      this.router.navigate(["/anime/upcoming"]);
+    } else if (option == "airing") {
+      this.router.navigate(["/anime/airing"]);
+
+    }
+  }
+  onMangaOption(option: string) {
+    this.onMangaHover = false;
+    console.log(option);
+    if (option == "upcoming") {
+      this.router.navigate(["/manga/upcoming"]);
+    } else if (option == "trending") {
+      this.router.navigate(["/manga/trending"]);
+    } else if (option == "complete") {
+      this.router.navigate(["/manga/complete"]);
+
+    }
+  }
+
+  onLeaveHoverElement() {
+    this.onMangaHover = false;
+    this.onAnimeHover = false;
+  }
+
   constructor(private router: Router) { }
+
+  ngOnInit() { }
+
 
   onSearch() {
     this.router.navigate(["search/anime"], { queryParams: { keyword: this.searchValue } });

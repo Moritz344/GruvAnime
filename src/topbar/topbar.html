@@ -1,9 +1,27 @@
+<div class="screen" (click)="onLeaveHoverElement()">
 <div class="container">
   <div class="container-items">
-    <a [routerLink]="['']"><button class="btn"><img src="home.svg">Home</button></a>
-    <a [routerLink]="['anime']"><button class="btn"><img src="anime.svg">Anime</button></a>
-    <a [routerLink]="['manga']"><button class="btn"><img src="manga.svg">Manga</button></a>
+    <a [routerLink]="['']"><button (mouseenter)="onLeaveHoverElement()" class="btn">Home</button></a>
+    <div class="anime-wrapper" (click)="onAnime()">
+      <a ><button (mouseenter)="onAnime()" class="btn">Anime</button></a>
+      @if (onAnimeHover) {
+        <div class="anime-hover-container">
+          <button (click)="onAnimeOption('trending')">Trending</button> <br>
+          <button (click)="onAnimeOption('airing')">Airing</button> <br>
+          <button (click)="onAnimeOption('upcoming')">Upcoming</button> <br>
+        </div>
+      }@if (onMangaHover) {
+        <div class="manga-hover-container">
+          <button (click)="onMangaOption('trending')">Trending</button> <br>
+          <button (click)="onMangaOption('complete')">Complete</button> <br>
+          <button (click)="onMangaOption('upcoming')">Upcoming</button> <br>
+        </div>
+      }
+    </div>
+    <a ><button (mouseenter)="onManga()" class="btn">Manga</button></a>
   </div>
+
+  
 
   <div class="search-container">
     <input class="search-input" [(ngModel)]="searchValue" spellcheck="false" (keydown.code.enter)="onSearch()"><button (click)="onSearch()"><img src="search.svg"></button>
@@ -12,4 +30,5 @@
   <div class="github">
     <a href="https://github.com/Moritz344" target="_blank"><img width="50" height="50" src="github-logo.png"> </a>
   </div>
+</div>
 </div>
