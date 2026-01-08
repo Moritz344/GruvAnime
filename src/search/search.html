@@ -30,7 +30,11 @@
     @if (searchResult && searchResult.length > 0 && !searching ) {
     <div class="search-container">
         @for (result of searchResult; track $index) {
-          <app-anime-block [data]="result"></app-anime-block>
+          @if (currentType == "anime") {
+            <app-anime-block [isAnime]="true" [data]="result"></app-anime-block>
+          }@else if (currentType == "manga") {
+            <app-anime-block [isAnime]="false" [data]="result"></app-anime-block>
+          }
         }
     </div>
     }@else if (searchResult.length == 0){

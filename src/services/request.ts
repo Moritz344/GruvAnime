@@ -241,6 +241,15 @@ export class Request {
     return this.http.get(url);
   }
 
+  getAnimeById(id: number) {
+    const url = this.base_url + "anime/" + id;
+    return this.http.get(url);
+  }
+  getMangaById(id: number) {
+    const url = this.base_url + "manga/" + id;
+    return this.http.get(url);
+  }
+
   getAiringAnime(limit: string, page: number) {
     const params = new URLSearchParams();
 

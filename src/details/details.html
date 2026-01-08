@@ -1,1 +1,37 @@
-<p>details works!</p>
+<app-topbar></app-topbar>
+@if (data) {
+  <div class="container">
+    <div class="main-container">
+      <div class="anime-card">
+        <div class="info">
+          <h1 class="title">{{ data.title }}</h1>
+          <h2>{{ data.title_japanese }}</h2>
+          <div class="row-1">
+            <span class="score">
+            {{ data.score }}
+          </span>
+          <span class="block">
+            {{ data.year }}
+          </span>
+          <span class="status">
+            {{ data.status }}
+          </span>
+          </div>
+        <br>
+          <div class="row-2">
+            @for (genre of data.genres; track $index) {
+              <span class="genre">{{ genre.name }}</span>
+            }
+          </div>
+        </div>
+        <img [src]="data.images.jpg.large_image_url">
+      </div>
+    </div>
+
+  <div class="synopsis-container">
+    <h1>Synopsis</h1>
+    <p class="synopsis">{{ data.synopsis }}</p>
+  </div>
+
+  </div>
+}

@@ -16,8 +16,6 @@ import { Subject, debounceTime } from 'rxjs';
 })
 export class Search implements OnInit, AfterContentInit {
 
-  // TODO: search again if its searching for too long
-
   searchFilter: { keyword: string, score: number, type: string, min_score: number, max_score: number, status: string, rating: string, sfw: boolean, genres: string[], genres_exclude: string[], order_by: string, sort: string } = { type: "", keyword: "", score: 0, min_score: 0, max_score: 0, status: "", rating: "", sfw: false, genres: [], genres_exclude: [], order_by: "", sort: "" };
   searchResult: any;
   lastSearchResult: any;

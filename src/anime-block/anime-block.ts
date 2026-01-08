@@ -1,5 +1,6 @@
 import { Component, Input, OnInit, OnChanges, ChangeDetectorRef } from '@angular/core';
 import { CommonModule } from '@angular/common';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-anime-block',
@@ -9,13 +10,22 @@ import { CommonModule } from '@angular/common';
 })
 export class AnimeBlock implements OnInit, OnChanges {
   @Input() data: any;
+  @Input() isAnime: boolean = false;
 
   title: string = "";
 
-  constructor(private cdr: ChangeDetectorRef) { }
+  constructor(private cdr: ChangeDetectorRef, private router: Router) { }
 
   ngOnInit() {
     this.setTitle();
+  }
+
+  onDetails() {
+    if (this.isAnime) {
+      this.router.navigate(["/anime", + this.data.mal_id]);
+    } else {
+      this.router.navigate(["/manga", + this.data.mal_id]);
+    }
   }
 
   ngOnChanges() {

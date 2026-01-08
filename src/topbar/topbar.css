@@ -1,11 +1,16 @@
 .container{
-  position: absolute;
+  position: fixed;
+  z-index: 1000;
+  max-height: 50px;
   left: 0px;
-  top: 5px;
+  top: 0px;
   right: 0px;
+  bottom: 850px;
   margin: 0 auto;
   padding: 10px;
-  background-color: var(--bg-medium);
+  background-color: #282828;
+  opacity: 95%;
+  backdrop-filter: blur(5px);
 
 }
 
@@ -19,6 +24,7 @@
 
 .container-items{
   display: flex;
+  margin-top: 10px;
   justify-content: center;
   flex-direction: row;
   gap: 10px;
@@ -130,7 +136,7 @@
 }
 
 .btn:hover{
-  color: var(--yellow-bright);
+  color: var(--orange);
 }
 
 
