@@ -2,10 +2,11 @@ import { Component, OnInit, ChangeDetectorRef } from '@angular/core';
 import { Request } from '../services/request';
 import { ActivatedRoute } from '@angular/router';
 import { Topbar } from '../topbar/topbar';
+import { CommonModule } from '@angular/common';
 
 @Component({
   selector: 'app-details',
-  imports: [Topbar],
+  imports: [Topbar, CommonModule],
   templateUrl: './details.html',
   styleUrl: './details.css',
 })
@@ -14,15 +15,26 @@ export class Details implements OnInit {
   path: string = "";
   id: string = "";
   data: any;
+  animeCharData: any;
 
   constructor(private api: Request, private route: ActivatedRoute, private cdr: ChangeDetectorRef) {
     this.setPath();
     this.initData();
   }
 
+  initAnimeCharacter() {
+    this.api.getAnimeCharacter(Number(this.id)).subscribe((response: any) => {
+      this.animeCharData = response.data;
+      this.animeCharData = this.animeCharData.slice(0, 12);
+      this.cdr.detectChanges();
+      console.log(response.data);
+    });
+  }
+
   initData() {
     if (this.path == "anime") {
       this.api.getAnimeById(Number(this.id)).subscribe((response: any) => {
+        this.initAnimeCharacter();
         this.data = response.data;
         this.cdr.detectChanges();
         console.log(this.data);

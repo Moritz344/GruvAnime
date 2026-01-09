@@ -36,7 +36,6 @@ export class Topbar implements OnInit {
 
   onAnimeOption(option: string) {
     this.onAnimeHover = false;
-    console.log(option);
     if (option == "trending") {
       this.router.navigate(["/anime/trending"]);
     } else if (option == "upcoming") {
@@ -48,7 +47,6 @@ export class Topbar implements OnInit {
   }
   onMangaOption(option: string) {
     this.onMangaHover = false;
-    console.log(option);
     if (option == "upcoming") {
       this.router.navigate(["/manga/upcoming"]);
     } else if (option == "trending") {

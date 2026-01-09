@@ -1,12 +1,12 @@
 <app-topbar></app-topbar>
 <div class="container" >
-  @if (data.length > 0) {
+  @if (data) {
     <div class="anime-container" *ngIf="!loading">
       @for (d of data; track $index) {
         <app-anime-block [isAnime]="false" [data]="d"></app-anime-block>
       }
     </div>
-      @if (paginationData) {
+      @if (paginationData && data.length > 0) {
         <div class="page-container">
             <span>Page: {{ paginationData.current_page }}/{{ paginationData.last_visible_page }}</span>
           </div>
@@ -22,8 +22,7 @@
             <div class="loader"></div>
           </div>
       }
-  }@else {
-    <span style="display: flex;justify-content: center;margin-top: 100px;font-size: 30px">Nothing found...</span>
+    <span *ngIf="data.length == 0" style="display: flex;justify-content: center;margin-top: 100px;font-size: 30px">Nothing found...</span>
   }
   </div>
 

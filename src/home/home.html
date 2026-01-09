@@ -25,7 +25,6 @@
         (mousemove)="drag($event,popular)"
         (mouseup)="endDrag(popular)"
         (mouseleave)="endDrag(popular)">
-
         @for (data of topAnimeData; track $index) {
             <app-anime-block [isAnime]="true"  [data]="data"></app-anime-block>
         }

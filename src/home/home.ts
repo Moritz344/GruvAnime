@@ -42,31 +42,31 @@ export class Home implements OnInit {
   constructor(private api: Request, private cdr: ChangeDetectorRef) { }
 
   initTopAnimeData() {
-    this.api.getTopAnime("", "bypopularity", "14").subscribe((response: any) => {
+    this.api.getTopAnimeCached("", "bypopularity", "14").subscribe((response: any) => {
       this.topAnimeData = response.data;
       this.cdr.detectChanges();
+      console.log(response);
     });
   }
 
 
   initTopMangaData() {
-    this.api.getTopManga("14", "manga", "bypopularity").subscribe((response: any) => {
+    this.api.getTopMangaCached("14", "manga", "bypopularity").subscribe((response: any) => {
       this.topMangaData = response.data;
       this.cdr.detectChanges();
     });
   }
 
   initMangaRec() {
-    this.api.getMangaRec().subscribe((response: any) => {
+    this.api.getMangaRecCached().subscribe((response: any) => {
       this.recMangaData = response.data;
       this.recMangaData = this.recMangaData.slice(0, 14);
       this.cdr.detectChanges();
     });
-
   }
 
   initAnimeRec() {
-    this.api.getAnimeRec().subscribe((response: any) => {
+    this.api.getAnimeRecCached().subscribe((response: any) => {
       this.recAnimeData = response.data;
       this.recAnimeData = this.recAnimeData.slice(0, 14);
       this.cdr.detectChanges();
@@ -74,7 +74,7 @@ export class Home implements OnInit {
   }
 
   initSpotlightData() {
-    this.api.getAnimeSpotlight().subscribe((response: any) => {
+    this.api.getAnimeSpotlightCached().subscribe((response: any) => {
       this.spotlightData = response.data;
       this.cdr.detectChanges();
     });
@@ -129,6 +129,7 @@ export class Home implements OnInit {
     }
 
   }
+
 
 
 

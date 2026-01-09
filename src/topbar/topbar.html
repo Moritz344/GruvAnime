@@ -1,7 +1,9 @@
 <div class="screen" (click)="onLeaveHoverElement()">
 <div class="container">
-  <div class="container-items">
+  <div class="home-container">
     <a [routerLink]="['']"><button (mouseenter)="onLeaveHoverElement()" class="btn">Home</button></a>
+  </div>
+  <div class="container-items">
     <div class="anime-wrapper" (click)="onAnime()">
       <a ><button (mouseenter)="onAnime()" class="btn">Anime</button></a>
       @if (onAnimeHover) {

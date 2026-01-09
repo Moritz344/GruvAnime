@@ -4,6 +4,7 @@ import {
   HttpHeaders,
   HttpErrorResponse,
 } from "@angular/common/http";
+import { Observable, shareReplay } from 'rxjs';
 
 @Injectable({
   providedIn: 'root',
@@ -12,7 +13,27 @@ export class Request {
 
   base_url = "https://api.jikan.moe/v4/";
 
+  private topAnimeCache$: Observable<any> | null = null;
+  private topMangaCache$: Observable<any> | null = null;
+  private animeRecCache$: Observable<any> | null = null;
+  private mangaRecCache$: Observable<any> | null = null;
+  private completeMangaCache$: Observable<any> | null = null;
+  private upcomingMangaCache$: Observable<any> | null = null;
+  private spotlightCache$: Observable<any> | null = null;
+  private animeAiring$: Observable<any> | null = null;
+  private animeUpcoming$: Observable<any> | null = null;
+
+
   constructor(private http: HttpClient) { }
+
+  clearAllCaches() {
+    this.topAnimeCache$ = null;
+    this.topMangaCache$ = null;
+    this.animeRecCache$ = null;
+    this.mangaRecCache$ = null;
+    this.spotlightCache$ = null;
+  }
+
 
   getTopAnime(type: string, filter: string, limit: string, page?: number) {
     const params = new URLSearchParams();
@@ -27,8 +48,18 @@ export class Request {
     const url = this.base_url + "top/anime?" + params;
 
     return this.http.get(url);
-
   }
+
+  getTopAnimeCached(type: string, filter: string, limit: string, page?: number): Observable<any> {
+    if (!this.topAnimeCache$) {
+      this.topAnimeCache$ = this.getTopAnime(type, filter, limit, page).pipe(
+        shareReplay(1)
+      );
+    }
+    return this.topAnimeCache$;
+  }
+
+
   getTopManga(limit: string, type?: string, filter?: string, page?: number) {
     const params = new URLSearchParams();
 
@@ -51,7 +82,24 @@ export class Request {
     const url = this.base_url + "top/manga?" + params;
 
     return this.http.get(url);
+  }
 
+  getTopMangaCached(limit: string, type?: string, filter?: string, page?: number): Observable<any> {
+    if (!this.topMangaCache$) {
+      this.topMangaCache$ = this.getTopManga(limit, type, filter, page).pipe(
+        shareReplay(1)
+      );
+    }
+    return this.topMangaCache$;
+  }
+
+  getUpcomingMangaCache(limit: string, page: number) {
+    if (!this.upcomingMangaCache$) {
+      this.upcomingMangaCache$ = this.getUpcomingManga(limit, page).pipe(
+        shareReplay(1)
+      );
+    }
+    return this.upcomingMangaCache$;
   }
 
   getUpcomingManga(limit: string, page: number) {
@@ -65,6 +113,15 @@ export class Request {
 
     const url = this.base_url + "manga?" + params;
     return this.http.get(url);
+  }
+
+  getCompleteMangaCache(limit: string, page: number) {
+    if (!this.completeMangaCache$) {
+      this.completeMangaCache$ = this.getCompleteManga(limit, page).pipe(
+        shareReplay(1)
+      );
+    }
+    return this.completeMangaCache$;
   }
 
   getCompleteManga(limit: string, page: number) {
@@ -86,7 +143,15 @@ export class Request {
     params.append("limit", "7");
     const url = this.base_url + "recommendations/manga?" + params;
     return this.http.get(url);
+  }
 
+  getMangaRecCached(): Observable<any> {
+    if (!this.mangaRecCache$) {
+      this.mangaRecCache$ = this.getMangaRec().pipe(
+        shareReplay(1)
+      );
+    }
+    return this.mangaRecCache$;
   }
 
   getAnimeRec() {
@@ -95,6 +160,15 @@ export class Request {
     params.append("limit", "7");
     const url = this.base_url + "recommendations/anime?" + params;
     return this.http.get(url);
+  }
+
+  getAnimeRecCached(): Observable<any> {
+    if (!this.animeRecCache$) {
+      this.animeRecCache$ = this.getAnimeRec().pipe(
+        shareReplay(1)
+      );
+    }
+    return this.animeRecCache$;
   }
 
   getRandomAnime() {
@@ -111,6 +185,15 @@ export class Request {
     params.append("limit", "10");
     const url = this.base_url + "anime?" + params;
     return this.http.get(url);
+  }
+
+  getAnimeSpotlightCached(): Observable<any> {
+    if (!this.spotlightCache$) {
+      this.spotlightCache$ = this.getAnimeSpotlight().pipe(
+        shareReplay(1)
+      );
+    }
+    return this.spotlightCache$;
   }
 
   searchManga(filter: { keyword: string, type: string, score: number, min_score: number, max_score: number, status: string, rating: string, sfw: boolean, genres: string[], genres_exclude: string[], order_by: string, sort: string }, page: string, limit: string) {
@@ -250,6 +333,7 @@ export class Request {
     return this.http.get(url);
   }
 
+
   getAiringAnime(limit: string, page: number) {
     const params = new URLSearchParams();
 
@@ -260,6 +344,11 @@ export class Request {
     params.append("limit", limit);
 
     const url = this.base_url + "anime?" + params;
+    return this.http.get(url);
+  }
+
+  getAnimeCharacter(id: number) {
+    const url = this.base_url + "anime/" + id + "/characters";
     return this.http.get(url);
   }
 

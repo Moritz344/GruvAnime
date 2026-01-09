@@ -46,7 +46,7 @@ export class Anime implements OnInit, AfterContentInit {
   initAnimeData() {
     this.loading = true;
     if (this.currentPath == "trending") {
-      this.api.getTopAnime("", "", "24", this.currentPage).subscribe((response: any) => {
+      this.api.getTopAnime("", "bypopularity", "24", this.currentPage).subscribe((response: any) => {
         this.data = response.data;
         this.loading = false;
         this.paginationData = response.pagination;
@@ -70,6 +70,7 @@ export class Anime implements OnInit, AfterContentInit {
       });
     }
   }
+
 
   initRoutes() {
     this.route.url.subscribe(segments => {

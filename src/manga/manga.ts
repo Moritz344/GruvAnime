@@ -24,14 +24,12 @@ export class Manga implements OnInit, AfterContentInit {
 
 
   constructor(private route: ActivatedRoute, private api: Request, private cdr: ChangeDetectorRef) {
-    this.initRoutes();
   }
 
   onNextPage() {
     if (this.paginationData.last_visible_page > this.currentPage) {
       this.currentPage += 1;
       this.initMangaData();
-      this.cdr.detectChanges();
     }
   }
 
@@ -39,14 +37,13 @@ export class Manga implements OnInit, AfterContentInit {
     if (this.currentPage > 1) {
       this.currentPage -= 1;
       this.initMangaData();
-      this.cdr.detectChanges();
     }
   }
 
   initMangaData() {
     this.loading = true;
     if (this.currentPath == "trending") {
-      this.api.getTopManga("24", "", "", this.currentPage).subscribe((response: any) => {
+      this.api.getTopManga("24", "manga", "bypopularity", this.currentPage).subscribe((response: any) => {
         this.data = response.data;
         this.loading = false;
         this.paginationData = response.pagination;
@@ -78,16 +75,24 @@ export class Manga implements OnInit, AfterContentInit {
       const path = segments.map(s => s.path).join('/');
       let splittedPath = path.split("/");
       this.currentPath = splittedPath[1];
-      console.log(this.currentPath);
-
     });
   }
 
 
   ngOnInit() {
+    this.route.url.subscribe(segments => {
+      const path = segments.map(s => s.path).join('/');
+      let splittedPath = path.split("/");
+      this.currentPath = splittedPath[1];
+      console.log(this.currentPath);
+      this.initMangaData();
+    });
   }
 
   ngAfterContentInit() {
-    this.initMangaData();
+    if (!this.currentPath) {
+      this.initRoutes();
+      this.initMangaData();
+    }
   }
 }

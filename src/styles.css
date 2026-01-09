@@ -1,18 +1,15 @@
 /* Gruvbox Color Palette */
 :root {
-  /* Dark background colors */
   --bg-hard: #1d2021;
   --bg-medium: #282828;
   --bg-soft: #32302f;
 
   --borders: #504945;
  
-  /* Light foreground colors */
   --fg-hard: #ebdbb2;
   --fg-medium: #d5c4a1;
   --fg-soft: #bdae93;
  
-  /* Grayscale */
   --gray0: #fbf1c7;
   --gray1: #ebdbb2;
   --gray2: #d5c4a1;
