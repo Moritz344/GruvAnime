@@ -9,7 +9,7 @@ import { Home } from '../home/home';
   styleUrl: './app.css'
 })
 export class App {
-  protected readonly title = signal('anime-list');
+  protected readonly title = signal('GruvAnime');
 
   constructor() { }
 }
