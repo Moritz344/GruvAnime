@@ -1,4 +1,4 @@
-# AnimeList
+# GruvAnime
 discover anime and manga
 
 <img width="1921" height="1078" alt="screenshot-2026-01-09_19-50-30" src="https://github.com/user-attachments/assets/85023fe4-4580-4891-a082-24e136148b25" />
