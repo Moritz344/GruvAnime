@@ -4,10 +4,11 @@ import { Topbar } from '../topbar/topbar';
 import { Request } from '../services/request';
 import { AnimeBlock } from '../anime-block/anime-block';
 import { Spotlight } from './spotlight/spotlight';
+import { Hover } from '../hover/hover';
 
 @Component({
   selector: 'app-home',
-  imports: [Topbar, AnimeBlock, Spotlight, CommonModule],
+  imports: [Topbar, AnimeBlock, Spotlight, CommonModule, Hover],
   templateUrl: './home.html',
   styleUrl: './home.css',
 })
@@ -27,11 +28,12 @@ export class Home implements OnInit {
   topMangaData: any;
   recMangaData: any;
 
+  hover: boolean = false;
+  hoverBoxCords: { x: number, y: number } = { y: 0, x: 0 };
+  hoverBoxData: any;
+  isAnimeBlock: boolean = false;
 
-  currentHoverData: any;
-  isHover: boolean = false;
-  hoverX: number = 0;
-  hoverY: number = 0;
+
 
   isDragging = false;
   startX = 0;
@@ -45,8 +47,24 @@ export class Home implements OnInit {
     this.api.getTopAnimeCached("", "bypopularity", "14").subscribe((response: any) => {
       this.topAnimeData = response.data;
       this.cdr.detectChanges();
-      console.log(response);
     });
+  }
+
+  onAnimeBlock(event: MouseEvent, data: any, isAnime: boolean, cooldown: boolean) {
+    this.hover = true;
+    this.hoverBoxCords = { y: event.pageY, x: event.pageX };
+    console.log(this.hoverBoxCords);
+    this.hoverBoxData = data;
+    this.isAnimeBlock = isAnime;
+    console.log(this.hoverBoxData);
+    this.cdr.detectChanges();
+  }
+
+
+  onAnimeBlockLeave() {
+    setTimeout(() => {
+      this.hover = false;
+    }, 500);
   }
 
 
@@ -96,6 +114,7 @@ export class Home implements OnInit {
   drag(event: MouseEvent | TouchEvent, element: HTMLDivElement) {
     if (!this.isDragging) return;
     event.preventDefault();
+
 
     const grid = element;
     let x: number;

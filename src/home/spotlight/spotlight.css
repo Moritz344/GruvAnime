@@ -12,6 +12,10 @@
   mask: linear-gradient(to right, transparent 0%, transparent 10%, black 50%, black 100%);
 }
 
+span{
+  user-select: none;
+}
+
 .genre-container{
   display: flex;
   flex-direction: row;
@@ -23,6 +27,7 @@
 }
 
 .genre{
+  user-select: none;
   background-color: rgba(184, 187, 38, 0.2);
   color: #b8bb26;
   display: inline-flex;

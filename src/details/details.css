@@ -103,7 +103,7 @@ h2{
 .genre{
   background-color: #3c3836;
   border: 1px solid #504945;
-  color: #a89984;
+  color: white;
   display: inline-flex;
   width: auto;
   border: 1px solid white;
@@ -135,11 +135,13 @@ h2{
 
 .char-container{
   display: grid;
-  grid-template-columns: repeat(4,1fr);
+  grid-template-columns: repeat(5,1fr);
   gap: 10px;
   float: left;
   margin-left: 500px;
+  margin-bottom: 100px;
 }
+
 
 .char-title{
   display: flex;
@@ -164,15 +166,16 @@ a{
   color: var(--primary);
 }
 
-
-.char img:hover{
-  transform: scale(1.02);
+.char-info{
+  display: flex;
+  flex-direction: column;
 }
+
 
 .char-name{
   display: flex;
   margin-left: 10px;
-  margin-top: 360px;
+  margin-top: 10px;
   float: bottom;
 }
 .char-role{
@@ -181,8 +184,3 @@ a{
   float: bottom;
 }
 
-.char img{
-  border-radius: 10px;
-  float: left;
-  margin-right: 10px;
-}

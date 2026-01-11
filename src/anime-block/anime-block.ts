@@ -1,4 +1,4 @@
-import { Component, Input, OnInit, OnChanges, ChangeDetectorRef } from '@angular/core';
+import { Component, Input, Output, EventEmitter, OnInit, OnChanges, ChangeDetectorRef } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { Router } from '@angular/router';
 
@@ -11,6 +11,7 @@ import { Router } from '@angular/router';
 export class AnimeBlock implements OnInit, OnChanges {
   @Input() data: any;
   @Input() isAnime: boolean = false;
+  @Input() openDetailsOnHoverElement: boolean = false;
 
   title: string = "";
 
@@ -21,6 +22,9 @@ export class AnimeBlock implements OnInit, OnChanges {
   }
 
   onDetails() {
+    if (this.openDetailsOnHoverElement) {
+      return;
+    }
     if (this.isAnime) {
       this.router.navigate(["/anime", + this.data.mal_id]);
     } else {
@@ -31,6 +35,7 @@ export class AnimeBlock implements OnInit, OnChanges {
   ngOnChanges() {
     this.setTitle();
   }
+
 
   setTitle() {
     if (this.data.entry) {

@@ -5,6 +5,10 @@
 body{
 }
 
+h1{
+  user-select: none;
+}
+
 .anime-grid {
   display: grid;
   grid-template-columns: repeat(15,1fr);

@@ -23,10 +23,9 @@
       <div class="anime-grid" #popular
         (mousedown)="startDrag($event,popular)"
         (mousemove)="drag($event,popular)"
-        (mouseup)="endDrag(popular)"
-        (mouseleave)="endDrag(popular)">
+        (mouseup)="endDrag(popular)">
         @for (data of topAnimeData; track $index) {
-            <app-anime-block [isAnime]="true"  [data]="data"></app-anime-block>
+            <app-anime-block (click)="onAnimeBlock($event,data,true,false)" (mouseleave)="onAnimeBlockLeave()" [isAnime]="true" [openDetailsOnHoverElement]="true" [data]="data"></app-anime-block>
         }
         </div>
       <div class="scroll-buttons">
@@ -34,6 +33,7 @@
         <button (click)="scroll('right',popular)"><img class="right" src="arrow.svg"></button>
       </div>
     }
+
 
     @if (topMangaData) {
     <h1 style="display: flex;justify-content: left; margin-bottom:0px;margin-left: 20px">Popular Manga</h1>
@@ -44,7 +44,7 @@
         (mouseleave)="endDrag(manga)">
 
         @for (data of topMangaData; track $index) {
-            <app-anime-block [isAnime]="false" [data]="data"></app-anime-block>
+            <app-anime-block (click)="onAnimeBlock($event,data,false,false)" (mouseleave)="onAnimeBlockLeave()" [isAnime]="false" [openDetailsOnHoverElement]="true" [data]="data"></app-anime-block>
         }
         </div>
       <div class="scroll-buttons">
@@ -64,7 +64,7 @@
 
     >
       @for (data of recAnimeData; track $index) {
-          <app-anime-block [isAnime]="true" [data]="data"></app-anime-block>
+          <app-anime-block [isAnime]="true" (mouseleave)="onAnimeBlockLeave()" (click)="onAnimeBlock($event,data,true,false)" [openDetailsOnHoverElement]="true" [data]="data"></app-anime-block>
       }
     </div>
       <div class="scroll-buttons">
@@ -82,7 +82,7 @@
 
     >
       @for (data of recMangaData; track $index) {
-          <app-anime-block [isAnime]="false" [data]="data"></app-anime-block>
+          <app-anime-block (mouseleave)="onAnimeBlockLeave()" (click)="onAnimeBlock($event,data,false,false)" [isAnime]="false" [openDetailsOnHoverElement]="true" [data]="data"></app-anime-block>
       }
     </div>
       <div class="scroll-buttons">
@@ -92,3 +92,9 @@
     }
     <br>
 </div>
+
+
+
+@if (hover) {
+  <app-hover [cords]="hoverBoxCords" [data]="hoverBoxData" [isAnime]="isAnimeBlock"></app-hover>
+}
