@@ -124,6 +124,18 @@
   color: var(--yellow);
 }
 
+.home-btn{
+  background-color: transparent;
+  border: none;
+  color: white;
+  font-size: 25px;
+  font-weight: bold;
+  transition: 0.3s ease;
+}
+
+.home-btn:hover{
+  color: var(--orange);
+}
 
 .btn{
   background-color: transparent;
