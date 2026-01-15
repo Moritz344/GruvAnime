@@ -4,7 +4,7 @@
   @if (data) {
     <div class="anime-container" *ngIf="!loading">
       @for (d of data; track $index) {
-        <app-anime-block [isAnime]="true" [data]="d"></app-anime-block>
+        <app-anime-block [isAnime]="isAnime" [data]="d"></app-anime-block>
       }
     </div>
       @if (paginationData && data.length > 0) {

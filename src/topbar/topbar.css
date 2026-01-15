@@ -19,13 +19,7 @@
   top: 20px;
 }
 
-.screen{
-  position: absolute;
-  top: 0;
-  width: 100vw;
-  height: 100vh;
-  background: transparent;
-}
+
 
 .container-items{
   display: flex;

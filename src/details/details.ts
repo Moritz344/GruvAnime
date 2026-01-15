@@ -27,7 +27,7 @@ export class Details implements OnInit {
       this.animeCharData = response.data;
       this.animeCharData = this.animeCharData.slice(0, 12);
       this.cdr.detectChanges();
-      console.log(response.data);
+      //console.log(response.data);
     });
   }
 
@@ -37,7 +37,7 @@ export class Details implements OnInit {
         this.initAnimeCharacter();
         this.data = response.data;
         this.cdr.detectChanges();
-        console.log(this.data);
+        //console.log(this.data);
       });
     } else {
       this.api.getMangaById(Number(this.id)).subscribe((response: any) => {
@@ -53,7 +53,7 @@ export class Details implements OnInit {
       const path = segments.map(s => s.path).join('/');
       this.path = segments[0]["path"];
       this.id = segments[1]["path"];
-      console.log(this.path, this.id);
+      //console.log(this.path, this.id);
     });
   }
 

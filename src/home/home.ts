@@ -64,7 +64,7 @@ export class Home implements OnInit {
   onAnimeBlockLeave() {
     setTimeout(() => {
       this.hover = false;
-    }, 500);
+    }, 1000);
   }
 
 

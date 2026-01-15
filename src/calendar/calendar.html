@@ -1,0 +1,31 @@
+<app-topbar></app-topbar>
+<div class="container">
+  <div class="days-container">
+    @for (day of days; track $index) {
+    <button [ngClass]="{'day-active': currentDay.toLowerCase() === day.toLowerCase(), 'day': currentDay.toLowerCase() !== day.toLowerCase()}" (click)="initCalendarData(day)" >{{ day }}</button>
+    }
+  </div>
+  <div class="anime-container">
+      @for (data of calendarData.data; track $index) {
+        <div class="anime-item">
+          <app-anime-block [data]="data" [isAnime]="true"></app-anime-block>
+          <div class="anime-time">{{ data.broadcast?.time || 'N/A' }}</div>
+        </div>
+      }
+  </div>
+
+    
+
+  @if (calendarData && calendarData.pagination && calendarData.pagination.has_next_page) {
+  <div class="load-more">
+      <button (click)="loadMoreData()" class="load">Load More</button>
+  </div>
+  }
+  @if (loading) {
+    <div class="loader-container">
+      <div class="loader"></div>
+    </div>
+
+  }
+
+</div>

@@ -34,6 +34,7 @@ img{
   background: linear-gradient(to bottom, rgba(0, 0, 0, 0.6), transparent);
   padding: 1rem 0.5rem 0.5rem;
 }
+
 .anime-score {
   user-select: none;
   width: 150px;

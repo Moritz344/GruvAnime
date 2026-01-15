@@ -10,9 +10,10 @@
 
 .anime-container{
   display: grid;
-  grid-template-columns: repeat(8,1fr);
+  grid-template-columns: repeat(7,200px);
   gap: 10px;
-  margin: 50px;
+  justify-content: center;
+  margin: 40px;
 }
 .page-container{
   display: flex;
@@ -26,8 +27,13 @@
   margin: 20px;
 }
 
+.page-container span{
+  font-size: 20px;
+}
+
 .pagination-container button{
   border: none;
+  font-size: 17px;
   background-color: var(--gray8);
   color: white;
   border-radius: 5px;

@@ -1,11 +1,10 @@
-import { Component, OnInit, AfterContentInit, ChangeDetectorRef, ChangeDetectionStrategy } from '@angular/core';
+import { Component, OnInit, AfterContentInit, ChangeDetectorRef, ChangeDetectionStrategy, Input } from '@angular/core';
 import { ActivatedRoute, RouterModule, Router } from '@angular/router';
 import { AnimeBlock } from '../anime-block/anime-block';
 import { Request } from '../services/request';
 import { Topbar } from '../topbar/topbar';
 import { CommonModule } from '@angular/common';
 
-// TODO: implement trending,airing,upcoming for manga and anime use anime-block and pagination/ 
 
 @Component({
   selector: 'app-anime',
@@ -16,6 +15,7 @@ import { CommonModule } from '@angular/common';
 })
 export class Anime implements OnInit, AfterContentInit {
 
+  isAnime: boolean = false;
   data: any;
   currentPath: string = "";
   paginationData: any;
@@ -40,6 +40,52 @@ export class Anime implements OnInit, AfterContentInit {
       this.currentPage -= 1;
       this.initAnimeData();
       this.cdr.detectChanges();
+    }
+  }
+
+  initData() {
+    this.route.url.subscribe(segments => {
+      const path = segments.map(s => s.path).join('/');
+      if (path.split("/")[0] == "anime") {
+        this.isAnime = true;
+      } else if (path.split("")[0] == "manga") {
+        this.isAnime = false;
+      }
+    });
+
+    if (this.isAnime) {
+      this.initAnimeData();
+    } else {
+      this.initMangaData();
+    }
+  }
+  initMangaData() {
+    this.loading = true;
+    if (this.currentPath == "trending") {
+      this.api.getTopManga("24", "manga", "bypopularity", this.currentPage).subscribe((response: any) => {
+        this.data = response.data;
+        this.loading = false;
+        this.paginationData = response.pagination;
+        console.log(this.data);
+        this.cdr.detectChanges();
+      })
+
+    } else if (this.currentPath == "upcoming") {
+      this.api.getUpcomingManga("24", this.currentPage).subscribe((response: any) => {
+        this.data = response.data;
+        this.loading = false;
+        console.log(response);
+        this.paginationData = response.pagination;
+        this.cdr.detectChanges();
+      });
+
+    } else if (this.currentPath == "complete") {
+      this.api.getCompleteManga("24", this.currentPage).subscribe((response: any) => {
+        this.data = response.data;
+        this.loading = false;
+        this.paginationData = response.pagination;
+        this.cdr.detectChanges();
+      });
     }
   }
 
@@ -86,7 +132,7 @@ export class Anime implements OnInit, AfterContentInit {
   }
 
   ngAfterContentInit() {
-    this.initAnimeData();
+    this.initData();
   }
 
 }

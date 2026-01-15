@@ -34,6 +34,10 @@ export class Topbar implements OnInit {
     this.onMangaHover = false;
   }
 
+  onCalendar() {
+    this.router.navigate(["/calendar"]);
+  }
+
   onAnimeOption(option: string) {
     this.onAnimeHover = false;
     if (option == "trending") {

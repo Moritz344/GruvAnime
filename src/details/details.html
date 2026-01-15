@@ -33,7 +33,7 @@
     <h1>Synopsis</h1>
     <p class="synopsis">{{ data.synopsis }}</p>
   </div>
-    <h1 class="char-title" *ngIf="animeCharData.length > 0">Character</h1>
+    <h1 class="char-title" *ngIf="animeCharData && animeCharData.length > 0">Character</h1>
     <br>
     <div class="char-container">
       @for (char of animeCharData; track $index) {

@@ -3,7 +3,7 @@ import { Home } from '../home/home';
 import { Details } from '../details/details';
 import { Search } from '../search/search';
 import { Anime } from '../anime/anime';
-import { Manga } from '../manga/manga';
+import { Calendar } from '../calendar/calendar';
 
 export const routes: Routes = [
   { path: "", component: Home },
@@ -13,11 +13,13 @@ export const routes: Routes = [
   { path: "anime/upcoming", component: Anime },
   { path: "anime/trending", component: Anime },
 
-  { path: "manga/complete", component: Manga },
-  { path: "manga/upcoming", component: Manga },
-  { path: "manga/trending", component: Manga },
+  { path: "manga/complete", component: Anime },
+  { path: "manga/upcoming", component: Anime },
+  { path: "manga/trending", component: Anime },
 
   { path: "manga/:id", component: Details },
   { path: "anime/:id", component: Details },
+
+  { path: "calendar", component: Calendar },
 
 ];

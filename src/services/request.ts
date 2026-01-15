@@ -22,6 +22,7 @@ export class Request {
   private spotlightCache$: Observable<any> | null = null;
   private animeAiring$: Observable<any> | null = null;
   private animeUpcoming$: Observable<any> | null = null;
+  private scheduleCache$: { [key: string]: Observable<any> } = {};
 
 
   constructor(private http: HttpClient) { }
@@ -32,6 +33,7 @@ export class Request {
     this.animeRecCache$ = null;
     this.mangaRecCache$ = null;
     this.spotlightCache$ = null;
+    this.scheduleCache$ = {};
   }
 
 
@@ -57,6 +59,24 @@ export class Request {
       );
     }
     return this.topAnimeCache$;
+  }
+
+  getSchedules(day: string, page: string) {
+    const params = new URLSearchParams();
+
+    if (page) {
+      params.append("page", page);
+    }
+
+    params.append("limit", "25");
+    params.append("filter", day);
+    params.append("kids", "false");
+    params.append("sfw", "false");
+
+    const url = this.base_url + "schedules?" + params;
+
+
+    return this.http.get(url);
   }
 
 
