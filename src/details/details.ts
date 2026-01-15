@@ -11,11 +11,12 @@ import { CommonModule } from '@angular/common';
   styleUrl: './details.css',
 })
 export class Details implements OnInit {
-
   path: string = "";
   id: string = "";
   data: any;
   animeCharData: any;
+  loading: boolean = true;
+  timeTookToLoad: number = 0;
 
   constructor(private api: Request, private route: ActivatedRoute, private cdr: ChangeDetectorRef) {
     this.setPath();
@@ -32,16 +33,19 @@ export class Details implements OnInit {
   }
 
   initData() {
+    this.loading = true;
     if (this.path == "anime") {
       this.api.getAnimeById(Number(this.id)).subscribe((response: any) => {
         this.initAnimeCharacter();
         this.data = response.data;
+        this.loading = false;
         this.cdr.detectChanges();
         //console.log(this.data);
       });
     } else {
       this.api.getMangaById(Number(this.id)).subscribe((response: any) => {
         this.data = response.data;
+        this.loading = false;
         this.cdr.detectChanges();
       });
 

@@ -1,6 +1,21 @@
 .container{
   z-index: 0;
+  animation: fadeIn 0.1s ease-out;
+  transition: opacity 0.2s ease-in-out;
 }
+
+
+@keyframes fadeIn{
+  from {
+    opacity: 0;
+    transform: translateX(20px);
+  }
+  to {
+    opacity: 1;
+    transform: translateX(0);
+  }
+}
+
 .anime-card {
   border-radius: 8px;
   overflow: hidden;
@@ -34,6 +49,8 @@ img{
   background: linear-gradient(to bottom, rgba(0, 0, 0, 0.6), transparent);
   padding: 1rem 0.5rem 0.5rem;
 }
+
+
 
 .anime-score {
   user-select: none;

@@ -1,5 +1,5 @@
 <app-topbar></app-topbar>
-@if (data) {
+@if (data && !loading) {
   <div class="container">
     <div class="main-container">
       <div class="anime-card">
@@ -48,4 +48,12 @@
     </div>
 
   </div>
+
 }
+
+  @if (loading) {
+    <div class="loader-container">
+      <div class="loader"></div>
+      Give it some time.
+    </div>
+  }

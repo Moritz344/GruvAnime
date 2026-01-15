@@ -2,12 +2,10 @@
   margin-top: 0px;
 }
 
-.main-container{
-
-}
-
-
-.cover-container{
+.loader-container{
+  display: flex;
+  justify-content: center;
+  margin-top: 200px;
 }
 
 .cover-container img{

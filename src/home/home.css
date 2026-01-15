@@ -9,6 +9,17 @@ h1{
   user-select: none;
 }
 
+@keyframes fadeIn{
+  from {
+    opacity: 0;
+    transform: translateX(20px);
+  }
+  to {
+    opacity: 1;
+    transform: translateX(0);
+  }
+}
+
 .anime-grid {
   display: grid;
   grid-template-columns: repeat(15,1fr);
@@ -20,6 +31,12 @@ h1{
   user-select: none;
   padding: 20px;
 }
+
+app-spotlight{
+  animation: fadeIn 0.5s ease-out;
+  transition: opacity 0.2s ease-in-out;
+}
+
 
 .hover-container{
   position: fixed;
