@@ -4,6 +4,8 @@ import { ActivatedRoute } from '@angular/router';
 import { Topbar } from '../topbar/topbar';
 import { CommonModule } from '@angular/common';
 
+// TODO: show reviews
+
 @Component({
   selector: 'app-details',
   imports: [Topbar, CommonModule],
@@ -17,10 +19,35 @@ export class Details implements OnInit {
   animeCharData: any;
   loading: boolean = true;
   timeTookToLoad: number = 0;
+  reviewData: any;
+
+  reviewText: string = "";
+  showMoreText: boolean = false;
+  currentSelectedReview: any;
 
   constructor(private api: Request, private route: ActivatedRoute, private cdr: ChangeDetectorRef) {
     this.setPath();
     this.initData();
+    this.initAnimeReviews();
+  }
+
+  onReadMore(index: number) {
+    this.showMoreText = !this.showMoreText;
+    this.currentSelectedReview = this.reviewData[index];
+  }
+
+  initAnimeReviews() {
+    this.api.getReviews(this.id, 1).subscribe((response: any) => {
+      this.reviewData = response.data;
+      console.log(response.data);
+      this.reviewData.forEach((element: any) => {
+        if (element.review.length > 400) {
+          element["shortReview"] = element.review.slice(0, 310) + "...";
+        }
+      });
+      console.log(this.reviewData);
+      this.cdr.detectChanges();
+    });
   }
 
   initAnimeCharacter() {

@@ -61,6 +61,15 @@ export class Request {
     return this.topAnimeCache$;
   }
 
+  getReviews(anime_id: string, page: number,) {
+    const params = new URLSearchParams();
+    params.append("page", page.toString());
+    params.append("spoiler", "false");
+    const url = this.base_url + "anime/" + anime_id + "/reviews?" + params.toString();
+    return this.http.get(url);
+
+  }
+
   getSchedules(day: string, page: string) {
     const params = new URLSearchParams();
 

@@ -31,7 +31,6 @@ export class Anime implements OnInit, AfterContentInit {
     if (this.paginationData.last_visible_page > this.currentPage) {
       this.currentPage += 1;
       this.initAnimeData();
-      this.cdr.detectChanges();
     }
   }
 
@@ -39,7 +38,6 @@ export class Anime implements OnInit, AfterContentInit {
     if (this.currentPage > 1) {
       this.currentPage -= 1;
       this.initAnimeData();
-      this.cdr.detectChanges();
     }
   }
 
@@ -62,16 +60,16 @@ export class Anime implements OnInit, AfterContentInit {
   initMangaData() {
     this.loading = true;
     if (this.currentPath == "trending") {
-      this.api.getTopManga("24", "manga", "bypopularity", this.currentPage).subscribe((response: any) => {
+      this.api.getTopManga("21", "manga", "bypopularity", this.currentPage).subscribe((response: any) => {
         this.data = response.data;
         this.loading = false;
         this.paginationData = response.pagination;
-        console.log(this.data);
+        console.log("data got:", this.data);
         this.cdr.detectChanges();
       })
 
     } else if (this.currentPath == "upcoming") {
-      this.api.getUpcomingManga("24", this.currentPage).subscribe((response: any) => {
+      this.api.getUpcomingManga("21", this.currentPage).subscribe((response: any) => {
         this.data = response.data;
         this.loading = false;
         console.log(response);
@@ -80,7 +78,7 @@ export class Anime implements OnInit, AfterContentInit {
       });
 
     } else if (this.currentPath == "complete") {
-      this.api.getCompleteManga("24", this.currentPage).subscribe((response: any) => {
+      this.api.getCompleteManga("21", this.currentPage).subscribe((response: any) => {
         this.data = response.data;
         this.loading = false;
         this.paginationData = response.pagination;
@@ -92,7 +90,7 @@ export class Anime implements OnInit, AfterContentInit {
   initAnimeData() {
     this.loading = true;
     if (this.currentPath == "trending") {
-      this.api.getTopAnime("", "bypopularity", "24", this.currentPage).subscribe((response: any) => {
+      this.api.getTopAnime("", "bypopularity", "21", this.currentPage).subscribe((response: any) => {
         this.data = response.data;
         this.loading = false;
         this.paginationData = response.pagination;
@@ -100,7 +98,7 @@ export class Anime implements OnInit, AfterContentInit {
       })
 
     } else if (this.currentPath == "airing") {
-      this.api.getAiringAnime("24", this.currentPage).subscribe((response: any) => {
+      this.api.getAiringAnime("21", this.currentPage).subscribe((response: any) => {
         this.data = response.data;
         this.loading = false;
         this.paginationData = response.pagination;
@@ -108,7 +106,7 @@ export class Anime implements OnInit, AfterContentInit {
       });
 
     } else if (this.currentPath == "upcoming") {
-      this.api.getUpcomingAnime("24", this.currentPage).subscribe((response: any) => {
+      this.api.getUpcomingAnime("21", this.currentPage).subscribe((response: any) => {
         this.data = response.data;
         this.loading = false;
         this.paginationData = response.pagination;
