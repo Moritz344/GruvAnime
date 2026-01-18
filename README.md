@@ -1,11 +1,18 @@
 # GruvAnime
 discover anime and manga
 
-<img width="1921" height="1078" alt="screenshot-2026-01-09_19-50-30" src="https://github.com/user-attachments/assets/85023fe4-4580-4891-a082-24e136148b25" />
+<img width="1916" height="1074" alt="screenshot-2026-01-18_20-37-36" src="https://github.com/user-attachments/assets/6fc064db-3c7f-4fa6-83bc-79c15fe8cff3" />
+
+
 
 <details>
   <summary>More Screenshots: </summary>
-  <img width="1924" height="1076" alt="screenshot-2026-01-09_19-50-49" src="https://github.com/user-attachments/assets/e979f363-dda5-4e58-b611-67446c69e526" />
+
+  <img width="1916" height="1074" alt="screenshot-2026-01-18_20-37-36" src="https://github.com/user-attachments/assets/df92f962-aae5-4149-b927-c820e0d4b842" />
+
+   <img width="1927" height="1080" alt="screenshot-2026-01-18_20-37-59" src="https://github.com/user-attachments/assets/34f0c547-c0f8-421f-9c9c-60e4cc595b2f" />
+
+ 
 </details>
 
 # Running Locally
