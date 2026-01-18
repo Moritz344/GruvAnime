@@ -55,6 +55,9 @@
 
 
 .container-top-items button{
+  position: absolute;
+  height: 42px;
+  left: 500px;
   border: none;
   background: var(--gray8);
   border-radius: 5px;
@@ -62,7 +65,7 @@
 }
 
 .container-top-items button:hover{
-  background-color: rgba(1,1,1,0.5);
+  background-color: rgba(1,1,1,0.4);
 }
 
 .search-type{

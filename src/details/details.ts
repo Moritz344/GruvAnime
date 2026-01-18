@@ -29,9 +29,6 @@ export class Details implements OnInit {
   constructor(private api: Request, private route: ActivatedRoute, private cdr: ChangeDetectorRef) {
     this.setPath();
     this.initData();
-    setTimeout(() => {
-      this.initAnimeReviews();
-    }, 500);
   }
 
   onReadMore(index: number) {
@@ -42,7 +39,6 @@ export class Details implements OnInit {
   initAnimeReviews() {
     this.api.getReviews(this.id, 1).subscribe((response: any) => {
       this.reviewData = response.data;
-      console.log(response.data);
       this.reviewData.forEach((element: any) => {
         if (element.review.length > 400) {
           element["shortReview"] = element.review.slice(0, 310) + "...";
@@ -51,7 +47,6 @@ export class Details implements OnInit {
         this.cdr.detectChanges();
 
       });
-      console.log(this.reviewData);
       this.cdr.detectChanges();
     });
   }
@@ -77,6 +72,9 @@ export class Details implements OnInit {
         this.cdr.detectChanges();
         //console.log(this.data);
       });
+      setTimeout(() => {
+        this.initAnimeReviews();
+      }, 500);
     } else {
       this.api.getMangaById(Number(this.id)).subscribe((response: any) => {
         this.data = response.data;

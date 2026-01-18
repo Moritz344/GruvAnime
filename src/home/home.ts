@@ -6,6 +6,8 @@ import { AnimeBlock } from '../anime-block/anime-block';
 import { Spotlight } from './spotlight/spotlight';
 import { Hover } from '../hover/hover';
 
+//TODO: character page
+
 @Component({
   selector: 'app-home',
   imports: [Topbar, AnimeBlock, Spotlight, CommonModule, Hover],
@@ -153,11 +155,21 @@ export class Home implements OnInit {
 
 
   ngOnInit(): void {
-    this.initTopAnimeData();
-    this.initAnimeRec();
-    this.initSpotlightData();
-    this.initTopMangaData();
-    this.initMangaRec();
+    setTimeout(() => {
+      this.initTopAnimeData();
+    }, 500);
+    setTimeout(() => {
+      this.initAnimeRec();
+    }, 3000);
+    setTimeout(() => {
+      this.initSpotlightData();
+    }, 500);
+    setTimeout(() => {
+      this.initTopMangaData();
+    }, 500);
+    setTimeout(() => {
+      this.initMangaRec();
+    }, 3000);
   }
 
 }

@@ -33,7 +33,8 @@
   margin-top: 15px;
 }
 
-.details-button:hover{
+
+.details-button button:hover{
   background-color: var(--aqua-bright);
   transform: scale(1.05);
 }
