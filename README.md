@@ -16,6 +16,18 @@ discover anime and manga
 
 # Running Locally
 ```bash
+git clone https://github.com/Moritz344/GruvAnime.git
+cd GruvAnime/
 npm install .
 ng serve
 ```
+
+## Disclaimer
+
+This website uses the Jikan API (https://jikan.moe), an unofficial MyAnimeList API.
+
+This project is not affiliated with, endorsed by, or sponsored by MyAnimeList or Jikan.
+All anime, manga, and related metadata belong to their respective owners.
+
+No copyright infringement is intended.
+
