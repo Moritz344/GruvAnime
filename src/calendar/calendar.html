@@ -2,7 +2,7 @@
 <div class="container">
   <div class="days-container">
     @for (day of days; track $index) {
-    <button [ngClass]="{'day-active': currentDay.toLowerCase() === day.toLowerCase(), 'day': currentDay.toLowerCase() !== day.toLowerCase()}" (click)="initCalendarData(day)" >{{ day }}</button>
+    <button [ngClass]="{'day-active': currentDay  === day, 'day': currentDay.toLowerCase() !== day.toLowerCase()}" (click)="initCalendarData(day)" >{{ day }}</button>
     }
   </div>
   <div class="anime-container">

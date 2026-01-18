@@ -24,11 +24,14 @@ export class Details implements OnInit {
   reviewText: string = "";
   showMoreText: boolean = false;
   currentSelectedReview: any;
+  tagColor: string = "white";
 
   constructor(private api: Request, private route: ActivatedRoute, private cdr: ChangeDetectorRef) {
     this.setPath();
     this.initData();
-    this.initAnimeReviews();
+    setTimeout(() => {
+      this.initAnimeReviews();
+    }, 500);
   }
 
   onReadMore(index: number) {
@@ -44,6 +47,9 @@ export class Details implements OnInit {
         if (element.review.length > 400) {
           element["shortReview"] = element.review.slice(0, 310) + "...";
         }
+
+        this.cdr.detectChanges();
+
       });
       console.log(this.reviewData);
       this.cdr.detectChanges();
@@ -63,7 +69,9 @@ export class Details implements OnInit {
     this.loading = true;
     if (this.path == "anime") {
       this.api.getAnimeById(Number(this.id)).subscribe((response: any) => {
-        this.initAnimeCharacter();
+        setTimeout(() => {
+          this.initAnimeCharacter();
+        }, 500);
         this.data = response.data;
         this.loading = false;
         this.cdr.detectChanges();

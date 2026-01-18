@@ -12,6 +12,10 @@
   width: 200px;
 }
 
+::-webkit-scrollbar {
+  display: none;
+}
+
 
 .layout{
   display: flex;

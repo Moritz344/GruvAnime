@@ -35,27 +35,30 @@
     </div>
 
     <br>
-    <h1 class="char-title">Characters </h1>
-    <br> <br>
-    <div class="char-container">
-      @for (char of animeCharData; track $index) {
-        <div class="char" *ngIf="char.role == 'Main' ">
-         <img width="220" height="360" [src]="char.character.images.jpg.image_url">
-         <div class="char-info">
-          <span><a [href]="char.character.url">{{ char.character.name }}</a></span>
-          <span>{{ char.role }}</span>
-         </div>
-        </div>
-      }
-    </div>
+      @if (animeCharData && animeCharData.length > 0) {
 
-  </div>
+        <h1 class="char-title">Characters </h1>
+        <br> <br>
+        <div class="char-container">
+          @for (char of animeCharData; track $index) {
+            <div class="char" *ngIf="char.role == 'Main' ">
+             <img width="220" height="360" [src]="char.character.images.jpg.image_url">
+             <div class="char-info">
+              <span><a [href]="char.character.url">{{ char.character.name }}</a></span>
+              <span>{{ char.role }}</span>
+             </div>
+            </div>
+          }
+        </div>
+
+  }
+      </div>
 
 
 }
 
-  <h1 class="review-title">Reviews </h1>
-  <div class="review-container-top">
+  <h1 class="review-title" *ngIf="reviewData && reviewData.length > 0">Reviews ({{ reviewData.length }}) </h1>
+  <div class="review-container-top" *ngIf="reviewData && reviewData.length > 0">
   <div class="review-container">
       @for (d of reviewData; track $index) {
           <div class="review">
@@ -70,10 +73,9 @@
               <p>{{ d.review }}</p>
             }@else {
                 <p>{{ d.shortReview }}</p>
-              }
+            }
    </div>
       <div class="review-options">
-        <span>{{ d.reactions.overall }}</span>
         <button class="review-option-read" (click)="onReadMore($index)">
         @if (showMoreText) {
             Read less

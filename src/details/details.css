@@ -50,6 +50,7 @@ h2{
   position: absolute;
   left: 100px;
   top: 1200px;
+  animation: fadeIn 0.5s ease-out;
 }
 
 
@@ -74,12 +75,24 @@ h2{
   display: grid;
   grid-template-columns: repeat(4,100px);
   gap: 0px;
+  margin-top: -30px;
 }
 
 .tag-container{
   margin: 10px;
   margin-left: 0px;
   margin-bottom: 0px;
+}
+
+@keyframes fadeIn{
+  from {
+    opacity: 0;
+    transform: translateX(20px);
+  }
+  to {
+    opacity: 1;
+    transform: translateX(0);
+  }
 }
 
 .tag{
@@ -261,7 +274,8 @@ h2{
   float: left;
   margin-top: 630px;
   margin-left: 100px;
-  margin-bottom: 0px;
+  margin-bottom: 10px;
+  animation: fadeIn 0.5s ease-out;
 }
 
 .review-title{

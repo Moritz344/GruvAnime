@@ -15,7 +15,7 @@ import { Topbar } from '../topbar/topbar';
 export class Calendar implements OnInit {
 
   calendarData: any;
-  days: string[] = ["Monday", "Tuesday", "Wednesday", "Thursday", "Friday", "Saturday", "Sunday"];
+  days: string[] = ["Sunday", "Monday", "Tuesday", "Wednesday", "Thursday", "Friday", "Saturday"];
   currentDay: string = "Monday";
   currentPage: number = 1;
   loading: boolean = false;
@@ -29,7 +29,6 @@ export class Calendar implements OnInit {
       this.calendarData = response;
       this.loading = false;
       this.cdr.detectChanges();
-      console.log(this.calendarData);
     });
   }
 
@@ -46,10 +45,11 @@ export class Calendar implements OnInit {
   }
 
   constructor(private api: Request, private cdr: ChangeDetectorRef) {
-    const today = new Date().getDay();
-    this.initCalendarData(this.days[today - 1]);
   }
 
-  ngOnInit(): void { }
+  ngOnInit(): void {
+    const today = new Date().getDay();
+    this.initCalendarData(this.days[today]);
+  }
 
 }
