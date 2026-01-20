@@ -30,14 +30,22 @@ export class Anime implements OnInit, AfterContentInit {
   onNextPage() {
     if (this.paginationData.last_visible_page > this.currentPage) {
       this.currentPage += 1;
-      this.initAnimeData();
+      if (this.isAnime) {
+        this.initAnimeData();
+      } else {
+        this.initMangaData();
+      }
     }
   }
 
   onPreviousPage() {
     if (this.currentPage > 1) {
       this.currentPage -= 1;
-      this.initAnimeData();
+      if (this.isAnime) {
+        this.initAnimeData();
+      } else {
+        this.initMangaData();
+      }
     }
   }
 
@@ -92,6 +100,7 @@ export class Anime implements OnInit, AfterContentInit {
     if (this.currentPath == "trending") {
       this.api.getTopAnime("", "bypopularity", "21", this.currentPage).subscribe((response: any) => {
         this.data = response.data;
+        console.log("data trnding", this.data);
         this.loading = false;
         this.paginationData = response.pagination;
         this.cdr.detectChanges();
