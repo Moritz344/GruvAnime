@@ -1,5 +1,6 @@
 # GruvAnime
 [![Netlify Status](https://api.netlify.com/api/v1/badges/8e862793-b88c-42be-92ea-17cde6804ca6/deploy-status)](https://app.netlify.com/projects/gruvanime/deploys)
+
 discover anime and manga
 
 <img width="1923" height="1080" alt="screenshot-2026-01-18_20-37-17" src="https://github.com/user-attachments/assets/03e834f4-f59a-44d4-9a31-8a8cdca08f92" />
