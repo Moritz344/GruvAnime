@@ -1,10 +1,17 @@
 <app-topbar></app-topbar>
 <div class="container" >
-  <div class="container-top-items">
+  <div [ngClass]="{
+    'container-top-items': !isMobile,
+    'container-top-items-mobile': isMobile
+  }
+  ">
     <input (keydown.code.enter)="search()" [(ngModel)]="searchFilter.keyword" spellcheck="false" placeholder="Search...">
     <button (click)="search()"><img src="search.svg"></button>
   </div>
-    <div class="filter-container">
+    <div [ngClass]="{
+      'filter-container': !isMobile,
+      'filter-container-mobile': isMobile
+    }">
       <app-dropdown header="Types" [data]="types" default="Anime"  (dropdownSelected)="onSetType($event)"></app-dropdown>
       @if (currentType == "anime") {
         <app-dropdown header="Rating" [data]="ratings" (reset)="onReset($event)"  (dropdownSelected)="onFilter($event)"></app-dropdown>
@@ -28,7 +35,10 @@
 
 
     @if (searchResult && searchResult.length > 0 && !searching ) {
-    <div class="search-container">
+    <div [ngClass]="{ 
+      'search-container': !isMobile,
+      'search-container-mobile': isMobile
+      }">
         @for (result of searchResult; track $index) {
           @if (currentType == "anime") {
             <app-anime-block [isAnime]="true" [data]="result"></app-anime-block>

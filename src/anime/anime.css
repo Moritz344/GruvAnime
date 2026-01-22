@@ -8,6 +8,15 @@
   margin-top: 100px;
 }
 
+.anime-container-mobile{
+  display: grid;
+  grid-template-columns: repeat(1,200px);
+  gap: 10px;
+  justify-content: center;
+  margin: 40px;
+
+}
+
 .anime-container{
   display: grid;
   grid-template-columns: repeat(7,200px);

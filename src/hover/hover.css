@@ -34,7 +34,7 @@
 }
 
 
-.details-button button:hover{
+button:hover{
   background-color: var(--aqua-bright);
   transform: scale(1.05);
 }

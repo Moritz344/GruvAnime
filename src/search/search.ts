@@ -7,6 +7,9 @@ import { Dropdown } from './dropdown/dropdown';
 import { Topbar } from '../topbar/topbar';
 import { AnimeBlock } from '../anime-block/anime-block';
 import { Subject, debounceTime } from 'rxjs';
+import { DeviceDetectorService } from 'ngx-device-detector';
+
+// TODO: make changing filter search 
 
 @Component({
   selector: 'app-search',
@@ -83,11 +86,11 @@ export class Search implements OnInit, AfterContentInit {
   currentPage: number = 1;
   searchLimit: string = "24";
   paginationData: any;
+  isMobile: boolean = false;
 
 
-  // TODO: make own dropdown component
-
-  constructor(private route: ActivatedRoute, private api: Request, private cdr: ChangeDetectorRef) {
+  constructor(private route: ActivatedRoute, private api: Request, private cdr: ChangeDetectorRef, private deviceService: DeviceDetectorService) {
+    this.isMobile = this.deviceService.isMobile();
     this.searchSubject.pipe(
       debounceTime(this.searchCooldown)
     ).subscribe(() => {

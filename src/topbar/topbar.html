@@ -1,35 +1,49 @@
 <div class="container" (click)="onLeaveHoverElement()">
   <div class="home-container">
-    <a [routerLink]="['']"><button (mouseenter)="onLeaveHoverElement()" class="home-btn">GruvAnime</button></a>
+    <a [routerLink]="['']"><button (mouseenter)="onLeaveHoverElement()" class="home-btn" *ngIf="!isMobile">GruvAnime</button></a>
   </div>
-  <div class="container-items">
-    <div class="anime-wrapper" (click)="onAnime()">
-      <a ><button (mouseenter)="onAnime()" class="btn"><img src="movie.svg">Anime</button></a>
-      @if (onAnimeHover) {
-        <div class="anime-hover-container">
-          <button (click)="onAnimeOption('trending')">Trending</button> <br>
-          <button (click)="onAnimeOption('airing')">Airing</button> <br>
-          <button (click)="onAnimeOption('upcoming')">Upcoming</button> <br>
-        </div>
-      }@if (onMangaHover) {
-        <div class="manga-hover-container">
-          <button (click)="onMangaOption('trending')">Trending</button> <br>
-          <button (click)="onMangaOption('complete')">Complete</button> <br>
-          <button (click)="onMangaOption('upcoming')">Upcoming</button> <br>
-        </div>
-      }
+  @if (!isMobile) {
+    <div class="container-items" >
+      <div class="anime-wrapper" (click)="onAnime()">
+        <a ><button (mouseenter)="onAnime()" class="btn"><img src="movie.svg">Anime</button></a>
+        @if (onAnimeHover) {
+          <div class="anime-hover-container">
+            <button (click)="onAnimeOption('trending')">Trending</button> <br>
+            <button (click)="onAnimeOption('airing')">Airing</button> <br>
+            <button (click)="onAnimeOption('upcoming')">Upcoming</button> <br>
+          </div>
+        }@if (onMangaHover) {
+          <div class="manga-hover-container">
+            <button (click)="onMangaOption('trending')">Trending</button> <br>
+            <button (click)="onMangaOption('complete')">Complete</button> <br>
+            <button (click)="onMangaOption('upcoming')">Upcoming</button> <br>
+          </div>
+        }
+      </div>
+      <a ><button (mouseenter)="onManga()" class="btn"><img src="manga.svg">Manga</button></a>
+      <a ><button (click)="onCalendar()" class="btn"><img src="calendar.svg">Calendar</button></a>
     </div>
-    <a ><button (mouseenter)="onManga()" class="btn"><img src="manga.svg">Manga</button></a>
-    <a ><button (click)="onCalendar()" class="btn"><img src="calendar.svg">Calendar</button></a>
-  </div>
 
+  }@else{
+    <div class="container-items-mobile">
+        <div class="menu-container">
+          <a class="mobile-home-header" [routerLink]="['']">GruvAnime</a>
+          <div class="options">
+            <a (click)="onAnimeOption('trending')">Anime</a>
+            <a (click)="onMangaOption('trending')">Manga</a>
+            <a (click)="onSearch()">Search</a>
+          </div>
+        </div>
+          <!-- <a href="https://github.com/Moritz344" target="_blank"><img width="50" height="50" src="github-logo.png"> </a> -->
+    </div>
+  }
   
 
-  <div class="search-container">
+  <div class="search-container" *ngIf="!isMobile">
     <input class="search-input" [(ngModel)]="searchValue" spellcheck="false" (keydown.code.enter)="onSearch()"><button (click)="onSearch()"><img src="search.svg"></button>
   </div>
 
-  <div class="github">
+  <div class="github" *ngIf="!isMobile">
     <a href="https://github.com/Moritz344" target="_blank"><img width="50" height="50" src="github-logo.png"> </a>
 </div>
 </div>

@@ -20,6 +20,36 @@
 }
 
 
+.container-items-mobile{
+  position: fixed;
+  display: flex;
+  flex-direction: row;
+}
+
+.menu-container{
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  background-color: var(--gray8);
+  height: 50px;
+}
+
+.options{
+  display: flex;
+  flex-direction: row;
+  gap: 10px;
+  margin-left: 120px;
+  margin-top: 15px;
+}
+
+.mobile-home-header{
+  position: absolute;
+  left: 10px;
+  top: 15px;
+  text-decoration: none;
+  color: var(--text);
+}
 
 .container-items{
   display: flex;
@@ -123,6 +153,8 @@
 .manga-hover-container button:hover{
   color: var(--yellow);
 }
+
+
 
 .home-btn{
   background-color: transparent;

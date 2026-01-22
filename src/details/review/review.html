@@ -1,0 +1,18 @@
+<div [ngClass]="{ 'container': !isMobile, 'container-mobile': isMobile }">
+  <img width="50" height="50" [src]="data.user.images.jpg.image_url">
+  <a [href]="data.user.url" target="_blank">{{ data.user.username }}</a> <br>
+  <br><br>
+  @if (showMoreText) {
+    <p>{{ reviewText }}</p> <br>
+  }@else {
+    <p>{{ reviewShortText }}...</p> <br>
+  }
+
+  <button (click)="onReadMore()" class="read-more">
+    @if (showMoreText) {
+      Read less
+    }@else{
+      Read More
+    }
+  </button>
+</div>

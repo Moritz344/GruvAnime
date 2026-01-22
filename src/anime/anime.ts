@@ -4,6 +4,7 @@ import { AnimeBlock } from '../anime-block/anime-block';
 import { Request } from '../services/request';
 import { Topbar } from '../topbar/topbar';
 import { CommonModule } from '@angular/common';
+import { DeviceDetectorService } from 'ngx-device-detector';
 
 
 @Component({
@@ -21,9 +22,11 @@ export class Anime implements OnInit, AfterContentInit {
   paginationData: any;
   currentPage: number = 1;
   loading: boolean = false;
+  isMobile: boolean = false;
 
 
-  constructor(private route: ActivatedRoute, private api: Request, private cdr: ChangeDetectorRef) {
+  constructor(private route: ActivatedRoute, private api: Request, private cdr: ChangeDetectorRef, private deviceService: DeviceDetectorService) {
+    this.isMobile = this.deviceService.isMobile();
     this.initRoutes();
   }
 

@@ -6,7 +6,8 @@ import { AnimeBlock } from '../anime-block/anime-block';
 import { Spotlight } from './spotlight/spotlight';
 import { Hover } from '../hover/hover';
 
-//TODO: character page
+// TODO: character page
+// TODO: make responsive for mobile
 
 @Component({
   selector: 'app-home',
@@ -55,10 +56,8 @@ export class Home implements OnInit {
   onAnimeBlock(event: MouseEvent, data: any, isAnime: boolean, cooldown: boolean) {
     this.hover = true;
     this.hoverBoxCords = { y: event.pageY, x: event.pageX };
-    console.log(this.hoverBoxCords);
     this.hoverBoxData = data;
     this.isAnimeBlock = isAnime;
-    console.log(this.hoverBoxData);
     this.cdr.detectChanges();
   }
 

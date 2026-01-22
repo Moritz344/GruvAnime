@@ -1,0 +1,45 @@
+.container{
+  position: relative;
+  width: 1000px;
+}
+
+.container-mobile{
+  width: 250px;
+  position: relative;
+}
+
+.container-mobile p{
+  margin: 0;
+}
+
+
+.container img{
+  float: left;
+  margin-right: 5px;
+}
+
+p{
+  text-align: justify;
+  margin-bottom: 0;
+}
+
+.read-more{
+  border:none;
+  border-radius: 5px;
+  padding: 5px;
+  font-size: 15px;
+  color: white;
+  background-color: var(--aqua);
+  transition: 0.3s ease;
+  margin-top: 0px;
+}
+
+a{
+  text-decoration: none;
+  color: var(--aqua);
+}
+
+.read-more:hover{
+  transform: scale(1.02);
+  background-color: var(--aqua-bright);
+}

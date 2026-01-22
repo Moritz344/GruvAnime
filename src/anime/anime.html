@@ -2,11 +2,21 @@
 <app-topbar></app-topbar>
 <div class="container">
   @if (data) {
-    <div class="anime-container" *ngIf="!loading">
-      @for (d of data; track $index) {
-        <app-anime-block [isAnime]="isAnime" [data]="d"></app-anime-block>
-      }
-    </div>
+    @if (!isMobile) {
+     <div class="anime-container" *ngIf="!loading">
+       @for (d of data; track $index) {
+         <app-anime-block [isAnime]="isAnime" [data]="d"></app-anime-block>
+       }
+     </div>
+
+    }@else {
+     <div class="anime-container-mobile" *ngIf="!loading">
+       @for (d of data; track $index) {
+         <app-anime-block [isAnime]="isAnime" [data]="d"></app-anime-block>
+       }
+     </div>
+
+     }
       @if (paginationData && data.length > 0) {
         <div class="page-container">
             <span>Page: {{ paginationData.current_page }}/{{ paginationData.last_visible_page }}</span>

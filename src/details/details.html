@@ -3,7 +3,7 @@
   <div class="container">
     <div class="main-container">
       <div class="anime-card">
-        <div class="info">
+        <div [ngClass]="{ 'info': !isMobile, 'info-mobile': isMobile }">
           <h1 class="title">{{ data.title }}</h1>
           <h2 *ngIf="data.title_japanese">{{ data.title_japanese }}</h2>
           <div class="row-1">
@@ -22,7 +22,6 @@
           </div>
           </div>
             <p class="synopsis">{{ data.synopsis }}</p>
-            <p></p>
         </div>
         <img draggable="false" [src]="data.images.jpg.large_image_url">
         <div class="anime-card-bottom-info">
@@ -36,10 +35,8 @@
 
     <br>
       @if (animeCharData && animeCharData.length > 0) {
-
-        <h1 class="char-title">Characters </h1>
-        <br> <br>
-        <div class="char-container">
+        <h1 [ngClass]="{ 'char-title': !isMobile,'char-title-mobile': isMobile}">Characters </h1>
+        <div [ngClass]="{ 'char-container': !isMobile, 'char-container-mobile': isMobile }">
           @for (char of animeCharData; track $index) {
             <div class="char" *ngIf="char.role == 'Main' ">
              <img width="220" height="360" [src]="char.character.images.jpg.image_url">
@@ -52,41 +49,18 @@
         </div>
 
   }
-      </div>
+    <h1 [ngClass]="{'review-title': !isMobile,'review-title-mobile': isMobile}" *ngIf="reviewData && reviewData.length > 0">Reviews ({{ reviewData.length }}) </h1>
+    <div [ngClass]="{ 'review-container': !isMobile, 'review-container-mobile': isMobile }">
+      @for ( review of reviewData; track $index) {
+        <app-review [data]="review" ></app-review>
+      }
+    </div>
+
+</div>
 
 
 }
 
-  <h1 class="review-title" *ngIf="reviewData && reviewData.length > 0">Reviews ({{ reviewData.length }}) </h1>
-  <div class="review-container-top" *ngIf="reviewData && reviewData.length > 0">
-  <div class="review-container">
-      @for (d of reviewData; track $index) {
-          <div class="review">
-            <img [src]="d.user.images.jpg.image_url" width="50" height="60">
-            <a [href]="d.user.url" target="_blank" class="user">{{ d.user.username }}</a> <br>
-            <div class="tag-container">
-            @for (t of d.tags; track $index) {
-              <span class="tag">{{ t }}</span>
-            }
-            </div>
-            @if (showMoreText && currentSelectedReview == d) {
-              <p>{{ d.review }}</p>
-            }@else {
-                <p>{{ d.shortReview }}</p>
-            }
-   </div>
-      <div class="review-options">
-        <button class="review-option-read" (click)="onReadMore($index)">
-        @if (showMoreText) {
-            Read less
-        }@else {
-            Read More
-        }
-        </button>
-      </div>
-    }
-
-  </div>
 
   @if (loading) {
     <div class="loader-container">

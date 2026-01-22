@@ -2,6 +2,9 @@ import { Component, HostListener, OnInit, OnDestroy } from '@angular/core';
 import { RouterModule, Router } from '@angular/router';
 import { CommonModule } from '@angular/common';
 import { FormsModule } from '@angular/forms';
+import { DeviceDetectorService } from 'ngx-device-detector';
+
+// TODO: github icon smaller
 
 @Component({
   selector: 'app-topbar',
@@ -15,6 +18,8 @@ export class Topbar implements OnInit {
 
   onAnimeHover: boolean = false;
   onMangaHover: boolean = false;
+  isMobile: boolean = false;
+  showMobileMenu: boolean = false;
 
   onAnime() {
     this.onMangaHover = false;
@@ -66,7 +71,13 @@ export class Topbar implements OnInit {
     this.onAnimeHover = false;
   }
 
-  constructor(private router: Router) { }
+  onShowMobileMenu() {
+    this.showMobileMenu = !this.showMobileMenu;
+  }
+
+  constructor(private router: Router, private deviceService: DeviceDetectorService) {
+    this.isMobile = this.deviceService.isMobile();
+  }
 
   ngOnInit() { }
 

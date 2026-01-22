@@ -2,13 +2,15 @@ import { Component, OnInit, ChangeDetectorRef } from '@angular/core';
 import { Request } from '../services/request';
 import { ActivatedRoute } from '@angular/router';
 import { Topbar } from '../topbar/topbar';
+import { Review } from './review/review';
 import { CommonModule } from '@angular/common';
+import { DeviceDetectorService } from 'ngx-device-detector';
 
-// TODO: show reviews
+// TODO: mobile responsive
 
 @Component({
   selector: 'app-details',
-  imports: [Topbar, CommonModule],
+  imports: [Topbar, CommonModule, Review],
   templateUrl: './details.html',
   styleUrl: './details.css',
 })
@@ -21,33 +23,21 @@ export class Details implements OnInit {
   timeTookToLoad: number = 0;
   reviewData: any;
 
-  reviewText: string = "";
-  showMoreText: boolean = false;
   currentSelectedReview: any;
   tagColor: string = "white";
+  isMobile: boolean = false;
 
-  constructor(private api: Request, private route: ActivatedRoute, private cdr: ChangeDetectorRef) {
+  constructor(private api: Request, private route: ActivatedRoute, private cdr: ChangeDetectorRef,
+    private device: DeviceDetectorService) {
+    this.isMobile = this.device.isMobile();
     this.setPath();
     this.initData();
   }
 
-  onReadMore(index: number) {
-    this.showMoreText = !this.showMoreText;
-    this.currentSelectedReview = this.reviewData[index];
-  }
 
   initAnimeReviews() {
     this.api.getReviews(this.id, 1).subscribe((response: any) => {
       this.reviewData = response.data;
-      this.reviewData.forEach((element: any) => {
-        if (element.review.length > 400) {
-          element["shortReview"] = element.review.slice(0, 310) + "...";
-        }
-
-        this.cdr.detectChanges();
-
-      });
-      this.cdr.detectChanges();
     });
   }
 

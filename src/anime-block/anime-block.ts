@@ -1,6 +1,7 @@
-import { Component, Input, Output, EventEmitter, OnInit, OnChanges, ChangeDetectorRef } from '@angular/core';
+import { Component, Input, inject, Output, EventEmitter, OnInit, OnChanges, ChangeDetectorRef } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { Router } from '@angular/router';
+import { DeviceDetectorService } from 'ngx-device-detector';
 
 @Component({
   selector: 'app-anime-block',
@@ -13,9 +14,12 @@ export class AnimeBlock implements OnInit, OnChanges {
   @Input() isAnime: boolean = false;
   @Input() openDetailsOnHoverElement: boolean = false;
 
+  isMobile: boolean = false;
   title: string = "";
 
-  constructor(private cdr: ChangeDetectorRef, private router: Router) { }
+  constructor(private cdr: ChangeDetectorRef, private router: Router, private detector: DeviceDetectorService) {
+    this.isMobile = this.detector.isMobile();
+  }
 
   ngOnInit() {
     this.setTitle();
@@ -42,7 +46,7 @@ export class AnimeBlock implements OnInit, OnChanges {
       this.data = this.data.entry[0];
       this.title = this.data.title;
     } else if (this.data.titles) {
-      this.title = this.data.titles[0].title;
+      this.title = this.data.title_english || this.data.title;
     }
   }
 
