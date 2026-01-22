@@ -47,7 +47,6 @@ export class Dropdown implements OnInit {
     } else {
       this.selectedNormal = item.name;
     }
-    console.log(item);
     this.dropdownSelected.emit({ item: item.value, title: this.header });
     this.expand = false;
   }

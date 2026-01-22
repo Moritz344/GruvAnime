@@ -10,6 +10,16 @@
   margin-top: 50px;
 }
 
+.container-top-items button{
+  position: absolute;
+  height: 42px;
+  left: 350px;
+  border: none;
+  background: var(--gray8);
+  border-radius: 5px;
+  z-index: 0;
+}
+
 .container-top-items-mobile{
   display: flex;
   flex-direction: row;
@@ -79,15 +89,6 @@ input {
 }
 
 
-.container-top-items button{
-  position: absolute;
-  height: 42px;
-  left: 500px;
-  border: none;
-  background: var(--gray8);
-  border-radius: 5px;
-  z-index: 0;
-}
 
 
 

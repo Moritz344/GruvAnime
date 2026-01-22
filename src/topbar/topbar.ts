@@ -4,8 +4,6 @@ import { CommonModule } from '@angular/common';
 import { FormsModule } from '@angular/forms';
 import { DeviceDetectorService } from 'ngx-device-detector';
 
-// TODO: github icon smaller
-
 @Component({
   selector: 'app-topbar',
   imports: [RouterModule, CommonModule, FormsModule],

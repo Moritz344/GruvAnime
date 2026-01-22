@@ -144,9 +144,8 @@ export class Search implements OnInit, AfterContentInit {
       this.searchFilter.sort = element.item;
     }
 
+    this.search();
 
-    console.log(element);
-    console.log(this.searchFilter);
   }
 
   onReset(header: string) {
@@ -170,7 +169,7 @@ export class Search implements OnInit, AfterContentInit {
       this.searchFilter.sort = "";
     }
     this.cdr.detectChanges();
-    console.log(this.searchFilter);
+    this.search();
   }
 
   onResetFilter() {
