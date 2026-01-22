@@ -109,7 +109,6 @@ export class Search implements OnInit, AfterContentInit {
 
 
     this.searchFilter.keyword = keyword;
-    console.log(this.searchFilter);
 
   }
 
@@ -144,6 +143,7 @@ export class Search implements OnInit, AfterContentInit {
       this.searchFilter.sort = element.item;
     }
 
+    this.cdr.detectChanges();
     this.search();
 
   }
@@ -187,7 +187,6 @@ export class Search implements OnInit, AfterContentInit {
       order_by: "",
       sort: ""
     };
-    console.log(this.searchFilter);
   }
 
   onNextPage() {
@@ -195,7 +194,6 @@ export class Search implements OnInit, AfterContentInit {
       this.currentPage += 1;
       this.search();
       this.cdr.detectChanges();
-      console.log(this.currentPage);
     }
   }
 
@@ -221,28 +219,22 @@ export class Search implements OnInit, AfterContentInit {
 
   performSearch() {
     this.searching = true;
-    console.log("searching");
     if (this.currentType == "anime") {
       this.api.searchAnime(this.searchFilter, this.currentPage.toString(), this.searchLimit).subscribe((response: any) => {
         this.searchResult = response.data;
         this.searching = false;
-        console.log(this.searchResult);
-        console.log("not searching");
         this.paginationData = response.pagination;
         this.checkPage();
-        console.log(this.paginationData);
         this.cdr.detectChanges();
       });
     } else if (this.currentType == "manga") {
       this.searchResult.length = 0;
-      console.log("type: manga");
       this.api.searchManga(this.searchFilter, this.currentPage.toString(), this.searchLimit).subscribe((response: any) => {
         this.searchResult = response.data;
         this.searching = false;
         this.paginationData = response.pagination;
         this.checkPage();
         this.cdr.detectChanges();
-        console.log(response);
       });
     }
   }

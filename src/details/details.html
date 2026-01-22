@@ -48,7 +48,9 @@
           }
         </div>
 
-  }
+      }@else {
+          <div class="char-container"></div>
+        }
     <h1 [ngClass]="{'review-title': !isMobile,'review-title-mobile': isMobile}" *ngIf="reviewData && reviewData.length > 0">Reviews ({{ reviewData.length }}) </h1>
     <div [ngClass]="{ 'review-container': !isMobile, 'review-container-mobile': isMobile }">
       @for ( review of reviewData; track $index) {
@@ -65,7 +67,6 @@
   @if (loading) {
     <div class="loader-container">
       <div class="loader"></div>
-      Give it some time.
     </div>
   }
 

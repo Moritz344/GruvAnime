@@ -8,6 +8,8 @@ import { Hover } from '../hover/hover';
 
 // TODO: character page
 // TODO: make responsive for mobile
+// TODO: fix hover element pos 
+// TODO: fix loading indicator not working
 
 @Component({
   selector: 'app-home',

@@ -28,11 +28,11 @@
 
       }
 
+    }
+    <span *ngIf="data.length == 0" style="display: flex;justify-content: center;margin-top: 100px;font-size: 30px">Nothing found...</span>
       @if (loading) {
           <div class="loader-container">
             <div class="loader"></div>
           </div>
       }
-    <span *ngIf="data.length == 0" style="display: flex;justify-content: center;margin-top: 100px;font-size: 30px">Nothing found...</span>
-    }
 </div>

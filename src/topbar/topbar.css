@@ -136,7 +136,7 @@
 .manga-hover-container{
   position: absolute;
   top: 100%;
-  left: 70px;
+  left: 110px;
   background-color: var(--gray8);
   padding: 10px;
   border: 1px solid white;

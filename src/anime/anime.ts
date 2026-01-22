@@ -21,7 +21,7 @@ export class Anime implements OnInit, AfterContentInit {
   currentPath: string = "";
   paginationData: any;
   currentPage: number = 1;
-  loading: boolean = false;
+  loading: boolean = true;
   isMobile: boolean = false;
 
 
