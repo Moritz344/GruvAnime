@@ -126,7 +126,7 @@
   border:none;
   color: white;
   background: transparent;
-  font-size: 15px;
+  font-size: 18px;
 }
 
 .anime-hover-container button:hover{
@@ -147,7 +147,7 @@
   border:none;
   color: white;
   background: transparent;
-  font-size: 15px;
+  font-size: 18px;
 }
 
 .manga-hover-container button:hover{
@@ -166,7 +166,7 @@
 }
 
 .home-btn:hover{
-  color: var(--orange);
+  color: var(--yellow);
 }
 
 .btn{
@@ -179,7 +179,7 @@
 }
 
 .btn:hover{
-  color: var(--orange);
+  color: var(--yellow);
 }
 
 

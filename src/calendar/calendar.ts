@@ -19,6 +19,10 @@ export class Calendar implements OnInit {
   currentDay: string = "Monday";
   currentPage: number = 1;
   loading: boolean = false;
+  cooldown: number = 10000;
+
+  time: number = 0;
+  interval: any;
 
   initCalendarData(day: string) {
     this.loading = true;

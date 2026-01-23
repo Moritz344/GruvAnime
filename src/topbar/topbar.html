@@ -1,4 +1,4 @@
-<div class="container" (click)="onLeaveHoverElement()">
+<div class="container" (click)="onLeaveHoverElement()" (mouseenter)="onLeaveHoverElement()">
   <div class="home-container">
     <a [routerLink]="['']"><button (mouseenter)="onLeaveHoverElement()" class="home-btn" *ngIf="!isMobile">GruvAnime</button></a>
   </div>
@@ -21,7 +21,7 @@
         }
       </div>
       <a ><button (mouseenter)="onManga()" class="btn"><img src="manga.svg">Manga</button></a>
-      <a ><button (click)="onCalendar()" class="btn"><img src="calendar.svg">Calendar</button></a>
+      <a ><button (click)="onCalendar()" (mouseenter)="onLeaveHoverElement()" class="btn"><img src="calendar.svg">Calendar</button></a>
     </div>
 
   }@else{

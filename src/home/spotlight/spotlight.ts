@@ -17,13 +17,13 @@ export class Spotlight implements OnInit {
 
   ngOnInit(): void {
     if (this.data) {
-      if (this.data.synopsis.length > 100) {
+      if (this.data.synopsis && this.data.synopsis.length > 100) {
         this.trimmedDesc = this.data.synopsis ? this.data.synopsis.slice(0, 100) + "..." : '';
       } else {
         this.trimmedDesc = this.data.synopsis;
       }
 
-      if (this.data.title.length > 20) {
+      if (this.data.title && this.data.title.length > 20) {
         this.trimmedTitel = this.data.title ? this.data.title.slice(0, 20) + "..." : '';
       } else {
         this.trimmedTitel = this.data.title;

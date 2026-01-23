@@ -82,6 +82,7 @@ export class Home implements OnInit {
     this.api.getMangaRecCached().subscribe((response: any) => {
       this.recMangaData = response.data;
       this.recMangaData = this.recMangaData.slice(0, 14);
+      this.recMangaData = this.removeDuplicate(this.recMangaData);
       this.cdr.detectChanges();
     });
   }
@@ -90,13 +91,21 @@ export class Home implements OnInit {
     this.api.getAnimeRecCached().subscribe((response: any) => {
       this.recAnimeData = response.data;
       this.recAnimeData = this.recAnimeData.slice(0, 14);
+      this.recAnimeData = this.removeDuplicate(this.recAnimeData);
       this.cdr.detectChanges();
     });
+  }
+
+  removeDuplicate(array: any) {
+    return array.filter((item: any, index: number) =>
+      array.findIndex((obj: any) => JSON.stringify(obj) === JSON.stringify(item)) === index
+    );
   }
 
   initSpotlightData() {
     this.api.getAnimeSpotlightCached().subscribe((response: any) => {
       this.spotlightData = response.data;
+      this.spotlightData = this.removeDuplicate(this.spotlightData);
       this.cdr.detectChanges();
     });
   }

@@ -45,7 +45,7 @@ button:hover{
   color: #b8bb26;
   display: inline-flex;
   padding: 5px 10px;
-  border-radius: 15px;
+  border-radius: 10px;
   border: 1px solid rgba(184, 187, 38, 0.3);
   font-size: 0.9em;
   font-weight: 500;
