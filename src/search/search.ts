@@ -9,7 +9,7 @@ import { AnimeBlock } from '../anime-block/anime-block';
 import { Subject, debounceTime } from 'rxjs';
 import { DeviceDetectorService } from 'ngx-device-detector';
 
-// TODO: make changing filter search 
+// TODO: insert filters into url: page,keyword,sort...
 
 @Component({
   selector: 'app-search',
