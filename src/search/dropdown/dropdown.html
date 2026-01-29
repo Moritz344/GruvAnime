@@ -9,7 +9,7 @@
       }@else {
         <div class="layout">
           <span (click)="onExpand()">{{ header }}: {{ selectedNormal }}</span> 
-          <button *ngIf="selectedNormal.length > 0" (click)="onReset('normal')" class="reset"><img src="reset.svg"></button>
+          <button *ngIf="selectedNormal && selectedNormal != default && header != 'Types'" (click)="onReset('normal')" class="reset"><img src="reset.svg"></button>
           <button class="arrow" (click)="onExpand()"><img src="arrow.svg"></button>
         </div>
       }

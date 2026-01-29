@@ -1,6 +1,7 @@
-import { Component, Input, OnInit, OnChanges } from '@angular/core';
+import { Component, Input, OnInit, OnChanges, ChangeDetectorRef } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { Router } from '@angular/router';
+import { Request } from '../services/request';
 
 @Component({
   selector: 'app-hover',
@@ -13,7 +14,10 @@ export class Hover implements OnInit, OnChanges {
   @Input() data: any;
   @Input() isAnime: boolean = false;
 
-  constructor(private router: Router) { }
+  desc: string = "";
+
+  constructor(private router: Router, private api: Request,
+    private cdr: ChangeDetectorRef) { }
 
   onDetails() {
     if (this.isAnime) {
@@ -23,8 +27,47 @@ export class Hover implements OnInit, OnChanges {
     }
   }
 
+  getAnimeDesc() {
+    this.api.getAnimeById(this.data.mal_id).subscribe((response: any) => {
+      this.desc = response.data.synopsis.slice(0, 200);
+      this.cdr.detectChanges();
+    });
+  }
+
+  getMangaDesc() {
+    if (this.isAnime) {
+      this.getAnimeDesc();
+      return;
+    }
+    this.api.getMangaById(this.data.mal_id).subscribe((response: any) => {
+      this.desc = response.data.synopsis.slice(0, 200);
+      this.cdr.detectChanges();
+    });
+  }
+
+  handleAnimeData() {
+    if (this.data && this.data.synopsis) {
+      this.desc = this.data.synopsis.slice(0, 200);
+    } else {
+      this.getAnimeDesc();
+    }
+  }
+
+  handleMangaData() {
+    if (this.data && this.data.synopsis) {
+      this.desc = this.data.synopsis.slice(0, 200);
+    } else {
+      this.getMangaDesc();
+    }
+
+  }
+
   ngOnInit() {
-    console.log(this.data);
+    if (this.isAnime) {
+      this.handleAnimeData();
+    } else {
+      this.handleMangaData();
+    }
   }
 
   ngOnChanges() {

@@ -1,6 +1,7 @@
 import { Component, OnInit, Input } from '@angular/core';
 import { CommonModule } from '@angular/common';
 
+// TODO: open details page on click
 @Component({
   selector: 'app-spotlight',
   imports: [CommonModule],
@@ -10,25 +11,24 @@ import { CommonModule } from '@angular/common';
 export class Spotlight implements OnInit {
   @Input() data: any;
 
-  trimmedDesc: string = "";
-  trimmedTitel: string = "";
+  trimmedDesc: string = '';
+  trimmedTitel: string = '';
 
-  constructor() { }
+  constructor() {}
 
   ngOnInit(): void {
     if (this.data) {
       if (this.data.synopsis && this.data.synopsis.length > 100) {
-        this.trimmedDesc = this.data.synopsis ? this.data.synopsis.slice(0, 100) + "..." : '';
+        this.trimmedDesc = this.data.synopsis ? this.data.synopsis.slice(0, 100) + '...' : '';
       } else {
         this.trimmedDesc = this.data.synopsis;
       }
 
       if (this.data.title && this.data.title.length > 20) {
-        this.trimmedTitel = this.data.title ? this.data.title.slice(0, 20) + "..." : '';
+        this.trimmedTitel = this.data.title ? this.data.title.slice(0, 20) + '...' : '';
       } else {
         this.trimmedTitel = this.data.title;
       }
     }
   }
-
 }

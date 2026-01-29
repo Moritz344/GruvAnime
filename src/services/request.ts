@@ -225,7 +225,7 @@ export class Request {
     return this.spotlightCache$;
   }
 
-  searchManga(filter: { keyword: string, type: string, score: number, min_score: number, max_score: number, status: string, rating: string, sfw: boolean, genres: string[], genres_exclude: string[], order_by: string, sort: string }, page: string, limit: string) {
+  searchManga(filter: { keyword: string, type: string, score: number, min_score: number, max_score: number, status: string, rating: string, sfw: boolean, genres: string[], genres_exclude: string[], order_by: string, sort: string, page: number }, limit: string) {
     const params = new URLSearchParams();
     if (filter.keyword) {
       params.append("q", filter.keyword);
@@ -276,14 +276,14 @@ export class Request {
 
 
     params.append("limit", limit);
-    params.append("page", page);
+    params.append("page", filter.page.toString());
     const url = this.base_url + "manga?" + params;
     return this.http.get(url);
 
   }
 
 
-  searchAnime(filter: { keyword: string, type: string, score: number, min_score: number, max_score: number, status: string, rating: string, sfw: boolean, genres: string[], genres_exclude: string[], order_by: string, sort: string }, page: string, limit: string) {
+  searchAnime(filter: { keyword: string, type: string, score: number, min_score: number, max_score: number, status: string, rating: string, sfw: boolean, genres: string[], genres_exclude: string[], order_by: string, sort: string, page: number }, limit: string) {
     const params = new URLSearchParams();
     if (filter.keyword) {
       params.append("q", filter.keyword);
@@ -335,7 +335,7 @@ export class Request {
 
 
     params.append("limit", limit);
-    params.append("page", page);
+    params.append("page", filter.page.toString());
     const url = this.base_url + "anime?" + params;
     return this.http.get(url);
 

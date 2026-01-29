@@ -8,8 +8,6 @@ import { Hover } from '../hover/hover';
 
 // TODO: character page
 // TODO: make responsive for mobile
-// TODO: fix hover element pos 
-// TODO: fix loading indicator not working
 
 @Component({
   selector: 'app-home',
@@ -17,8 +15,6 @@ import { Hover } from '../hover/hover';
   templateUrl: './home.html',
   styleUrl: './home.css',
 })
-
-
 export class Home implements OnInit {
   @ViewChild('spotlightGrid') spotlightGrid!: ElementRef;
   @ViewChild('popular') popular!: ElementRef;
@@ -34,11 +30,9 @@ export class Home implements OnInit {
   recMangaData: any;
 
   hover: boolean = false;
-  hoverBoxCords: { x: number, y: number } = { y: 0, x: 0 };
+  hoverBoxCords: { x: number; y: number } = { y: 0, x: 0 };
   hoverBoxData: any;
   isAnimeBlock: boolean = false;
-
-
 
   isDragging = false;
   startX = 0;
@@ -46,10 +40,13 @@ export class Home implements OnInit {
 
   scrollRight: number = 0;
 
-  constructor(private api: Request, private cdr: ChangeDetectorRef) { }
+  constructor(
+    private api: Request,
+    private cdr: ChangeDetectorRef,
+  ) {}
 
   initTopAnimeData() {
-    this.api.getTopAnimeCached("", "bypopularity", "14").subscribe((response: any) => {
+    this.api.getTopAnimeCached('', 'bypopularity', '14').subscribe((response: any) => {
       this.topAnimeData = response.data;
       this.cdr.detectChanges();
     });
@@ -57,12 +54,15 @@ export class Home implements OnInit {
 
   onAnimeBlock(event: MouseEvent, data: any, isAnime: boolean, cooldown: boolean) {
     this.hover = true;
-    this.hoverBoxCords = { y: event.pageY, x: event.pageX };
+    if (event.pageX > 600) {
+      this.hoverBoxCords = { y: event.pageY, x: event.pageX - 400 };
+    } else {
+      this.hoverBoxCords = { y: event.pageY, x: event.pageX - 100 };
+    }
     this.hoverBoxData = data;
     this.isAnimeBlock = isAnime;
     this.cdr.detectChanges();
   }
-
 
   onAnimeBlockLeave() {
     setTimeout(() => {
@@ -70,9 +70,8 @@ export class Home implements OnInit {
     }, 1000);
   }
 
-
   initTopMangaData() {
-    this.api.getTopMangaCached("14", "manga", "bypopularity").subscribe((response: any) => {
+    this.api.getTopMangaCached('14', 'manga', 'bypopularity').subscribe((response: any) => {
       this.topMangaData = response.data;
       this.cdr.detectChanges();
     });
@@ -97,8 +96,9 @@ export class Home implements OnInit {
   }
 
   removeDuplicate(array: any) {
-    return array.filter((item: any, index: number) =>
-      array.findIndex((obj: any) => JSON.stringify(obj) === JSON.stringify(item)) === index
+    return array.filter(
+      (item: any, index: number) =>
+        array.findIndex((obj: any) => JSON.stringify(obj) === JSON.stringify(item)) === index,
     );
   }
 
@@ -127,14 +127,12 @@ export class Home implements OnInit {
     if (!this.isDragging) return;
     event.preventDefault();
 
-
     const grid = element;
     let x: number;
 
     if (event instanceof MouseEvent) {
       x = event.pageX - grid.offsetLeft;
-    }
-    else {
+    } else {
       return;
     }
 
@@ -158,11 +156,7 @@ export class Home implements OnInit {
     } else {
       grid.scrollBy({ left: scrollAmount, behavior: 'smooth' });
     }
-
   }
-
-
-
 
   ngOnInit(): void {
     setTimeout(() => {
@@ -181,5 +175,4 @@ export class Home implements OnInit {
       this.initMangaRec();
     }, 3000);
   }
-
 }

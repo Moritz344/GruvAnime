@@ -19,13 +19,15 @@ import { DeviceDetectorService } from 'ngx-device-detector';
 })
 export class Search implements OnInit, AfterContentInit {
 
-  searchFilter: { keyword: string, score: number, type: string, min_score: number, max_score: number, status: string, rating: string, sfw: boolean, genres: string[], genres_exclude: string[], order_by: string, sort: string } = { type: "", keyword: "", score: 0, min_score: 0, max_score: 0, status: "", rating: "", sfw: false, genres: [], genres_exclude: [], order_by: "", sort: "" };
+  searchFilter: { keyword: string, score: number, type: string, min_score: number, max_score: number, status: string, rating: string, sfw: boolean, genres: string[], genres_exclude: string[], order_by: string, sort: string, page: number } = { type: "", keyword: "", score: 0, min_score: 0, max_score: 0, status: "", rating: "", sfw: false, genres: [], genres_exclude: [], order_by: "", sort: "", page: 1 };
   searchResult: any;
   lastSearchResult: any;
 
   searching: boolean = true;
 
   currentType: string = "";
+
+  queryParams: any;
 
   searchSubject = new Subject<void>;
   private searchCooldown = 300;
@@ -89,7 +91,7 @@ export class Search implements OnInit, AfterContentInit {
   isMobile: boolean = false;
 
 
-  constructor(private route: ActivatedRoute, private api: Request, private cdr: ChangeDetectorRef, private deviceService: DeviceDetectorService) {
+  constructor(private route: ActivatedRoute, private router: Router, private api: Request, private cdr: ChangeDetectorRef, private deviceService: DeviceDetectorService) {
     this.isMobile = this.deviceService.isMobile();
     this.searchSubject.pipe(
       debounceTime(this.searchCooldown)
@@ -98,26 +100,125 @@ export class Search implements OnInit, AfterContentInit {
     });
   }
 
+  updateUrl() {
+    const queryParams: any = {};
+
+    if (this.searchFilter.keyword) {
+      queryParams.keyword = this.searchFilter.keyword;
+    }
+
+    if (this.searchFilter.rating) {
+      queryParams.rating = this.searchFilter.rating;
+    }
+
+    if (this.searchFilter.status) {
+      queryParams.status = this.searchFilter.status;
+    }
+
+    if (this.searchFilter.order_by) {
+      queryParams.order_by = this.searchFilter.order_by;
+    }
+
+    if (this.searchFilter.sort) {
+      queryParams.sort = this.searchFilter.sort;
+    }
+
+    if (this.searchFilter.genres && this.searchFilter.genres.length > 0) {
+      queryParams.genres = this.searchFilter.genres.join(',');
+    }
+
+    if (this.searchFilter.genres_exclude && this.searchFilter.genres_exclude.length > 0) {
+      queryParams.genres_exclude = this.searchFilter.genres_exclude.join(',');
+    }
+
+    if (this.searchFilter.min_score > 0) {
+      queryParams.min_score = this.searchFilter.min_score.toString();
+    }
+
+    if (this.searchFilter.max_score > 0) {
+      queryParams.max_score = this.searchFilter.max_score.toString();
+    }
+
+    if (this.searchFilter.sfw) {
+      queryParams.sfw = 'true';
+    }
+
+    if (this.currentPage > 1) {
+      queryParams.page = this.currentPage.toString();
+    }
+
+    this.router.navigate(['/search', this.currentType], { queryParams });
+  }
+
+  onModelChange(item: any, header: string) {
+    console.log("item", item, "header", header);
+  }
+
   initRoutes() {
-    let keyword = "";
     this.route.params.subscribe(params => {
       this.currentType = params['type'];
     });
+
     this.route.queryParams.subscribe(params => {
-      keyword = params['keyword'];
+      if (params['keyword']) {
+        this.searchFilter.keyword = params['keyword'];
+      }
+
+      if (params['page']) {
+        this.searchFilter.page = params['page'];
+      }
+
+      if (params['rating']) {
+        this.searchFilter.rating = params['rating'];
+      }
+
+      if (params['status']) {
+        this.searchFilter.status = params['status'];
+      }
+
+      if (params['order_by']) {
+        this.searchFilter.order_by = params['order_by'];
+      }
+
+      if (params['sort']) {
+        this.searchFilter.sort = params['sort'];
+      }
+
+      if (params['genres']) {
+        this.searchFilter.genres = params['genres'].split(',');
+      }
+
+      if (params['genres_exclude']) {
+        this.searchFilter.genres_exclude = params['genres_exclude'].split(',');
+      }
+
+      if (params['min_score']) {
+        this.searchFilter.min_score = parseFloat(params['min_score']);
+      }
+
+      if (params['max_score']) {
+        this.searchFilter.max_score = parseFloat(params['max_score']);
+      }
+
+      if (params['sfw'] === 'true') {
+        this.searchFilter.sfw = true;
+      }
+
+      if (params['page']) {
+        this.currentPage = parseInt(params['page']);
+      }
     });
-
-
-    this.searchFilter.keyword = keyword;
 
   }
 
   onSetType(item: any) {
     this.currentType = item.item;
     this.performSearch();
+    this.updateUrl();
   }
 
   onFilter(element: { item: string, title: string }) {
+    console.log(element.item);
 
     if (element.title == "Rating") {
       this.searchFilter.rating = element.item;
@@ -145,6 +246,7 @@ export class Search implements OnInit, AfterContentInit {
 
     this.cdr.detectChanges();
     this.search();
+    this.updateUrl();
 
   }
 
@@ -166,15 +268,17 @@ export class Search implements OnInit, AfterContentInit {
     } else if (header == "SFW") {
       this.searchFilter.sfw = false;
     } else if (header == "Sort") {
-      this.searchFilter.sort = "";
+      this.searchFilter.sort = "desc";
     }
+
     this.cdr.detectChanges();
     this.search();
+    this.updateUrl();
   }
 
   onResetFilter() {
     this.searchFilter = {
-      type: "",
+      type: "anime",
       keyword: this.searchFilter.keyword,
       score: 0,
       min_score: 0,
@@ -185,22 +289,25 @@ export class Search implements OnInit, AfterContentInit {
       genres: [],
       genres_exclude: [],
       order_by: "",
-      sort: ""
+      sort: "",
+      page: this.currentPage
     };
   }
 
   onNextPage() {
-    if (this.paginationData.last_visible_page > this.currentPage) {
-      this.currentPage += 1;
+    if (this.paginationData.last_visible_page > this.searchFilter.page) {
+      this.searchFilter.page += 1;
       this.search();
+      this.updateUrl();
       this.cdr.detectChanges();
     }
   }
 
   onPreviousPage() {
-    if (this.currentPage > 1) {
-      this.currentPage -= 1;
+    if (this.searchFilter.page > 1) {
+      this.searchFilter.page -= 1;
       this.search();
+      this.updateUrl();
       this.cdr.detectChanges();
     }
   }
@@ -215,21 +322,23 @@ export class Search implements OnInit, AfterContentInit {
   search() {
     this.searching = true;
     this.searchSubject.next();
+    this.updateUrl();
   }
 
   performSearch() {
     this.searching = true;
+    this.searchResult = [];
     if (this.currentType == "anime") {
-      this.api.searchAnime(this.searchFilter, this.currentPage.toString(), this.searchLimit).subscribe((response: any) => {
+      this.api.searchAnime(this.searchFilter, this.searchLimit).subscribe((response: any) => {
         this.searchResult = response.data;
         this.searching = false;
         this.paginationData = response.pagination;
         this.checkPage();
         this.cdr.detectChanges();
+
       });
     } else if (this.currentType == "manga") {
-      this.searchResult.length = 0;
-      this.api.searchManga(this.searchFilter, this.currentPage.toString(), this.searchLimit).subscribe((response: any) => {
+      this.api.searchManga(this.searchFilter, this.searchLimit).subscribe((response: any) => {
         this.searchResult = response.data;
         this.searching = false;
         this.paginationData = response.pagination;

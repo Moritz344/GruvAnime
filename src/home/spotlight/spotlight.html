@@ -1,18 +1,16 @@
 @if (data) {
-
-<div class="container" >
+<div class="container">
   <div class="items">
-    <img draggable="false" [src]="data.images?.jpg?.image_url">
+    <img draggable="false" [src]="data.images?.jpg?.image_url" />
     <h1 stlye="user-select: none">{{ data.title }}</h1>
     <div class="desc">
       <p>{{ trimmedDesc }}</p>
     </div>
-      <div class="genre-container">
+    <div class="genre-container">
       @for (genre of data.genres; track $index) {
-          <span class="genre">{{ genre.name }} </span>
+      <span class="genre">{{ genre.name }} </span>
       }
-      </div>
-
+    </div>
   </div>
 </div>
 }

@@ -2,7 +2,7 @@
   <div class="container" [ngStyle]="{ top: cords.y + 'px',left: (cords.x + 20) + 'px'}">
     <div class="container-items" >
     <h2>{{ data.title }}</h2>
-    <p>{{ data.synopsis.slice(0,200) }}...</p>
+    <p>{{ desc }}...</p>
     <div class="genre-container" *ngIf="data.genres">
       @for (genre of data.genres; track $index) {
           <span class="genre">{{ genre.name }} </span>
