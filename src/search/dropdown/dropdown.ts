@@ -74,12 +74,12 @@ export class Dropdown implements OnInit, OnChanges {
       if (!this.model) this.model = [];
       this.model.push(item.value);
       this.modelChange.emit(this.model);
-      this.dropdownSelected.emit({ item: item.name, title: item.value })
+      this.dropdownSelected.emit({ item: item.value, title: item.name })
     } else {
       this.selectedNormal = item.name;
       this.model = { name: item.name, value: item.value };
       this.modelChange.emit(this.model.value);
-      this.dropdownSelected.emit({ item: item.name, title: item.value })
+      this.dropdownSelected.emit({ item: item.value, title: item.name })
     }
     this.expand = false;
   }

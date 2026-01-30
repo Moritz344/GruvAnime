@@ -9,7 +9,9 @@ import { AnimeBlock } from '../anime-block/anime-block';
 import { Subject, debounceTime } from 'rxjs';
 import { DeviceDetectorService } from 'ngx-device-detector';
 
-// TODO: insert filters into url: page,keyword,sort...
+// TODO: page filter not in url 
+// TODO: Type filter not working
+// TODO: when selecting manga make sure to reset the filters 
 
 @Component({
   selector: 'app-search',
@@ -212,13 +214,13 @@ export class Search implements OnInit, AfterContentInit {
   }
 
   onSetType(item: any) {
+    console.log(item);
     this.currentType = item.item;
     this.performSearch();
     this.updateUrl();
   }
 
   onFilter(element: { item: string, title: string }) {
-    console.log(element.item);
 
     if (element.title == "Rating") {
       this.searchFilter.rating = element.item;

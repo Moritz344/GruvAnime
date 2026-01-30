@@ -12,7 +12,7 @@
       'filter-container': !isMobile,
       'filter-container-mobile': isMobile
     }">
-      <app-dropdown header="Types" [data]="types" default="Animes" [(model)]="currentType" (dropdownSelected)="onSetType($event)"></app-dropdown>
+      <app-dropdown header="Types" [data]="types" default="Anime" [(model)]="currentType" (dropdownSelected)="onSetType($event)"></app-dropdown>
       @if (currentType == "anime") {
         <app-dropdown header="Rating" [data]="ratings" (reset)="onReset($event)" [(model)]="searchFilter.rating"  (dropdownSelected)="onFilter($event)"></app-dropdown>
       }
