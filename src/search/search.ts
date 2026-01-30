@@ -87,7 +87,6 @@ export class Search implements OnInit, AfterContentInit {
   order_by_manga: { name: string, value: string }[] = [{ name: "Title", value: "title" }, { name: "Start Date", value: "start_date" }, { name: "End Date", value: "end_date" }, { name: "Score", value: "score" }, { name: "Scored By", value: "scored_by" }, { name: "Rank", value: "rank" }, { name: "Popularity", value: "popularity" }, { name: "Members", value: "members" }, { name: "Favourites", value: "favourties" }, { name: "Chapters", value: "chapters" }, { name: "Volumes", value: "volumes" }];
   sort: { name: string, value: string }[] = [{ name: "Descending", value: "desc" }, { name: "Ascending", value: "asc" }];
 
-  currentPage: number = 1;
   searchLimit: string = "24";
   paginationData: any;
   isMobile: boolean = false;
@@ -145,8 +144,8 @@ export class Search implements OnInit, AfterContentInit {
       queryParams.sfw = 'true';
     }
 
-    if (this.currentPage > 1) {
-      queryParams.page = this.currentPage.toString();
+    if (this.searchFilter.page) {
+      queryParams.page = this.searchFilter.page.toString();
     }
 
     this.router.navigate(['/search', this.currentType], { queryParams });
@@ -156,15 +155,20 @@ export class Search implements OnInit, AfterContentInit {
     console.log("item", item, "header", header);
   }
 
+  resetSearch() {
+    this.router.navigate(['search/anime']);
+    this.search();
+  }
+
+
   initRoutes() {
     this.route.params.subscribe(params => {
       this.currentType = params['type'];
     });
 
     this.route.queryParams.subscribe(params => {
-      if (params['keyword']) {
-        this.searchFilter.keyword = params['keyword'];
-      }
+
+      this.cdr.detectChanges();
 
       if (params['page']) {
         this.searchFilter.page = params['page'];
@@ -207,17 +211,20 @@ export class Search implements OnInit, AfterContentInit {
       }
 
       if (params['page']) {
-        this.currentPage = parseInt(params['page']);
+        this.searchFilter.page = parseInt(params['page']);
       }
+
+      this.cdr.detectChanges();
     });
 
   }
 
+
+
   onSetType(item: any) {
-    console.log(item);
+    this.router.navigate(["search/" + item.item]);
     this.currentType = item.item;
     this.performSearch();
-    this.updateUrl();
   }
 
   onFilter(element: { item: string, title: string }) {
@@ -292,13 +299,13 @@ export class Search implements OnInit, AfterContentInit {
       genres_exclude: [],
       order_by: "",
       sort: "",
-      page: this.currentPage
+      page: 1
     };
   }
 
   onNextPage() {
     if (this.paginationData.last_visible_page > this.searchFilter.page) {
-      this.searchFilter.page += 1;
+      this.searchFilter.page = Number(this.searchFilter.page) + 1;
       this.search();
       this.updateUrl();
       this.cdr.detectChanges();
@@ -307,7 +314,7 @@ export class Search implements OnInit, AfterContentInit {
 
   onPreviousPage() {
     if (this.searchFilter.page > 1) {
-      this.searchFilter.page -= 1;
+      this.searchFilter.page = Number(this.searchFilter.page) - 1;
       this.search();
       this.updateUrl();
       this.cdr.detectChanges();
@@ -315,8 +322,8 @@ export class Search implements OnInit, AfterContentInit {
   }
 
   checkPage() {
-    if (this.currentPage > this.paginationData.last_visible_page) {
-      this.currentPage = 1;
+    if (this.searchFilter.page > this.paginationData.last_visible_page) {
+      this.searchFilter.page = 1;
       this.search();
     }
   }
@@ -351,9 +358,9 @@ export class Search implements OnInit, AfterContentInit {
   }
 
   ngOnInit() {
+    this.initRoutes();
   }
   ngAfterContentInit() {
-    this.initRoutes();
     this.performSearch();
   }
 }

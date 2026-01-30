@@ -6,7 +6,6 @@ import { Review } from './review/review';
 import { CommonModule } from '@angular/common';
 import { DeviceDetectorService } from 'ngx-device-detector';
 
-// TODO: mobile responsive
 
 @Component({
   selector: 'app-details',
@@ -19,6 +18,7 @@ export class Details implements OnInit {
   id: string = "";
   data: any;
   animeCharData: any;
+  animeCharDataLimited: any;
   loading: boolean = true;
   timeTookToLoad: number = 0;
   reviewData: any;
@@ -42,11 +42,13 @@ export class Details implements OnInit {
   }
 
   initAnimeCharacter() {
+    this.loading = true;
     this.api.getAnimeCharacter(Number(this.id)).subscribe((response: any) => {
       this.animeCharData = response.data;
-      this.animeCharData = this.animeCharData.slice(0, 12);
+      this.animeCharDataLimited = this.animeCharData.slice(0, 12);
+      this.loading = false;
       this.cdr.detectChanges();
-      //console.log(response.data);
+
     });
   }
 
@@ -58,6 +60,7 @@ export class Details implements OnInit {
           this.initAnimeCharacter();
         }, 500);
         this.data = response.data;
+        console.log(this.data);
         this.loading = false;
         this.cdr.detectChanges();
         //console.log(this.data);
@@ -86,7 +89,6 @@ export class Details implements OnInit {
 
 
   ngOnInit(): void {
-
   }
 
 }

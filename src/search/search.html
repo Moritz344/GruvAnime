@@ -29,7 +29,7 @@
         <app-dropdown header="Order By" [data]="order_by_manga"  (reset)="onReset($event)" [(model)]="searchFilter.order_by"  (dropdownSelected)="onFilter($event)"></app-dropdown>
       }
       <app-dropdown header="Sort" [data]="sort" default="Descending" (reset)="onReset($event)" [(model)]="searchFilter.sort"  (dropdownSelected)="onFilter($event)"></app-dropdown>
-      <app-dropdown header="Genres" [multipleSelectable]="true" [data]="genres" (reset)="onReset($event)" [(model)]="searchFilter.genres" (dropdownSelected)="onFilter($event)"></app-dropdown>
+      <app-dropdown header="Genres"  [multipleSelectable]="true" [data]="genres" (reset)="onReset($event)" [(model)]="searchFilter.genres" (dropdownSelected)="onFilter($event)"></app-dropdown>
       <app-dropdown header="Excluded Genres" [multipleSelectable]="true" (reset)="onReset($event)" [data]="excluded_genres" [(model)]="searchFilter.genres_exclude" (dropdownSelected)="onFilter($event)"></app-dropdown>
     </div>
 

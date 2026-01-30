@@ -4,7 +4,7 @@
     <div class="main-container">
       <div class="anime-card">
         <div [ngClass]="{ 'info': !isMobile, 'info-mobile': isMobile }">
-          <h1 class="title">{{ data.title }}</h1>
+          <h1 class="title">{{ data.title_english }} </h1>
           <h2 *ngIf="data.title_japanese">{{ data.title_japanese }}</h2>
           <div class="row-1">
           <span class="year" *ngIf="data.year">
@@ -35,13 +35,13 @@
 
     <br>
       @if (animeCharData && animeCharData.length > 0) {
-        <h1 [ngClass]="{ 'char-title': !isMobile,'char-title-mobile': isMobile}">Characters </h1>
+        <h1 [ngClass]="{ 'char-title': !isMobile,'char-title-mobile': isMobile}">Characters ({{ animeCharData.length }} in total) </h1>
         <div [ngClass]="{ 'char-container': !isMobile, 'char-container-mobile': isMobile }">
           @for (char of animeCharData; track $index) {
             <div class="char" *ngIf="char.role == 'Main' ">
              <img width="220" height="360" [src]="char.character.images.jpg.image_url">
              <div class="char-info">
-              <span><a [href]="char.character.url">{{ char.character.name }}</a></span>
+              <span><a [href]="char.character.url" target="_blank">{{ char.character.name }}</a></span>
               <span>{{ char.role }}</span>
              </div>
             </div>
@@ -49,7 +49,8 @@
         </div>
 
       }@else {
-          <div class="char-container"></div>
+          <div class="char-container">
+          </div>
         }
     <h1 [ngClass]="{'review-title': !isMobile,'review-title-mobile': isMobile}" *ngIf="reviewData && reviewData.length > 0">Reviews ({{ reviewData.length }}) </h1>
     <div [ngClass]="{ 'review-container': !isMobile, 'review-container-mobile': isMobile }">
@@ -62,6 +63,7 @@
 
 
 }
+   
 
 
   @if (loading) {

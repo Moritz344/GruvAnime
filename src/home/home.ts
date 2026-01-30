@@ -7,7 +7,6 @@ import { Spotlight } from './spotlight/spotlight';
 import { Hover } from '../hover/hover';
 
 // TODO: character page
-// TODO: make responsive for mobile
 
 @Component({
   selector: 'app-home',
@@ -43,7 +42,7 @@ export class Home implements OnInit {
   constructor(
     private api: Request,
     private cdr: ChangeDetectorRef,
-  ) {}
+  ) { }
 
   initTopAnimeData() {
     this.api.getTopAnimeCached('', 'bypopularity', '14').subscribe((response: any) => {

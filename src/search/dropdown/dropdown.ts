@@ -49,19 +49,21 @@ export class Dropdown implements OnInit, OnChanges {
   }
 
   setModel() {
+    console.log("set model", this.model);
     if (this.model && this.data && !this.multipleSelectable) {
       let modelValue = this.model;
       if (typeof this.model === 'object' && this.model.value) {
         modelValue = this.model.value;
       }
       const foundItem: any = this.data.find(item => item.value === modelValue);
-      this.selectedNormal = foundItem ? foundItem.name : this.default;
+      this.selectedNormal = foundItem ? foundItem.name : (modelValue || this.default);
     } else if (this.model && this.data && this.multipleSelectable && Array.isArray(this.model)) {
       this.selected = this.model.map(value => {
         const foundItem = this.data.find(item => item.value === value);
         return foundItem ? foundItem.name : value;
       });
     }
+    console.log("Here", this.selectedNormal);
   }
 
   ngOnChanges() {
@@ -85,6 +87,10 @@ export class Dropdown implements OnInit, OnChanges {
   }
 
   ngOnInit() {
+    this.setModel();
+  }
+
+  ngAfterContentInit() {
     this.initDefault();
   }
 
