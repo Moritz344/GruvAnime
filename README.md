@@ -3,7 +3,7 @@
 
 discover anime and manga
 
-<img width="1923" height="1080" alt="screenshot-2026-01-18_20-37-17" src="https://github.com/user-attachments/assets/03e834f4-f59a-44d4-9a31-8a8cdca08f92" />
+<img width="1923" height="1080" alt="screenshot-2026-01-31_19-50-00" src="https://github.com/user-attachments/assets/3e12b3d6-bd56-4a04-a199-67cef58a4464" />
 
 
 
