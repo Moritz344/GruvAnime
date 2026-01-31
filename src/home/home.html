@@ -2,19 +2,12 @@
 <div class="container">
     <div class="spotlight-container">
       <div class="spotlight-grid" 
-           #spotlightGrid
-           (mousedown)="startDrag($event,spotlightGrid)"
-           (mousemove)="drag($event,spotlightGrid)"
-           (mouseup)="endDrag(spotlightGrid)"
-           (mouseleave)="endDrag(spotlightGrid)"
-           >
-       @for (d of spotlightData; track $index) {
-          <app-spotlight [data]="d"></app-spotlight>
-        }
+           #spotlightGrid>
+          <app-spotlight [data]="spotlightData[this.pageData.page]" [pageData]="pageData"></app-spotlight>
       </div>
-      <div class="scroll-buttons">
-        <button (click)="scroll('left',spotlightGrid)"><img class="left" src="arrow.svg"></button>
-        <button (click)="scroll('right',spotlightGrid)"><img class="right" src="arrow.svg"></button>
+      <div class="page-buttons-spotlight">
+        <button (click)="onPreviousSpotlight()"><img class="left" src="arrow.svg"></button>
+        <button (click)="onNextSpotlight()"><img class="right" src="arrow.svg"></button>
       </div>
     </div>
 

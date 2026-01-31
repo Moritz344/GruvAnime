@@ -1,16 +1,35 @@
 @if (data) {
 <div class="container">
-  <div class="items">
-    <img draggable="false" [src]="data.images?.jpg?.image_url" />
-    <h1 stlye="user-select: none">{{ data.title }}</h1>
-    <div class="desc">
-      <p>{{ trimmedDesc }}</p>
-    </div>
-    <div class="genre-container">
-      @for (genre of data.genres; track $index) {
-      <span class="genre">{{ genre.name }} </span>
+  <div class="thumbnail-container">
+    <img width="500px" height="500px" [src]="data.images.jpg.large_image_url">
+  </div>
+
+  <div class="title-container">
+    <h1 style="font-size: 50px;margin:0">{{ data.title_english }}</h1>
+    <h2>{{ data.title_japanese }}</h2>
+    <div class="badge-container">
+      @if (data.episodes) {
+        <span class="badge" >Episodes: {{ data.episodes }}</span>
+      }
+      @if (data.year) {
+        <span class="badge" >{{ data.year }}</span>
+      }
+      @if (data.status) {
+        <span class="badge" >{{ data.status }}</span>
       }
     </div>
+      <div class="details-container">
+          <button (click)="onDetails()">Details</button>
+          <button><a [href]="data.trailer.embed_url" target="_blank">Watch Trailer </a></button>
+      </div>
   </div>
+  <div class="page-container">
+    {{ pageData.page }}/{{ pageData.limit }}
+  </div>
+
 </div>
+}@else{
+  <div class="container-loader">
+    <div class="loader"></div>
+  </div>
 }

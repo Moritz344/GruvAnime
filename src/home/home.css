@@ -52,6 +52,34 @@ app-spotlight{
   position: relative;
   width: 100%;
   margin: 30px 20px;
+  margin-bottom: 500px;
+}
+
+.page-buttons-spotlight{
+  display: flex;
+  gap: 5px;
+  position: absolute;
+  right: 40px;
+  top: 520px;
+}
+
+.page-buttons-spotlight button {
+  background-color: transparent;
+  border-radius: 20px;
+  border: 1px solid white;
+  width: 30px;
+  height: 30px;
+  opacity: 0.7;
+}
+
+.page-buttons-spotlight img{
+  width: 15px;
+  height: 15px;
+}
+
+.page-buttons-spotlight button:hover{
+  opacity: 1;
+  transform: scale(1.02);
 }
 
 .scroll-buttons{
@@ -66,7 +94,7 @@ app-spotlight{
   transform: rotate(180deg);
 }
 
-.scroll-buttons button{
+.scroll-buttons  button{
   background-color: transparent;
   border-radius: 20px;
   border: 1px solid white;
@@ -85,14 +113,13 @@ app-spotlight{
   transform: scale(1.02);
 }
 
+
 .spotlight-grid{
   display: flex;
   overflow-x: auto;
   overflow-y: hidden;
   scrollbar-width: none; 
   -ms-overflow-style: none;
-  cursor: grab;
-  user-select: none;
   padding: 10px;
 }
 

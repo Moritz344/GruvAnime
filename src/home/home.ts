@@ -37,6 +37,8 @@ export class Home implements OnInit {
   startX = 0;
   scrollLeft = 0;
 
+  pageData: { page: number, limit: number } = { page: 0, limit: 8 };
+
   scrollRight: number = 0;
 
   constructor(
@@ -49,6 +51,18 @@ export class Home implements OnInit {
       this.topAnimeData = response.data;
       this.cdr.detectChanges();
     });
+  }
+
+  onPreviousSpotlight() {
+    if (this.pageData.page > 0) {
+      this.pageData.page -= 1;
+    }
+  }
+
+  onNextSpotlight() {
+    if (this.pageData.page < this.pageData.limit) {
+      this.pageData.page += 1;
+    }
   }
 
   onAnimeBlock(event: MouseEvent, data: any, isAnime: boolean, cooldown: boolean) {
@@ -105,6 +119,7 @@ export class Home implements OnInit {
     this.api.getAnimeSpotlightCached().subscribe((response: any) => {
       this.spotlightData = response.data;
       this.spotlightData = this.removeDuplicate(this.spotlightData);
+      console.log(response.data);
       this.cdr.detectChanges();
     });
   }

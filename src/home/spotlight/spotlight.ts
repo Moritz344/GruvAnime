@@ -1,7 +1,9 @@
-import { Component, OnInit, Input } from '@angular/core';
+import { Component, OnInit, Input, inject } from '@angular/core';
 import { CommonModule } from '@angular/common';
+import { Router } from '@angular/router';
 
-// TODO: open details page on click
+// TODO: switch pages automatically 
+
 @Component({
   selector: 'app-spotlight',
   imports: [CommonModule],
@@ -10,11 +12,14 @@ import { CommonModule } from '@angular/common';
 })
 export class Spotlight implements OnInit {
   @Input() data: any;
+  @Input() pageData: any;
 
   trimmedDesc: string = '';
   trimmedTitel: string = '';
 
-  constructor() {}
+  router = inject(Router);
+
+  constructor() { }
 
   ngOnInit(): void {
     if (this.data) {
@@ -30,5 +35,10 @@ export class Spotlight implements OnInit {
         this.trimmedTitel = this.data.title;
       }
     }
+    console.log(this.data);
+  }
+
+  onDetails() {
+    this.router.navigate(["anime/" + this.data.mal_id]);
   }
 }

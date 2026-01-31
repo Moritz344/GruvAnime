@@ -59,6 +59,47 @@
   --tablet-max: 1024px;
 }
 
+.glass {
+  background: rgba(40, 40, 40, 0.7);
+  backdrop-filter: blur(10px);
+  -webkit-backdrop-filter: blur(10px);
+  border: 1px solid rgba(80, 73, 69, 0.3);
+  box-shadow: 0 8px 32px 0 rgba(0, 0, 0, 0.37);
+}
+
+.badge{
+  border-radius: 5px;
+  padding: 5px;
+  color: white;
+  background-color: var(--blue);
+  transition: 0.3s ease;
+  text-align: center;
+  width: auto;
+  height: 20px;
+}
+
+.details-button button{
+  border: none;
+  background-color: var(--aqua);
+  padding: 10px 20px;
+  color: white;
+  border-radius: 10px;
+  cursor: pointer;
+  font-weight: bold;
+  transition: 0.3s ease;
+  margin-top: 15px;
+}
+
+.details-button button:hover{
+  transform: scale(1.05);
+}
+
+a{
+  color: white;
+  text-decoration: none;
+}
+
+
 body {
   background-color: var(--background);
   color: var(--text);
@@ -84,10 +125,6 @@ body {
   -ms-overflow-style: none;
 }
 
-
-
-
-
 .loader-container {
   display: flex;
   justify-content: center;
@@ -104,6 +141,7 @@ body {
   position: relative;
   animation: l3-0 .75s linear infinite;
 }
+
 .loader:before {
   content: "";
   position: absolute;
@@ -113,6 +151,7 @@ body {
   background: var(--gray1);
   animation: l3-1 .75s cubic-bezier(0,900,1,900) infinite;
 }
+
 @keyframes l3-0 {
   to {background-position: -125% 100%}
 }

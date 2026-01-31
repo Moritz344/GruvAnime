@@ -6,6 +6,8 @@ import { Review } from './review/review';
 import { CommonModule } from '@angular/common';
 import { DeviceDetectorService } from 'ngx-device-detector';
 
+// TODO: More Details: Episodes,Trailer,
+
 
 @Component({
   selector: 'app-details',

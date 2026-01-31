@@ -14,10 +14,10 @@
             {{ data.status }}
           </span>
           </div>
-          <div class="genre-container">
-          <div class="row-2">
+          <div class="genre-container" *ngIf="data.genres.length > 1">
+          <div class="row-2" >
             @for (genre of data.genres; track $index) {
-              <span class="genre">{{ genre.name }}</span>
+              <span class="genre" >{{ genre.name }}</span>
             }
           </div>
           </div>
@@ -25,10 +25,10 @@
         </div>
         <img draggable="false" [src]="data.images.jpg.large_image_url">
         <div class="anime-card-bottom-info">
-            <span class="rank">Rank #{{ data.rank }}</span>
-            <span class="score">Score {{ data.score }}</span>
-            <span class="fav">Favorites {{ data.favorites }}</span>
-            <span class="pop">Popularity #{{ data.popularity }}</span>
+            <span class="rank" *ngIf="data.rank">Rank #{{ data.rank }}</span>
+            <span class="score" *ngIf="data.score">Score {{ data.score }}</span>
+            <span class="fav" *ngIf="data.favorites">Favorites {{ data.favorites }}</span>
+            <span class="pop" *ngIf="data.popularity">Popularity #{{ data.popularity }}</span>
         </div>
       </div>
     </div>
@@ -52,8 +52,8 @@
           <div class="char-container">
           </div>
         }
-    <h1 [ngClass]="{'review-title': !isMobile,'review-title-mobile': isMobile}" *ngIf="reviewData && reviewData.length > 0">Reviews ({{ reviewData.length }}) </h1>
     <div [ngClass]="{ 'review-container': !isMobile, 'review-container-mobile': isMobile }">
+    <h1 [ngClass]="{'review-title': !isMobile,'review-title-mobile': isMobile}" *ngIf="reviewData && reviewData.length > 0">Reviews ({{ reviewData.length }}) </h1>
       @for ( review of reviewData; track $index) {
         <app-review [data]="review" ></app-review>
       }
