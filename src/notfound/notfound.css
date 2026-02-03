@@ -4,6 +4,12 @@
   margin-top: 350px;
 }
 
+.home{
+  display: flex;
+  justify-content: center;
+  font-size: 40px;
+}
+
 .container span{
   font-size: 40px;
 }

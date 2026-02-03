@@ -4,6 +4,7 @@ import { Details } from '../details/details';
 import { Search } from '../search/search';
 import { Anime } from '../anime/anime';
 import { Calendar } from '../calendar/calendar';
+import { NotFound } from '../notfound/notfound';
 
 export const routes: Routes = [
   { path: "", component: Home },
@@ -22,5 +23,6 @@ export const routes: Routes = [
 
   { path: "calendar", component: Calendar },
 
+  { path: '**', component: NotFound }
 
 ];
