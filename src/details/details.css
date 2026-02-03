@@ -362,9 +362,9 @@ h2{
   transition: 0.3s ease;
 }
 .char-title{
-  position: absolute;
-  top: 1270px;
-  left: 100px;
+  margin-left: 100px;
+  margin-top: 30px;
+  margin-bottom: 0px;
 }
 
 .char-title-mobile{
@@ -409,7 +409,7 @@ h2{
   grid-template-columns: repeat(7,1fr);
   gap: 10px;
   float: left;
-  margin-top: 90px; 
+  margin-top: 30px; 
   margin-left: 100px;
   margin-bottom: 20px;
   animation: fadeIn 0.5s ease-out;
@@ -476,7 +476,7 @@ a{
   background-color: #282828;
   border: 1px solid var(--gray7);
   border-radius: 10px;
-  height: 340px;
+  height: auto;
   width: 400px;
   line-height: 45px;
 }
