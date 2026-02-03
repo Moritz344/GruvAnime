@@ -1,4 +1,4 @@
-import { Component, OnInit, Input, inject } from '@angular/core';
+import { Component, OnInit, Input, inject, Output, EventEmitter } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { Router } from '@angular/router';
 
@@ -10,16 +10,22 @@ import { Router } from '@angular/router';
   templateUrl: './spotlight.html',
   styleUrl: './spotlight.css',
 })
+
 export class Spotlight implements OnInit {
   @Input() data: any;
   @Input() pageData: any;
+  @Output() pageChange = new EventEmitter<number>;
 
+
+  aired: any;
   trimmedDesc: string = '';
   trimmedTitel: string = '';
 
   router = inject(Router);
 
-  constructor() { }
+  constructor() {
+  }
+
 
   ngOnInit(): void {
     if (this.data) {
@@ -34,8 +40,21 @@ export class Spotlight implements OnInit {
       } else {
         this.trimmedTitel = this.data.title;
       }
+
+
     }
-    console.log(this.data);
+  }
+
+  onNextPage() {
+    if (this.pageData.page < this.pageData.limit) {
+      this.pageChange.emit(this.pageData.page + 1);
+    }
+  }
+
+  onPrevPage() {
+    if (this.pageData.page > 0) {
+      this.pageChange.emit(this.pageData.page - 1);
+    }
   }
 
   onDetails() {

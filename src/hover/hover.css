@@ -20,24 +20,6 @@
   margin-top: 10px;
 }
 
-.details-button{
-  border: none;
-  background-color: var(--aqua);
-  padding: 10px 20px;
-  color: white;
-  border-radius: 10px;
-  cursor: pointer;
-  font-weight: bold;
-  transition: transform 0.3s ease;
-  transition: background-color 0.2s ease;
-  margin-top: 15px;
-}
-
-
-button:hover{
-  background-color: var(--aqua-bright);
-  transform: scale(1.05);
-}
 
 .genre{
   user-select: none;

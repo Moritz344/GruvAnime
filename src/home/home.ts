@@ -1,12 +1,15 @@
-import { Component, OnInit, ChangeDetectorRef, ViewChild, ElementRef } from '@angular/core';
+import { Component, OnInit, ChangeDetectorRef, ViewChild, ElementRef, OnDestroy } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { Topbar } from '../topbar/topbar';
 import { Request } from '../services/request';
 import { AnimeBlock } from '../anime-block/anime-block';
 import { Spotlight } from './spotlight/spotlight';
 import { Hover } from '../hover/hover';
+import { Subject, debounceTime } from 'rxjs';
 
 // TODO: character page
+// TODO: slice long names in anime-card 
+// TODO: fix 404 Page not Found 
 
 @Component({
   selector: 'app-home',
@@ -14,7 +17,7 @@ import { Hover } from '../hover/hover';
   templateUrl: './home.html',
   styleUrl: './home.css',
 })
-export class Home implements OnInit {
+export class Home implements OnInit, OnDestroy {
   @ViewChild('spotlightGrid') spotlightGrid!: ElementRef;
   @ViewChild('popular') popular!: ElementRef;
   @ViewChild('rec') rec!: ElementRef;
@@ -27,6 +30,9 @@ export class Home implements OnInit {
 
   topMangaData: any;
   recMangaData: any;
+
+  private autoPageInterval!: number;
+  switchPagesAutomatically: boolean = true;
 
   hover: boolean = false;
   hoverBoxCords: { x: number; y: number } = { y: 0, x: 0 };
@@ -44,7 +50,12 @@ export class Home implements OnInit {
   constructor(
     private api: Request,
     private cdr: ChangeDetectorRef,
-  ) { }
+  ) {
+  }
+
+  ngOnDestroy() {
+    clearInterval(this.autoPageInterval);
+  }
 
   initTopAnimeData() {
     this.api.getTopAnimeCached('', 'bypopularity', '14').subscribe((response: any) => {
@@ -57,6 +68,19 @@ export class Home implements OnInit {
     if (this.pageData.page > 0) {
       this.pageData.page -= 1;
     }
+  }
+
+  turnOffAutoSwitch() {
+    this.switchPagesAutomatically = false;
+    clearInterval(this.autoPageInterval);
+  }
+  turnOnAutoSwitch() {
+    this.switchPagesAutomatically = true;
+    this.autoPage(8);
+  }
+
+  onPageChange(page: number) {
+    this.pageData.page = page;
   }
 
   onNextSpotlight() {
@@ -172,7 +196,23 @@ export class Home implements OnInit {
     }
   }
 
+  autoPage(times: number) {
+    let count = this.pageData.page;
+    this.autoPageInterval = setInterval(() => {
+      if (!this.switchPagesAutomatically) { return; }
+      count++;
+      this.pageData.page = count;
+      this.cdr.detectChanges();
+
+      if (count === times) {
+        count = 0;
+      }
+    }, 3000);
+
+  }
+
   ngOnInit(): void {
+    this.autoPage(8);
     setTimeout(() => {
       this.initTopAnimeData();
     }, 500);

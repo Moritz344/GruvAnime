@@ -7,15 +7,10 @@
   <div class="title-container">
     <h1 style="font-size: 50px;margin:0">{{ data.title_english }}</h1>
     <h2>{{ data.title_japanese }}</h2>
+
     <div class="badge-container">
-      @if (data.episodes) {
-        <span class="badge" >Episodes: {{ data.episodes }}</span>
-      }
-      @if (data.year) {
-        <span class="badge" >{{ data.year }}</span>
-      }
-      @if (data.status) {
-        <span class="badge" >{{ data.status }}</span>
+      @if (data.aired.prop.from.year) {
+        <span class="badge">Release: {{ data.aired.prop.from.year }}  </span>
       }
     </div>
       <div class="details-container">
@@ -25,6 +20,17 @@
   </div>
   <div class="page-container">
     {{ pageData.page }}/{{ pageData.limit }}
+  </div>
+
+  <div class="next-page-button-right" >
+    <button (click)="onNextPage()"><img width="20" height="18" style="transform: rotate(180deg)" src="arrow.svg"></button>
+  </div>
+  <div class="next-page-button-left">
+    <button (click)="onPrevPage()"><img width="20" height="18" src="arrow.svg"></button>
+  </div>
+
+  <div class="coming-soon-badge">
+    <button >Upcoming Anime</button>
   </div>
 
 </div>

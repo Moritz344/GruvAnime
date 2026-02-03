@@ -3,11 +3,7 @@
     <div class="spotlight-container">
       <div class="spotlight-grid" 
            #spotlightGrid>
-          <app-spotlight [data]="spotlightData[this.pageData.page]" [pageData]="pageData"></app-spotlight>
-      </div>
-      <div class="page-buttons-spotlight">
-        <button (click)="onPreviousSpotlight()"><img class="left" src="arrow.svg"></button>
-        <button (click)="onNextSpotlight()"><img class="right" src="arrow.svg"></button>
+          <app-spotlight (mouseenter)="turnOffAutoSwitch()" (mouseleave)="turnOnAutoSwitch()" [data]="spotlightData[this.pageData.page]" (pageChange)="onPageChange($event)" [pageData]="pageData"></app-spotlight>
       </div>
     </div>
 

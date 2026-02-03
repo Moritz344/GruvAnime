@@ -45,8 +45,14 @@ export class AnimeBlock implements OnInit, OnChanges {
     if (this.data.entry) {
       this.data = this.data.entry[0];
       this.title = this.data.title;
+      if (this.title.length > 32) {
+        this.title = this.title.slice(0, 32) + "..";
+      }
     } else if (this.data.titles) {
       this.title = this.data.title_english || this.data.title;
+      if (this.title.length > 32) {
+        this.title = this.title.slice(0, 32) + "...";
+      }
     }
   }
 

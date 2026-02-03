@@ -1,7 +1,7 @@
 .container{
   position: absolute;
   top: 0px;
-  right: 0px;
+  right: 0;
   left: 0px;
   height: 500px;
   width: 98vw;
@@ -10,9 +10,10 @@
   backdrop-filter: blur(10px);
   -webkit-backdrop-filter: blur(10px);
   border: 1px solid rgba(80, 73, 69, 0.3);
-  animation: fadeIn 0.5s ease-out;
   transition: opacity 0.2s ease-in-out;
+  animation: 0.5s fadeIn;
 }
+
 @keyframes fadeIn{
   from {
     opacity: 0;
@@ -34,9 +35,25 @@
   display: flex;
   flex-direction: column;
   margin-top: 100px;
-  margin-left: 50px;
+  margin-left: 100px;
   float: left;
   width: 1300px;
+}
+
+
+.coming-soon-badge{
+  position: absolute;
+  top: 10px;
+  left: 10px;
+}
+
+.coming-soon-badge button{
+  border: none;
+  border-radius: 5px;
+  padding: 5px;
+  font-size: 15px;
+  color: white;
+  background-color: var(--orange);
 }
 
 .page-container{
@@ -99,3 +116,48 @@
   align-items: center;
 }
 
+.next-page-button-left button { 
+  position: absolute;
+  top: 200px;
+  left: 10px;
+  background: var(--bg-medium);
+  border-radius: 20px;
+  border: 1px solid white;
+  width: 40px;
+  height: 40px;
+  opacity: 0.9;
+  transition: background-color 0.2s ease;
+}
+
+.next-page-button-right button { 
+  position: absolute;
+  top: 200px;
+  right: 10px;
+  background: var(--bg-medium);
+  border-radius: 20px;
+  border: 1px solid white;
+  width: 40px;
+  height: 40px;
+  opacity: 0.9;
+  transition: background-color 0.2s ease;
+}
+
+.next-page-button-right button:hover{
+  background-color: black;
+  opacity: 1;
+}
+.next-page-button-left button:hover{
+  background-color: black;
+  opacity: 1;
+}
+
+.badge-ep{
+  border-radius: 5px;
+  padding: 5px;
+  color: white;
+  background-color: var(--purple);
+  transition: 0.3s ease;
+  text-align: center;
+  width: auto;
+  height: 20px;
+}

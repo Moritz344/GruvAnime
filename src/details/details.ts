@@ -7,6 +7,8 @@ import { CommonModule } from '@angular/common';
 import { DeviceDetectorService } from 'ngx-device-detector';
 
 // TODO: More Details: Episodes,Trailer,
+// TODO: Redesign Page
+// TODO: show similar anime/manga
 
 
 @Component({
@@ -40,6 +42,8 @@ export class Details implements OnInit {
   initAnimeReviews() {
     this.api.getReviews(this.id, 1).subscribe((response: any) => {
       this.reviewData = response.data;
+      this.cdr.detectChanges();
+      console.log(this.reviewData);
     });
   }
 
