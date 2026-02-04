@@ -74,18 +74,18 @@
         </table>
       </div>
 
-      <div class="stat-container">
+      <div class="stat-container" *ngIf="data.score || data.popularity || data.members">
         <h1 style="display:flex;justify-content: center">Statistics</h1>     
         <table class="stat-table">
-          <tr>
+          <tr *ngIf="data.score">
             <td><span>Score</span></td>
             <td><span style="float: right">{{ data.score }}</span></td>
           </tr>
-          <tr>
+          <tr *ngIf="data.popularity">
             <td><span>Popularity</span></td>
             <td><span style="float: right">{{ data.popularity }}</span></td>
           </tr>
-          <tr>
+          <tr *ngIf="data.members">
             <td><span>Members</span></td>
             <td><span style="float: right">{{ data.members }}</span></td>
           </tr>
@@ -107,21 +107,17 @@
           }
         </div>
 
-      }@else {
-          <div class="char-container">
-          </div>
-        }
+      }
 
 
       
-       <!--
     <div [ngClass]="{ 'review-container': !isMobile, 'review-container-mobile': isMobile }">
     <h1 [ngClass]="{'review-title': !isMobile,'review-title-mobile': isMobile}" *ngIf="reviewData && reviewData.length > 0">Reviews ({{ reviewData.length }}) </h1>
       @for ( review of reviewData; track $index) {
         <app-review [data]="review" ></app-review>
       }
     </div>
-    -->
+    <br><br>
 </div>
 
 

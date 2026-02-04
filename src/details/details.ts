@@ -9,6 +9,7 @@ import { DeviceDetectorService } from 'ngx-device-detector';
 // TODO: More Details: Episodes,Trailer,
 // TODO: Redesign Page
 // TODO: show similar anime/manga
+// TODO: handle too many requests
 
 
 @Component({
@@ -62,18 +63,18 @@ export class Details implements OnInit {
     this.loading = true;
     if (this.path == "anime") {
       this.api.getAnimeById(Number(this.id)).subscribe((response: any) => {
-        setTimeout(() => {
-          this.initAnimeCharacter();
-        }, 500);
         this.data = response.data;
         console.log(this.data);
         this.loading = false;
+        setTimeout(() => {
+          this.initAnimeCharacter();
+        }, 500);
+        setTimeout(() => {
+          this.initAnimeReviews();
+        }, 500);
         this.cdr.detectChanges();
         //console.log(this.data);
       });
-      setTimeout(() => {
-        this.initAnimeReviews();
-      }, 500);
     } else {
       this.api.getMangaById(Number(this.id)).subscribe((response: any) => {
         this.data = response.data;
