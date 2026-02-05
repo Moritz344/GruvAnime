@@ -1,13 +1,13 @@
 .container{
   position: fixed;
-  top: 200px;
-  left: 600px;
+  top: 40%;
+  left: 50%;
+  transform: translate(-50%, -50%);
   background-color: var(--gray9);
   z-index: 10000;
   border-radius: 10px;
   padding: 10px;
   border: 1px solid var(--gray7);
-  max-width: 500px;
 }
 
 span{
