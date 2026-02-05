@@ -67,7 +67,7 @@
             <td><span>Studio</span></td>
             <td><span style="float: right" >{{ data.studios[0]["name"] }}</span></td>
           </tr>
-          <tr *ngIf="data.duration">
+          <tr *ngIf="data.duration && data.duration != 'Unknown'">
             <td><span>Duration</span></td>
             <td><span style="float: right" >{{ data.duration }}</span></td>
           </tr>
@@ -78,15 +78,15 @@
         <h1 style="display:flex;justify-content: center">Statistics</h1>     
         <table class="stat-table">
           <tr *ngIf="data.score">
-            <td><span>Score</span></td>
+            <td><img src="score.png" class="score-img" width="20" height="20" ><span>Score</span></td>
             <td><span style="float: right">{{ data.score }}</span></td>
           </tr>
           <tr *ngIf="data.popularity">
-            <td><span>Popularity</span></td>
-            <td><span style="float: right">{{ data.popularity }}</span></td>
+            <td><img src="arrow_up.svg" class="pop-img" width="30" height="30"><span>Popularity</span></td>
+            <td><span style="float: right" >{{ data.popularity  }}</span></td>
           </tr>
           <tr *ngIf="data.members">
-            <td><span>Members</span></td>
+            <td><img src="user.svg" class="members-img" width="30" height="30" ><span>Members</span></td>
             <td><span style="float: right">{{ data.members }}</span></td>
           </tr>
         </table>
@@ -96,7 +96,7 @@
       @if (animeCharData && animeCharData.length > 0) {
         <h1 [ngClass]="{ 'char-title': !isMobile,'char-title-mobile': isMobile}">Characters ({{ animeCharData.length }} in total) </h1>
         <div [ngClass]="{ 'char-container': !isMobile, 'char-container-mobile': isMobile }">
-          @for (char of animeCharData; track $index) {
+          @for (char of animeCharDataLimited; track $index) {
             <div class="char" *ngIf="char.role == 'Main' ">
              <img width="220" height="360" [src]="char.character.images.jpg.image_url">
              <div class="char-info">

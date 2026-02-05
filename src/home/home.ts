@@ -5,15 +5,15 @@ import { Request } from '../services/request';
 import { AnimeBlock } from '../anime-block/anime-block';
 import { Spotlight } from './spotlight/spotlight';
 import { Hover } from '../hover/hover';
+import { Toast } from '../toast/toast';
 import { Subject, debounceTime } from 'rxjs';
 
 // TODO: character page
 // TODO: slice long names in anime-card 
-// TODO: fix 404 Page not Found 
 
 @Component({
   selector: 'app-home',
-  imports: [Topbar, AnimeBlock, Spotlight, CommonModule, Hover],
+  imports: [Topbar, AnimeBlock, Spotlight, CommonModule, Hover, Toast],
   templateUrl: './home.html',
   styleUrl: './home.css',
 })
@@ -33,6 +33,8 @@ export class Home implements OnInit, OnDestroy {
 
   private autoPageInterval!: number;
   switchPagesAutomatically: boolean = true;
+
+  showToast: boolean = true;
 
   hover: boolean = false;
   hoverBoxCords: { x: number; y: number } = { y: 0, x: 0 };
@@ -55,6 +57,10 @@ export class Home implements OnInit, OnDestroy {
 
   ngOnDestroy() {
     clearInterval(this.autoPageInterval);
+  }
+
+  onRemoveToast() {
+    this.showToast = false;
   }
 
   initTopAnimeData() {
@@ -81,12 +87,6 @@ export class Home implements OnInit, OnDestroy {
 
   onPageChange(page: number) {
     this.pageData.page = page;
-  }
-
-  onNextSpotlight() {
-    if (this.pageData.page < this.pageData.limit) {
-      this.pageData.page += 1;
-    }
   }
 
   onAnimeBlock(event: MouseEvent, data: any, isAnime: boolean, cooldown: boolean) {
@@ -143,7 +143,6 @@ export class Home implements OnInit, OnDestroy {
     this.api.getAnimeSpotlightCached().subscribe((response: any) => {
       this.spotlightData = response.data;
       this.spotlightData = this.removeDuplicate(this.spotlightData);
-      console.log(response.data);
       this.cdr.detectChanges();
     });
   }
@@ -202,12 +201,12 @@ export class Home implements OnInit, OnDestroy {
       if (!this.switchPagesAutomatically) { return; }
       count++;
       this.pageData.page = count;
-      this.cdr.detectChanges();
-
-      if (count === times) {
+      if (count >= times) {
+        this.pageData.page = 0;
         count = 0;
       }
-    }, 3000);
+      this.cdr.detectChanges();
+    }, 2000);
 
   }
 

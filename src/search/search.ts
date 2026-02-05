@@ -152,7 +152,6 @@ export class Search implements OnInit, AfterContentInit {
   }
 
   onModelChange(item: any, header: string) {
-    console.log("item", item, "header", header);
   }
 
   resetSearch() {

@@ -32,6 +32,12 @@ export class Details implements OnInit {
   tagColor: string = "white";
   isMobile: boolean = false;
 
+  popString: string = "";
+  membersString: string = "";
+
+  charNameString: string = "";
+
+
   constructor(private api: Request, private route: ActivatedRoute, private cdr: ChangeDetectorRef,
     private device: DeviceDetectorService) {
     this.isMobile = this.device.isMobile();
@@ -44,7 +50,6 @@ export class Details implements OnInit {
     this.api.getReviews(this.id, 1).subscribe((response: any) => {
       this.reviewData = response.data;
       this.cdr.detectChanges();
-      console.log(this.reviewData);
     });
   }
 
@@ -53,6 +58,13 @@ export class Details implements OnInit {
     this.api.getAnimeCharacter(Number(this.id)).subscribe((response: any) => {
       this.animeCharData = response.data;
       this.animeCharDataLimited = this.animeCharData.slice(0, 12);
+      this.animeCharDataLimited.forEach((i: any) => {
+        let name = i["character"]["name"];
+        if (name.length >= 25) {
+          i["character"]["name"] = i["character"]["name"].slice(0, 25) + "...";
+          name = name.slice(0, 25) + ".."
+        }
+      });
       this.loading = false;
       this.cdr.detectChanges();
 
@@ -73,7 +85,6 @@ export class Details implements OnInit {
           this.initAnimeReviews();
         }, 500);
         this.cdr.detectChanges();
-        //console.log(this.data);
       });
     } else {
       this.api.getMangaById(Number(this.id)).subscribe((response: any) => {
@@ -90,7 +101,6 @@ export class Details implements OnInit {
       const path = segments.map(s => s.path).join('/');
       this.path = segments[0]["path"];
       this.id = segments[1]["path"];
-      //console.log(this.path, this.id);
     });
   }
 

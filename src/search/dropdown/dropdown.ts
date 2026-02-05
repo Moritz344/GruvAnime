@@ -49,7 +49,6 @@ export class Dropdown implements OnInit, OnChanges {
   }
 
   setModel() {
-    console.log("set model", this.model);
     if (this.model && this.data && !this.multipleSelectable) {
       let modelValue = this.model;
       if (typeof this.model === 'object' && this.model.value) {
@@ -63,7 +62,6 @@ export class Dropdown implements OnInit, OnChanges {
         return foundItem ? foundItem.name : value;
       });
     }
-    console.log("Here", this.selectedNormal);
   }
 
   ngOnChanges() {

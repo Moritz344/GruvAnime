@@ -2,7 +2,7 @@ import { Component, OnInit, Input, inject, Output, EventEmitter } from '@angular
 import { CommonModule } from '@angular/common';
 import { Router } from '@angular/router';
 
-// TODO: switch pages automatically 
+// TODO: auto page switch limit not working
 
 @Component({
   selector: 'app-spotlight',

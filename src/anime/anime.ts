@@ -75,7 +75,6 @@ export class Anime implements OnInit, AfterContentInit {
         this.data = response.data;
         this.loading = false;
         this.paginationData = response.pagination;
-        console.log("data got:", this.data);
         this.cdr.detectChanges();
       })
 
@@ -83,7 +82,6 @@ export class Anime implements OnInit, AfterContentInit {
       this.api.getUpcomingManga("21", this.currentPage).subscribe((response: any) => {
         this.data = response.data;
         this.loading = false;
-        console.log(response);
         this.paginationData = response.pagination;
         this.cdr.detectChanges();
       });
@@ -103,7 +101,6 @@ export class Anime implements OnInit, AfterContentInit {
     if (this.currentPath == "trending") {
       this.api.getTopAnime("", "bypopularity", "21", this.currentPage).subscribe((response: any) => {
         this.data = response.data;
-        console.log("data trnding", this.data);
         this.loading = false;
         this.paginationData = response.pagination;
         this.cdr.detectChanges();

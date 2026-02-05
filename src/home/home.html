@@ -1,4 +1,18 @@
 <app-topbar></app-topbar>
+@if (showToast) {
+  <app-toast 
+    message="
+    This website is a <b>work in progress</b>. Expect changes and possible instability. 
+    If you found a bug report it here: <a href='https://github.com/Moritz344/GruvAnime/issues' target='_blank'>Github Issues</a>
+    "
+    header="Hey"
+    height="200"
+    width="400"
+    (kill)="onRemoveToast()"
+    >
+  </app-toast>
+}
+
 <div class="container">
     <div class="spotlight-container">
       <div class="spotlight-grid" 
