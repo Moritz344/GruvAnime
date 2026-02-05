@@ -31,10 +31,10 @@ export class Home implements OnInit, OnDestroy {
   topMangaData: any;
   recMangaData: any;
 
-  private autoPageInterval!: number;
+  private autoPageInterval!: any;
   switchPagesAutomatically: boolean = true;
 
-  showToast: boolean = true;
+  showToast: boolean = false;
 
   hover: boolean = false;
   hoverBoxCords: { x: number; y: number } = { y: 0, x: 0 };
@@ -61,6 +61,7 @@ export class Home implements OnInit, OnDestroy {
 
   onRemoveToast() {
     this.showToast = false;
+    sessionStorage.setItem('toast-shown', 'true');
   }
 
   initTopAnimeData() {
@@ -211,6 +212,11 @@ export class Home implements OnInit, OnDestroy {
   }
 
   ngOnInit(): void {
+    const toastShown = sessionStorage.getItem('toast-shown');
+    if (!toastShown) {
+      this.showToast = true;
+    }
+
     this.autoPage(8);
     setTimeout(() => {
       this.initTopAnimeData();
