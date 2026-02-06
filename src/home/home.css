@@ -258,3 +258,34 @@ app-spotlight{
   }
 }
 
+@media (max-width: 468px) {
+  .anime-grid {
+    grid-template-columns: repeat(3, 100px);
+    gap: 8px;
+    padding: 8px;
+  }
+
+  .chapter-header{
+    margin-left: 10px;
+  }
+
+  
+  h1 {
+    font-size: 1.1rem;
+    margin-left: 8px;
+  }
+  
+  .spotlight-container {
+    margin: 10px 8px;
+    margin-bottom: 50px;
+  }
+  
+  .page-buttons-spotlight {
+    right: 15px;
+    top: 270px;
+  }
+  
+  .scroll-buttons {
+    margin-right: 15px;
+  }
+}
