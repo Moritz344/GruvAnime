@@ -92,8 +92,6 @@ input {
 
 
 
-
-
 .search-type{
   margin-right: 10px;
 }
@@ -108,7 +106,7 @@ input {
 }
 .search-container-mobile{
   display: grid;
-  grid-template-columns: repeat(1,200px);
+  grid-template-columns: repeat(3,1fr);
   gap: 10px;
   justify-content: center;
   margin: 0px;

@@ -14,6 +14,14 @@
 
 }
 
+.screen{
+  top: 0;
+  width: 100vw;
+  height: 100vw;
+  position: fixed;
+  z-index: 0;
+}
+
 .home-container{
   position: absolute;
   top: 20px;
@@ -180,6 +188,186 @@
 
 .btn:hover{
   color: var(--yellow);
+}
+
+@media (max-width: 1200px) {
+  .search-container {
+    right: 120px;
+  }
+  
+  .search-input {
+    width: 180px;
+  }
+  
+  .github {
+    right: 50px;
+  }
+  
+  .btn {
+    font-size: 18px;
+  }
+  
+  .home-btn {
+    font-size: 22px;
+  }
+}
+
+@media (max-width: 900px) {
+  .container {
+    padding: 8px;
+    max-height: 45px;
+  }
+  
+  .container-items {
+    gap: 8px;
+    margin-top: 8px;
+  }
+  
+  .btn {
+    font-size: 16px;
+  }
+  
+  .home-btn {
+    font-size: 20px;
+  }
+  
+  .search-container {
+    right: 100px;
+    top: 12px;
+  }
+  
+  .search-input {
+    width: 150px;
+    height: 25px;
+    font-size: 0.9rem;
+  }
+  
+  .search-container button {
+    height: 25px;
+  }
+  
+  .github {
+    right: 40px;
+    top: 8px;
+  }
+  
+  .github img {
+    width: 35px;
+    height: 35px;
+  }
+  
+  .anime-hover-container,
+  .manga-hover-container {
+    padding: 8px;
+  }
+  
+  .anime-hover-container button,
+  .manga-hover-container button {
+    font-size: 16px;
+  }
+}
+
+@media (max-width: 700px) {
+  .container {
+    max-height: 40px;
+    padding: 5px;
+  }
+  
+  .home-container {
+    top: 15px;
+  }
+  
+  .btn {
+    font-size: 14px;
+  }
+  
+  .home-btn {
+    font-size: 18px;
+  }
+  
+  .container-items img {
+    width: 16px;
+    height: 16px;
+    margin-right: 3px;
+  }
+  
+  .search-container {
+    right: 90px;
+    top: 10px;
+  }
+  
+  .search-input {
+    width: 120px;
+    height: 22px;
+    font-size: 0.8rem;
+  }
+  
+  .search-container button {
+    height: 22px;
+  }
+  
+  .github {
+    right: 30px;
+    top: 5px;
+  }
+  
+  .github img {
+    width: 30px;
+    height: 30px;
+  }
+  
+  .anime-hover-container,
+  .manga-hover-container {
+    padding: 6px;
+  }
+  
+  .anime-hover-container button,
+  .manga-hover-container button {
+    font-size: 14px;
+  }
+}
+
+@media (max-width: 500px) {
+  .menu-container {
+    height: 45px;
+  }
+  
+  .mobile-home-header {
+    top: 12px;
+    font-size: 18px;
+  }
+  
+  .options {
+    margin-left: 100px;
+    margin-top: 12px;
+    gap: 8px;
+  }
+  
+  .options a {
+    font-size: 14px;
+  }
+}
+
+@media (max-width: 400px) {
+  .menu-container {
+    height: 40px;
+  }
+  
+  .mobile-home-header {
+    top: 10px;
+    font-size: 16px;
+    left: 8px;
+  }
+  
+  .options {
+    margin-left: 100px;
+    margin-top: 10px;
+    gap: 6px;
+  }
+  
+  .options a {
+    font-size: 15px;
+  }
 }
 
 

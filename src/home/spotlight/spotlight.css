@@ -40,6 +40,11 @@
   width: 1300px;
 }
 
+.title-container h1{
+  font-size: 50px;
+  margin:0
+}
+
 
 .coming-soon-badge{
   position: absolute;
@@ -160,4 +165,178 @@
   text-align: center;
   width: auto;
   height: 20px;
+}
+
+@media (max-width: 1200px) {
+  .title-container {
+    width: 1000px;
+    margin-left: 80px;
+  }
+
+  .thumbnail-container img{
+    height: 450px;
+  }
+  
+  .container {
+    height: 450px;
+  }
+  
+  .container-loader {
+    height: 450px;
+  }
+  
+  .page-container {
+    top: 410px;
+  }
+  
+  .next-page-button-left button,
+  .next-page-button-right button {
+    top: 180px;
+  }
+}
+
+@media (max-width: 900px) {
+  .container {
+    height: 380px;
+    width: 95vw;
+  }
+  
+  .container-loader {
+    height: 380px;
+    width: 95vw;
+  }
+  
+  .title-container {
+    margin-top: 80px;
+    margin-left: 60px;
+    width: 70%;
+  }
+  
+  .page-container {
+    top: 340px;
+    right: 15px;
+  }
+  
+  .next-page-button-left button,
+  .next-page-button-right button {
+    top: 150px;
+    width: 35px;
+    height: 35px;
+  }
+  
+  .badge-container {
+    grid-template-columns: repeat(2, 120px);
+    gap: 8px;
+  }
+  
+  .details-container {
+    gap: 40px;
+  }
+  
+  .details-container button {
+    padding: 8px 15px;
+    width: 120px;
+    font-size: 0.9rem;
+  }
+}
+
+@media (max-width: 600px) {
+  .container {
+    visibility: hidden;
+  }
+  
+  .container-loader {
+    height: 300px;
+    width: 92vw;
+  }
+  
+  .title-container {
+    margin-top: 60px;
+    margin-left: 40px;
+    width: 70%;
+  }
+  .title-container h1{
+    font-size: 30px;
+  }
+  
+  .page-container {
+    top: 260px;
+    right: 10px;
+    width: 40px;
+    font-size: 0.8rem;
+  }
+  
+  .next-page-button-left button,
+  .next-page-button-right button {
+    top: 120px;
+    width: 30px;
+    height: 30px;
+  }
+  
+  .badge-container {
+    grid-template-columns: 1fr;
+    gap: 6px;
+  }
+  
+  .details-container {
+    grid-template-columns: 1fr;
+    gap: 20px;
+  }
+  
+  .details-container button {
+    width: 100px;
+    padding: 6px 12px;
+    font-size: 0.8rem;
+  }
+  
+  .coming-soon-badge button {
+    font-size: 12px;
+    padding: 3px;
+  }
+}
+
+@media (max-width: 400px) {
+  .container {
+    visibility: hidden;
+  }
+  
+  .container-loader {
+    height: 250px;
+    width: 90vw;
+  }
+
+  
+  .title-container {
+    margin-top: 40px;
+    margin-left: 20px;
+    width: 55%;
+  }
+
+  .title-container h1{
+    font-size: 20px;
+  }
+
+  
+  .page-container {
+    top: 470px;
+    width: 35px;
+    font-size: 0.7rem;
+  }
+  
+  .next-page-button-left button,
+  .next-page-button-right button {
+    top: 100px;
+    width: 25px;
+    height: 25px;
+  }
+  
+  .details-container button {
+    width: 80px;
+    padding: 5px 8px;
+    font-size: 0.7rem;
+  }
+
+  .thumbnail-container{
+    height: 50px;
+  }
 }

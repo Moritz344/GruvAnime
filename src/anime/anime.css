@@ -10,7 +10,7 @@
 
 .anime-container-mobile{
   display: grid;
-  grid-template-columns: repeat(1,200px);
+  grid-template-columns: repeat(3,1fr);
   gap: 10px;
   justify-content: center;
   margin: 40px;
@@ -54,3 +54,4 @@
 .pagination-container button:hover{
   background-color: rgba(1,1,1,0.5);
 }
+

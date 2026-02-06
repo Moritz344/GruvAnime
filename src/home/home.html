@@ -22,7 +22,7 @@
     </div>
 
     @if (topAnimeData) {
-    <h1 style="display: flex;justify-content: left; margin-bottom:0px;margin-left: 20px">Popular Anime </h1>
+    <h1 class="chapter-header">Popular Anime </h1>
       <div class="anime-grid" #popular
         (mousedown)="startDrag($event,popular)"
         (mousemove)="drag($event,popular)"
@@ -39,7 +39,7 @@
 
 
     @if (topMangaData) {
-    <h1 style="display: flex;justify-content: left; margin-bottom:0px;margin-left: 20px">Popular Manga</h1>
+    <h1 class="chapter-header">Popular Manga</h1>
       <div class="anime-grid" #manga
         (mousedown)="startDrag($event,manga)"
         (mousemove)="drag($event,manga)"
@@ -58,7 +58,7 @@
 
 
     @if (recAnimeData) {
-    <h1 style="display: flex;justify-content: left; margin-bottom:0px;margin-left: 20px">Recent Anime Recommendations</h1>
+    <h1 class="chapter-header">Recent Anime Recommendations</h1>
     <div class="anime-grid" #rec
       (mousedown)="startDrag($event,rec)"
       (mousemove)="drag($event,rec)"
@@ -76,7 +76,7 @@
       </div>
     }
     @if (recMangaData) {
-    <h1 style="display: flex;justify-content: left; margin-bottom:0px;margin-left: 20px">Recent Manga Recommendations</h1>
+    <h1 class="chapter-header">Recent Manga Recommendations</h1>
     <div class="anime-grid" #rec_manga
       (mousedown)="startDrag($event,rec_manga)"
       (mousemove)="drag($event,rec_manga)"

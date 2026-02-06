@@ -9,10 +9,6 @@ import { AnimeBlock } from '../anime-block/anime-block';
 import { Subject, debounceTime } from 'rxjs';
 import { DeviceDetectorService } from 'ngx-device-detector';
 
-// TODO: page filter not in url 
-// TODO: Type filter not working
-// TODO: when selecting manga make sure to reset the filters 
-
 @Component({
   selector: 'app-search',
   imports: [RouterModule, CommonModule, FormsModule, Dropdown, Topbar, AnimeBlock],

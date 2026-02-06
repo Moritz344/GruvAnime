@@ -136,3 +136,125 @@ app-spotlight{
   border-radius: 10px;
 }
 
+@media (max-width: 1200px) {
+
+  .anime-grid {
+    grid-template-columns: repeat(7, 1fr);
+  }
+
+  
+  
+  .page-buttons-spotlight {
+    top: 420px;
+  }
+}
+
+@media (max-width: 900px) {
+  .container {
+    margin-top: 200px;
+  }
+  
+  .anime-grid {
+    grid-template-columns: repeat(5, 1fr);
+    gap: 15px;
+    padding: 15px;
+  }
+
+  .page-buttons-spotlight {
+    right: 25px;
+    top: 370px;
+  }
+  
+  .scroll-buttons {
+    margin-right: 25px;
+  }
+  
+  h1 {
+    margin-left: 15px;
+    font-size: 1.4rem;
+  }
+}
+
+@media (max-width: 600px) {
+  .container {
+    margin-top: 0px;
+  }
+  
+  .anime-grid {
+    grid-template-columns: repeat(4, 1fr);
+    gap: 10px;
+    padding: 10px;
+  }
+  
+  .spotlight-container {
+    margin: 15px 10px;
+    margin-bottom: 500px;
+  }
+  
+  .page-buttons-spotlight {
+    right: 20px;
+    top: 300px;
+  }
+  
+  .scroll-buttons {
+    visibility: hidden;
+  }
+  
+  h1 {
+    margin-left: 10px;
+    font-size: 1.2rem;
+    margin-bottom: 5px;
+  }
+  
+  .scroll-buttons button,
+  .page-buttons-spotlight button {
+    width: 35px;
+    height: 35px;
+  }
+  
+  .scroll-buttons img,
+  .page-buttons-spotlight img {
+    width: 18px;
+    height: 18px;
+  }
+}
+
+.chapter-header{
+  display: flex;
+  justify-content: left;
+  margin-bottom:0px;
+  margin-left: 20px
+}
+
+@media (max-width: 400px) {
+  .anime-grid {
+    grid-template-columns: repeat(3, 1fr);
+    gap: 8px;
+    padding: 8px;
+  }
+
+  .chapter-header{
+    margin-left: 10px;
+  }
+
+  
+  h1 {
+    font-size: 1.1rem;
+    margin-left: 8px;
+  }
+  
+  .spotlight-container {
+    margin: 10px 8px;
+    margin-bottom: 50px;
+  }
+  
+  .page-buttons-spotlight {
+    right: 15px;
+    top: 270px;
+  }
+  
+  .scroll-buttons {
+    margin-right: 15px;
+  }
+}
+

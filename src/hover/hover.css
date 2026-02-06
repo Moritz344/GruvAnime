@@ -43,3 +43,49 @@
     transform: translateX(0);
   }
 }
+
+/* Responsive Media Queries for Hover */
+@media (max-width: 900px) {
+  .container {
+    min-width: 250px;
+    max-width: 350px;
+    padding: 12px;
+  }
+  
+  .genre {
+    font-size: 0.8em;
+    padding: 4px 8px;
+  }
+}
+
+@media (max-width: 600px) {
+  .container {
+    min-width: 200px;
+    max-width: 280px;
+    padding: 10px;
+  }
+  
+  .genre {
+    font-size: 0.7em;
+    padding: 3px 6px;
+    border-radius: 8px;
+  }
+}
+
+@media (max-width: 400px) {
+  .container {
+    min-width: 160px;
+    max-width: 220px;
+    padding: 8px;
+  }
+  
+  .genre {
+    font-size: 0.65em;
+    padding: 2px 5px;
+  }
+  
+  .genre-container {
+    gap: 5px;
+    margin-top: 8px;
+  }
+}

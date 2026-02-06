@@ -216,6 +216,16 @@ export class Request {
     return this.http.get(url);
   }
 
+  getAnimeRelations(id: string) {
+    const url = this.base_url + "anime/" + id + "/relations";
+    return this.http.get(url);
+  }
+
+  getMangaRelations(id: string) {
+    const url = this.base_url + "manga/" + id + "/relations";
+    return this.http.get(url);
+  }
+
   getAnimeSpotlightCached(): Observable<any> {
     if (!this.spotlightCache$) {
       this.spotlightCache$ = this.getAnimeSpotlight().pipe(

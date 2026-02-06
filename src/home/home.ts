@@ -9,7 +9,6 @@ import { Toast } from '../toast/toast';
 import { Subject, debounceTime } from 'rxjs';
 
 // TODO: character page
-// TODO: slice long names in anime-card 
 
 @Component({
   selector: 'app-home',
