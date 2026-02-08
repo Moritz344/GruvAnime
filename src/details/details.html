@@ -20,25 +20,13 @@
             </span>
             </div>
             <div class="genre-container" *ngIf="data.genres.length > 1">
-            <div class="row-2" >
               @for (genre of data.genres; track $index) {
-                <span class="badge" >{{ genre.name }}</span>
+                <span class="genre" >{{ genre.name }}</span>
               }
-            </div>
           </div>
         </div>
         <img draggable="false" [src]="data.images.jpg.large_image_url">
       </div>
-        <!--
-        <div class="anime-card-bottom-info">
-            <span class="rank" *ngIf="data.rank">Rank #{{ data.rank }}</span>
-            <span class="score" *ngIf="data.score">Score {{ data.score }}</span>
-            <span class="fav" *ngIf="data.favorites">Favorites {{ data.favorites }}</span>
-            <span class="pop" *ngIf="data.popularity">Popularity #{{ data.popularity }}</span>
-            <span class="ep" *ngIf="data.episodes">Episodes #{{ data.episodes }}</span>
-            
-        </div>
-        -->
     </div>
       <h1 style="margin-left: 100px;margin-top:50px">Description</h1>
       <div class="desc-container">
@@ -47,23 +35,23 @@
       <div class="info-container">
         <h1 style="display:flex;justify-content: center">Information</h1>
         <table class="info-table">
-          <tr *ngIf="data.type">
+          <tr *ngIf="data && data.type">
             <td><span>Type</span></td>
             <td><span style="float: right" >{{ data.type }}</span></td>
           </tr>
-          <tr *ngIf="data.episodes">
+          <tr *ngIf="data && data.episodes">
             <td><span>Episodes</span></td>
             <td><span style="float: right" >{{ data.episodes }}</span></td>
           </tr>
-          <tr *ngIf="data.status">
+          <tr *ngIf="data && data.status">
             <td><span>Status</span></td>
             <td><span style="float: right" >{{ data.status }}</span></td>
           </tr>
-          <tr *ngIf="data.season">
+          <tr *ngIf="data && data.season">
             <td><span>Season</span></td>
             <td><span style="float: right" >{{ data.season }}</span></td>
           </tr>
-          <tr *ngIf="data.studios.length > 1">
+          <tr *ngIf="data.studios && data.studios.length > 1">
             <td><span>Studio</span></td>
             <td><span style="float: right" >{{ data.studios[0]["name"] }}</span></td>
           </tr>
@@ -106,13 +94,23 @@
             </div>
           }
         </div>
+      }
 
+      @if (relationsDataMore && relationsDataMore.length > 1) {
+        <h1 [ngClass]="{ 'rel-title': !isMobile,'rel-title-mobile': isMobile}">Relations</h1>
+        <div [ngClass]="{ 'rel-container': !isMobile, 'rel-container-mobile': isMobile }">
+          @for (relation of relationsDataMore; track $index) {
+            <app-anime-block [data]="relation" [isAnime]="true"></app-anime-block>
+          }
+        </div>
+      }@else{
+        <h1 [ngClass]="{ 'rel-title': !isMobile,'rel-title-mobile': isMobile}">No Relations found...</h1>
       }
 
 
       
-    <div [ngClass]="{ 'review-container': !isMobile, 'review-container-mobile': isMobile }">
     <h1 [ngClass]="{'review-title': !isMobile,'review-title-mobile': isMobile}" *ngIf="reviewData && reviewData.length > 0">Reviews ({{ reviewData.length }}) </h1>
+    <div [ngClass]="{ 'review-container': !isMobile, 'review-container-mobile': isMobile }">
       @for ( review of reviewData; track $index) {
         <app-review [data]="review" ></app-review>
       }

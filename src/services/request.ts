@@ -135,10 +135,6 @@ export class Request {
     const params = new URLSearchParams();
 
     params.append("status", "upcoming");
-    params.append("page", page.toString());
-    params.append("order_by", "popularity");
-    params.append("sfw", "true");
-    params.append("limit", limit);
 
     const url = this.base_url + "manga?" + params;
     return this.http.get(url);
@@ -213,6 +209,11 @@ export class Request {
     params.append("order_by", "popularity");
     params.append("limit", "10");
     const url = this.base_url + "anime?" + params;
+    return this.http.get(url);
+  }
+
+  getAnimePictures(id: string) {
+    const url = this.base_url + "anime/" + id + "/pictures";
     return this.http.get(url);
   }
 

@@ -1,4 +1,4 @@
-<div (click)="onLeaveHoverElement()" class="screen"></div>
+<div (mouseenter)="onLeaveHoverElement()" class="screen"></div>
 <div class="container" (click)="onLeaveHoverElement()" (mouseenter)="onLeaveHoverElement()">
   <div class="home-container">
     <a [routerLink]="['']"><button (mouseenter)="onLeaveHoverElement()" class="home-btn" *ngIf="!isMobile">GruvAnime</button></a>

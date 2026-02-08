@@ -43,8 +43,7 @@
       <div class="anime-grid" #manga
         (mousedown)="startDrag($event,manga)"
         (mousemove)="drag($event,manga)"
-        (mouseup)="endDrag(manga)"
-        (mouseleave)="endDrag(manga)">
+        (mouseup)="endDrag(manga)">
 
         @for (data of topMangaData; track $index) {
             <app-anime-block (click)="onAnimeBlock($event,data,false,false)" (mouseleave)="onAnimeBlockLeave()" [isAnime]="false" [openDetailsOnHoverElement]="true" [data]="data"></app-anime-block>
@@ -63,8 +62,6 @@
       (mousedown)="startDrag($event,rec)"
       (mousemove)="drag($event,rec)"
       (mouseup)="endDrag(rec)"
-      (mouseleave)="endDrag(rec)"
-
     >
       @for (data of recAnimeData; track $index) {
           <app-anime-block [isAnime]="true" (mouseleave)="onAnimeBlockLeave()" (click)="onAnimeBlock($event,data,true,false)" [openDetailsOnHoverElement]="true" [data]="data"></app-anime-block>
@@ -81,8 +78,6 @@
       (mousedown)="startDrag($event,rec_manga)"
       (mousemove)="drag($event,rec_manga)"
       (mouseup)="endDrag(rec_manga)"
-      (mouseleave)="endDrag(rec_manga)"
-
     >
       @for (data of recMangaData; track $index) {
           <app-anime-block (mouseleave)="onAnimeBlockLeave()" (click)="onAnimeBlock($event,data,false,false)" [isAnime]="false" [openDetailsOnHoverElement]="true" [data]="data"></app-anime-block>
