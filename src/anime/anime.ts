@@ -39,6 +39,7 @@ export class Anime implements OnInit, AfterContentInit {
         this.initMangaData();
       }
     }
+    this.cdr.detectChanges();
   }
 
   onPreviousPage() {

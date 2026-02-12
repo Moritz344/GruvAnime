@@ -17,7 +17,7 @@
      </div>
 
      }
-      @if (paginationData && data.length > 0) {
+      @if (paginationData && data.length > 0 && !loading) {
         <div class="page-container">
             <span>Page: {{ paginationData.current_page }}/{{ paginationData.last_visible_page }}</span>
           </div>
@@ -34,5 +34,6 @@
           <div class="loader-container">
             <div class="loader"></div>
           </div>
+          <span style="font-size: 20px;display: flex;justify-content: center;margin-top: 20px">Loading Page: {{ currentPage }}</span>
       }
 </div>
