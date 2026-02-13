@@ -10,6 +10,7 @@ import { switchMap, forkJoin, of, delay, tap } from 'rxjs';
 import { Subscription } from 'rxjs';
 
 // TODO: Redesign Page
+// TODO: make responsive for mobile
 // TODO: handle too many requests/better error handling
 
 
@@ -29,6 +30,9 @@ export class Details implements OnInit {
   reviewData: any;
   relationsData: any;
   relationsDataMore: any[] = [];
+
+  relationsDataManga: any;
+  relationsDataMoreManga: any[] = [];
 
   loading: boolean = true;
   loadingRelations: boolean = true;
@@ -51,13 +55,21 @@ export class Details implements OnInit {
 
   initAnimeRelations() {
     this.api.getAnimeRelations(this.id).subscribe((response: any) => {
-      this.relationsData = response.data.slice(0, 3);
-      this.initMoreDataForAnimeRelations();
+      this.relationsData = response.data;
+      this.loadingRelations = false;
+      this.initMoreDataForRelations(true);
+      this.cdr.detectChanges();
+    })
+  }
+  initMangaRelations() {
+    this.api.getMangaRelations(this.id).subscribe((response: any) => {
+      this.relationsData = response.data;
+      this.initMoreDataForRelations(false);
       this.cdr.detectChanges();
     })
   }
 
-  initMoreDataForAnimeRelations() {
+  initMoreDataForRelations(isAnime: boolean) {
     this.relationsDataMore = [];
     this.loadingRelations = true;
     let delay = 0;
@@ -65,20 +77,31 @@ export class Details implements OnInit {
       let id = item["entry"][0]["mal_id"];
       if (id) {
         setTimeout(() => {
-          this.api.getAnimeById(id).subscribe({
-            next: (response: any) => {
-              this.relationsDataMore.push(response.data);
-              this.loadingRelations = false;
-              console.log(this.relationsDataMore);
-            },
-            error: (err) => {
-              console.error(`Failed to load anime ${id}:`, err);
-            }
-          });
+          if (isAnime && item["entry"][0]["type"] == "anime") {
+            this.api.getAnimeById(id).subscribe({
+              next: (response: any) => {
+                this.relationsDataMore.push(response.data);
+                this.cdr.detectChanges();
+                this.loadingRelations = false;
+              },
+              error: (err) => {
+                console.error(`Failed to load anime ${id}:`, err);
+              }
+            });
+          } else {
+            this.api.getMangaById(id).subscribe({
+              next: (response: any) => {
+                this.relationsDataMore.push(response.data);
+              },
+              error: (err) => {
+                console.error(`Failed to load anime ${id}:`, err);
+              }
+            });
+
+          }
         }, delay);
-        delay += 1000;
+        delay += 900;
       }
-      this.cdr.detectChanges();
     });
   }
 
@@ -119,7 +142,7 @@ export class Details implements OnInit {
 
           return of(null).pipe(
             tap(() => this.initAnimeRelations()),
-            delay(500),
+            delay(1000),
             tap(() => this.initAnimeReviews()),
             delay(1000),
           );
@@ -129,6 +152,7 @@ export class Details implements OnInit {
       this.api.getMangaById(Number(this.id)).subscribe((response: any) => {
         this.data = response.data;
         this.loading = false;
+        this.initMangaRelations();
         this.cdr.detectChanges();
       });
     }

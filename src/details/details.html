@@ -4,11 +4,11 @@
     <div class="main-container">
       <div class="anime-card">
         <div [ngClass]="{ 'info': !isMobile, 'info-mobile': isMobile }">
-          <div class="title-container">
+          <div [ngClass]="{ 'title-container': !isMobile, 'title-container-mobile': isMobile }">
             <h1 class="title">{{ data.title_english }} </h1>
             <h2 >{{ data.title_japanese }}</h2>
           </div>
-          <div class="row-1">
+          <div [ngClass]="{ 'row-1': !isMobile, 'row-1-mobile': isMobile }">
             <span class="badge" *ngIf="data.year">
               {{ data.year }}
             </span>
@@ -19,7 +19,7 @@
               Episodes: {{ data.episodes }}
             </span>
             </div>
-            <div class="genre-container" *ngIf="data.genres.length > 1">
+            <div [ngClass]="{ 'genre-container': !isMobile, 'genre-container-mobile': isMobile }" *ngIf="data.genres.length > 1">
               @for (genre of data.genres; track $index) {
                 <span class="genre" >{{ genre.name }}</span>
               }
@@ -28,13 +28,13 @@
         <img draggable="false" [src]="data.images.jpg.large_image_url">
       </div>
     </div>
-      <h1 style="margin-left: 100px;margin-top:50px">Description</h1>
-      <div class="desc-container">
+      <h1 [ngClass]="{ 'desc-title': !isMobile, 'desc-title-mobile': isMobile }">Description</h1>
+      <div [ngClass]="{ 'desc-container': !isMobile, 'desc-container-mobile': isMobile }">
         <p>{{ data.synopsis }}</p>
       </div>
-      <div class="info-container">
-        <h1 style="display:flex;justify-content: center">Information</h1>
-        <table class="info-table">
+      <div [ngClass]="{ 'info-container': !isMobile, 'info-container-mobile': isMobile }">
+        <h1 [ngClass]="{ 'info-title': !isMobile, 'info-title-mobile': isMobile }">Information</h1>
+        <table [ngClass]="{ 'info-table': !isMobile, 'info-table-mobile': isMobile }">
           <tr *ngIf="data && data.type">
             <td><span>Type</span></td>
             <td><span style="float: right" >{{ data.type }}</span></td>
@@ -62,9 +62,9 @@
         </table>
       </div>
 
-      <div class="stat-container" *ngIf="data.score || data.popularity || data.members">
-        <h1 style="display:flex;justify-content: center">Statistics</h1>     
-        <table class="stat-table">
+      <div [ngClass]="{ 'stat-container': !isMobile, 'stat-container-mobile': isMobile }" *ngIf="data.score || data.popularity || data.members">
+        <h1 [ngClass]="{ 'info-title': !isMobile, 'stat-title-mobile': isMobile }">Statistics</h1>     
+        <table [ngClass]="{ 'stat-table': !isMobile, 'stat-table-mobile': isMobile }">
           <tr *ngIf="data.score">
             <td><img src="score.png" class="score-img" width="20" height="20" ><span>Score</span></td>
             <td><span style="float: right">{{ data.score }}</span></td>
@@ -103,9 +103,14 @@
             <app-anime-block [data]="relation" [isAnime]="true"></app-anime-block>
           }
         </div>
-      }@else{
-        <h1 [ngClass]="{ 'rel-title': !isMobile,'rel-title-mobile': isMobile}">No Relations found...</h1>
       }
+      @if (loadingRelations){
+        <div class="loader-relations">
+          <h1 [ngClass]="{ 'rel-title': !isMobile,'rel-title-mobile': isMobile}">Loading Relations ...</h1>
+          <div style="margin-left: 100px" class="loader"></div>
+        </div>
+      }
+
 
 
       

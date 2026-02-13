@@ -26,6 +26,10 @@
   z-index: 10;
 }
 
+.days-container button {
+  z-index: 1000;
+}
+
 .days-container{
   display: grid;
   grid-template-columns: repeat(7,200px);

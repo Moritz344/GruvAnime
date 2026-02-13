@@ -26,6 +26,7 @@
   margin-top: 100px;
   margin-left: 100px;
 }
+
 @media (max-width: 768px) {
   .anime-card {
     position: relative;
@@ -61,13 +62,45 @@
 }
 
 .info-mobile{
-  text-align: center;
+  position: absolute;
+  top: 0px;
+  left: 0px;
+  width: 500px;
+  height: 400px;
   margin: 20px auto;
   max-width: 90%;
-  padding: 0 10px;
 }
+
+.title-container-mobile{
+  position: absolute;
+  top: 250px;
+  right: 400px;
+  display: inline-flex;
+  width: auto;
+  flex-direction: column;
+}
+
+.desc-container-mobile{
+  margin-top: 0px;
+  display: flex;
+  flex-direction: column;
+  line-height: 1.5;
+  padding: 20px;
+  border: 1px solid var(--gray6);
+  width: 330px;
+  border-radius: 10px;
+  background-color: #282828;
+}
+
+.row-1-mobile{
+}
+
+.desc-title-mobile{
+  margin-top: 200px;
+}
+
 .info-mobile p{
-  text-align: left;
+  text-align: justify;
   margin: 10px 0;
   line-height: 1.4;
   word-wrap: break-word;
@@ -504,6 +537,10 @@ a{
   font-size: 17px;
 }
 
+.desc-title{
+  margin-left: 100px;
+}
+
 .members-img{
   margin-top: 5px;
   margin-right: 6px;
@@ -530,6 +567,7 @@ a{
   max-height: 340px;
   height: auto;
   width: 400px;
+  min-height: 250px;
   line-height: 45px;
 }
 
@@ -543,7 +581,12 @@ a{
   border-radius: 10px;
   height: auto;
   width: 400px;
+  min-height: 250px; 
   line-height: 45px;
+}
+
+.info-title{
+  text-align: center;
 }
 
 .info-table{
