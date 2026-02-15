@@ -1,11 +1,11 @@
 <app-topbar></app-topbar>
 <div class="container">
-  <div class="days-container">
+  <div [ngClass]="{ 'days-container': !isMobile, 'days-container-mobile': isMobile }">
     @for (day of days; track $index) {
       <button [ngClass]="{'day-active': currentDay  === day, 'day': currentDay.toLowerCase() !== day.toLowerCase()}" (click)="initCalendarData(day)" >{{ day }}</button>
     }
   </div>
-  <div class="anime-container">
+  <div [ngClass]="{ 'anime-container': !isMobile, 'anime-container-mobile': isMobile }">
       @for (data of calendarData.data; track $index) {
         <div class="anime-item">
           <app-anime-block [data]="data" [isAnime]="true"></app-anime-block>
@@ -13,6 +13,8 @@
         </div>
       }
   </div>
+  <br>
+  <br>
 
     
 

@@ -8,6 +8,13 @@
   justify-content: center;
   margin: 10px;
 }
+.anime-container-mobile{
+  display: grid;
+  grid-template-columns: repeat(3,100px);
+  gap: 30px;
+  justify-content: center;
+}
+
 
 .anime-item {
   position: relative;
@@ -26,9 +33,10 @@
   z-index: 10;
 }
 
-.days-container button {
+button {
   z-index: 1000;
 }
+
 
 .days-container{
   display: grid;
@@ -37,6 +45,19 @@
   height: 40px;
   justify-content: center;
   margin-bottom: 30px;
+}
+
+.days-container-mobile button{
+  height: 40px;
+}
+
+.days-container-mobile{
+  display: grid;
+  grid-template-columns: repeat(1,360px);
+  gap: 10px;
+  height: 50px;
+  justify-content: center;
+  margin-bottom: 340px;
 }
 
 .loader-container{
@@ -80,7 +101,7 @@
 
 
 .day{
-  color: var(--aqua);
+  color: var(--gray3);
   border: 1px solid white;
   font-size: 20px;
   background-color: var(--gray10);

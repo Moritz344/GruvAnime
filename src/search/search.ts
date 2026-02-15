@@ -303,8 +303,8 @@ export class Search implements OnInit, AfterContentInit {
       this.searchFilter.page = Number(this.searchFilter.page) + 1;
       this.search();
       this.updateUrl();
-      this.cdr.detectChanges();
     }
+    this.cdr.detectChanges();
   }
 
   onPreviousPage() {
@@ -312,8 +312,8 @@ export class Search implements OnInit, AfterContentInit {
       this.searchFilter.page = Number(this.searchFilter.page) - 1;
       this.search();
       this.updateUrl();
-      this.cdr.detectChanges();
     }
+    this.cdr.detectChanges();
   }
 
   checkPage() {

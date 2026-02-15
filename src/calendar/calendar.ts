@@ -3,6 +3,7 @@ import { CommonModule } from '@angular/common';
 import { Request } from '../services/request';
 import { AnimeBlock } from '../anime-block/anime-block';
 import { Topbar } from '../topbar/topbar';
+import { DeviceDetectorService } from 'ngx-device-detector';
 
 // TODO: show sheduled anime like aniworld
 
@@ -20,6 +21,7 @@ export class Calendar implements OnInit {
   currentPage: number = 1;
   loading: boolean = false;
   cooldown: number = 10000;
+  isMobile: boolean = false;
 
   time: number = 0;
   interval: any;
@@ -48,7 +50,9 @@ export class Calendar implements OnInit {
     })
   }
 
-  constructor(private api: Request, private cdr: ChangeDetectorRef) {
+  constructor(private api: Request, private cdr: ChangeDetectorRef, private device: DeviceDetectorService) {
+    this.isMobile = this.device.isMobile();
+    console.log(this.isMobile);
   }
 
   ngOnInit(): void {
