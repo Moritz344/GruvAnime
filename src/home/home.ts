@@ -6,7 +6,9 @@ import { AnimeBlock } from '../anime-block/anime-block';
 import { Spotlight } from './spotlight/spotlight';
 import { Hover } from '../hover/hover';
 import { Toast } from '../toast/toast';
+import { Router } from '@angular/router';
 import { Subject, debounceTime } from 'rxjs';
+import { SupabaseService } from '../services/supabase';
 
 // TODO: character page
 
@@ -48,9 +50,14 @@ export class Home implements OnInit, OnDestroy {
 
   scrollRight: number = 0;
 
+  loadingMangaRec: boolean = true;
+  loadingAnimeRec: boolean = true;
+
   constructor(
     private api: Request,
     private cdr: ChangeDetectorRef,
+    private supabase: SupabaseService,
+    private router: Router,
   ) {
   }
 
@@ -64,9 +71,14 @@ export class Home implements OnInit, OnDestroy {
   }
 
   initTopAnimeData() {
-    this.api.getTopAnimeCached('', 'bypopularity', '14').subscribe((response: any) => {
-      this.topAnimeData = response.data;
-      this.cdr.detectChanges();
+    this.api.getTopAnimeCached('', 'bypopularity', '14').subscribe({
+      next: (response: any) => {
+        this.topAnimeData = response.data;
+        this.cdr.detectChanges();
+      },
+      error: (err) => {
+        console.log(err);
+      }
     });
   }
 
@@ -90,14 +102,11 @@ export class Home implements OnInit, OnDestroy {
   }
 
   onAnimeBlock(event: MouseEvent, data: any, isAnime: boolean, cooldown: boolean) {
-    this.hover = true;
-    if (event.pageX > 600) {
-      this.hoverBoxCords = { y: event.pageY, x: event.pageX - 400 };
+    if (isAnime) {
+      this.router.navigate(["/anime", + data.mal_id]);
     } else {
-      this.hoverBoxCords = { y: event.pageY, x: event.pageX - 100 };
+      this.router.navigate(["/manga", + data.mal_id]);
     }
-    this.hoverBoxData = data;
-    this.isAnimeBlock = isAnime;
     this.cdr.detectChanges();
   }
 
@@ -108,27 +117,47 @@ export class Home implements OnInit, OnDestroy {
   }
 
   initTopMangaData() {
-    this.api.getTopMangaCached('14', 'manga', 'bypopularity').subscribe((response: any) => {
-      this.topMangaData = response.data;
-      this.cdr.detectChanges();
+    this.api.getTopMangaCached('14', 'manga', 'bypopularity').subscribe({
+      next: (response: any) => {
+        this.topMangaData = response.data;
+        this.cdr.detectChanges();
+      },
+      error: (err) => {
+        console.log(err);
+      }
     });
   }
 
   initMangaRec() {
-    this.api.getMangaRecCached().subscribe((response: any) => {
-      this.recMangaData = response.data;
-      this.recMangaData = this.recMangaData.slice(0, 14);
-      this.recMangaData = this.removeDuplicate(this.recMangaData);
-      this.cdr.detectChanges();
+    this.loadingMangaRec = true;
+    this.api.getMangaRecCached().subscribe({
+      next: (response: any) => {
+        this.recMangaData = response.data;
+        this.recMangaData = this.recMangaData.slice(0, 14);
+        this.recMangaData = this.removeDuplicate(this.recMangaData);
+        this.loadingMangaRec = false;
+        this.cdr.detectChanges();
+      },
+      error: (err) => {
+        console.log(err);
+      }
     });
+
   }
 
   initAnimeRec() {
-    this.api.getAnimeRecCached().subscribe((response: any) => {
-      this.recAnimeData = response.data;
-      this.recAnimeData = this.recAnimeData.slice(0, 14);
-      this.recAnimeData = this.removeDuplicate(this.recAnimeData);
-      this.cdr.detectChanges();
+    this.loadingAnimeRec = true;
+    this.api.getAnimeRecCached().subscribe({
+      next: (response: any) => {
+        this.recAnimeData = response.data;
+        this.recAnimeData = this.recAnimeData.slice(0, 14);
+        this.recAnimeData = this.removeDuplicate(this.recAnimeData);
+        this.loadingAnimeRec = false;
+        this.cdr.detectChanges();
+      },
+      error: (err) => {
+        console.log(err);
+      }
     });
   }
 
@@ -140,10 +169,15 @@ export class Home implements OnInit, OnDestroy {
   }
 
   initSpotlightData() {
-    this.api.getAnimeSpotlightCached().subscribe((response: any) => {
-      this.spotlightData = response.data;
-      this.spotlightData = this.removeDuplicate(this.spotlightData);
-      this.cdr.detectChanges();
+    this.api.getAnimeSpotlightCached().subscribe({
+      next: (response: any) => {
+        this.spotlightData = response.data;
+        this.spotlightData = this.removeDuplicate(this.spotlightData);
+        this.cdr.detectChanges();
+      },
+      error: (err) => {
+        console.log(err);
+      }
     });
   }
 
@@ -211,6 +245,8 @@ export class Home implements OnInit, OnDestroy {
   }
 
   ngOnInit(): void {
+
+
     const toastShown = sessionStorage.getItem('toast-shown');
     if (!toastShown) {
       this.showToast = true;

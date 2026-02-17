@@ -72,13 +72,18 @@
         <button (click)="scroll('right',rec)"><img class="right" src="arrow.svg"></button>
       </div>
     }
+    @if (loadingAnimeRec) {
+        <h1 class="loader-header">Loading Anime Recommendations!</h1>
+        <div class="loader-container-text">
+          <div class="loader"></div>
+        </div>
+      }
     @if (recMangaData) {
     <h1 class="chapter-header">Recent Manga Recommendations</h1>
     <div class="anime-grid" #rec_manga
       (mousedown)="startDrag($event,rec_manga)"
       (mousemove)="drag($event,rec_manga)"
-      (mouseup)="endDrag(rec_manga)"
-    >
+      (mouseup)="endDrag(rec_manga)">
       @for (data of recMangaData; track $index) {
           <app-anime-block (mouseleave)="onAnimeBlockLeave()" (click)="onAnimeBlock($event,data,false,false)" [isAnime]="false" [openDetailsOnHoverElement]="true" [data]="data"></app-anime-block>
       }
@@ -88,11 +93,14 @@
         <button (click)="scroll('right',rec_manga)"><img class="right" src="arrow.svg"></button>
       </div>
     }
+    @if (loadingMangaRec) {
+        <h1 class="loader-header">Loading Manga Recommendations!</h1>
+        <div class="loader-container-text">
+          <div class="loader"></div>
+        </div>
+      }
     <br>
 </div>
 
 
 
-@if (hover) {
-  <app-hover [cords]="hoverBoxCords" [data]="hoverBoxData" [isAnime]="isAnimeBlock"></app-hover>
-}

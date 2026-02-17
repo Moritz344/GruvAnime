@@ -21,6 +21,17 @@ h1{
   }
 }
 
+.loader-container-text{
+  display: flex;
+  justify-content: center;
+  margin-top: 50px;
+}
+
+.loader-header{
+  display: flex;
+  justify-content: center;
+}
+
 .anime-grid {
   display: grid;
   grid-template-columns: repeat(15,1fr);
