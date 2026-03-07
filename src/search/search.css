@@ -10,14 +10,69 @@
   margin-top: 50px;
 }
 
-.container-top-items button{
-  position: absolute;
-  height: 42px;
-  left: 350px;
-  border: none;
+
+.search-button{
+  display: flex;
+  flex-direction: row;
+  justify-content: center;
+  justify-items: center;
+  width: 100vw;
+  margin-top: 90px;
+  margin-bottom: 30px;
+}
+
+.search-button-mobile{
+  display: flex;
+  flex-direction: row;
+  justify-content: center;
+  justify-items: center;
+  width: 100vw;
+  margin-top: 30px;
+  margin-bottom: -70px;
+}
+
+.search-button-mobile button{
+  width: 300px;
   background: var(--gray8);
   border-radius: 5px;
   z-index: 0;
+  height: 42px;
+  border: none;
+  margin-right: 0px;
+}
+
+.search-button-mobile button:hover{
+  background-color: var(--gray7);
+}
+
+.search-button button{
+  width: 300px;
+  background: var(--gray8);
+  border-radius: 5px;
+  z-index: 0;
+  height: 42px;
+  border: none;
+  margin-right: 0px;
+}
+
+.search-button button:hover{
+  background-color: var(--gray7);
+}
+
+.search-button span{
+  color: white;
+  font-size: 20px;
+  float: right;
+  margin-left: -90px;
+  margin-right: 100px;
+}
+
+.search-button-mobile span{
+  color: white;
+  font-size: 20px;
+  float: right;
+  margin-left: -90px;
+  margin-right: 100px;
 }
 
 .container-top-items-mobile{
@@ -47,15 +102,15 @@
 
 
 input {
-    background: var(--surface);
-    border-radius: 5px;
-    border: none;
-    color: var(--text);
-    font-size: 1rem;
-    width: 340px;
-    height: 40px;
-    outline: none;
-    z-index: 0;
+  background: var(--surface);
+  border-radius: 5px;
+  border: none;
+  color: var(--text);
+  font-size: 20px;
+  width: 97%;
+  height: 40px;
+  outline: none;
+  z-index: 0;
 }
 
 .pagination-container{
@@ -107,8 +162,9 @@ input {
   gap: 10px;
   justify-content: center;
   margin: 20px;
-  margin-top: 100px;
+  margin-top: 0px;
 }
+
 .search-container-mobile{
   display: grid;
   grid-template-columns: repeat(4,100px);

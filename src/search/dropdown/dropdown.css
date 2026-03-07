@@ -1,15 +1,29 @@
 .container{
   display: inline-flex;
   flex-direction: column;
-  width: auto;
   background: var(--gray8);
   padding: 10px;
   cursor: pointer;
   border-radius: 10px;
 }
 
+.container-mobile{
+  display: inline-flex;
+  width: 90vw;
+  flex-direction: column;
+  background: var(--gray8);
+  padding: 10px;
+  cursor: pointer;
+  border-radius: 10px;
+}
+
+
 .header-container{
   width: 200px;
+}
+
+button{
+  z-index: 100;
 }
 
 ::-webkit-scrollbar {

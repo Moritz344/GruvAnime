@@ -8,7 +8,6 @@ import { Hover } from '../hover/hover';
 import { Toast } from '../toast/toast';
 import { Router } from '@angular/router';
 import { Subject, debounceTime } from 'rxjs';
-import { SupabaseService } from '../services/supabase';
 
 // TODO: character page
 
@@ -43,8 +42,12 @@ export class Home implements OnInit, OnDestroy {
   isAnimeBlock: boolean = false;
 
   isDragging = false;
+  wasDrag = false;
+  dragStartX = 0;
+  dragStartY = 0;
   startX = 0;
   scrollLeft = 0;
+  private readonly DRAG_THRESHOLD = 5;
 
   pageData: { page: number, limit: number } = { page: 0, limit: 8 };
 
@@ -56,7 +59,6 @@ export class Home implements OnInit, OnDestroy {
   constructor(
     private api: Request,
     private cdr: ChangeDetectorRef,
-    private supabase: SupabaseService,
     private router: Router,
   ) {
   }
@@ -101,14 +103,6 @@ export class Home implements OnInit, OnDestroy {
     this.pageData.page = page;
   }
 
-  onAnimeBlock(event: MouseEvent, data: any, isAnime: boolean, cooldown: boolean) {
-    if (isAnime) {
-      this.router.navigate(["/anime", + data.mal_id]);
-    } else {
-      this.router.navigate(["/manga", + data.mal_id]);
-    }
-    this.cdr.detectChanges();
-  }
 
   onAnimeBlockLeave() {
     setTimeout(() => {
@@ -183,9 +177,12 @@ export class Home implements OnInit, OnDestroy {
 
   startDrag(event: MouseEvent | TouchEvent, element: any) {
     this.isDragging = true;
+    this.wasDrag = false;
     const grid = element;
 
     if (event instanceof MouseEvent) {
+      this.dragStartX = event.pageX;
+      this.dragStartY = event.pageY;
       this.startX = event.pageX - grid.offsetLeft;
       this.scrollLeft = grid.scrollLeft;
     }
@@ -202,6 +199,11 @@ export class Home implements OnInit, OnDestroy {
     let x: number;
 
     if (event instanceof MouseEvent) {
+      const movedX = Math.abs(event.pageX - this.dragStartX);
+      const movedY = Math.abs(event.pageY - this.dragStartY);
+      if (movedX > this.DRAG_THRESHOLD || movedY > this.DRAG_THRESHOLD) {
+        this.wasDrag = true;
+      }
       x = event.pageX - grid.offsetLeft;
     } else {
       return;
@@ -216,6 +218,13 @@ export class Home implements OnInit, OnDestroy {
     const grid = element;
     grid.style.cursor = 'grab';
     grid.style.userSelect = 'auto';
+  }
+
+  onGridClick(event: MouseEvent) {
+    if (this.wasDrag) {
+      event.preventDefault();
+      event.stopPropagation();
+    }
   }
 
   scroll(direction: 'left' | 'right', element: HTMLDivElement) {
@@ -240,13 +249,11 @@ export class Home implements OnInit, OnDestroy {
         count = 0;
       }
       this.cdr.detectChanges();
-    }, 2000);
+    }, 5000);
 
   }
 
   ngOnInit(): void {
-
-
     const toastShown = sessionStorage.getItem('toast-shown');
     if (!toastShown) {
       this.showToast = true;

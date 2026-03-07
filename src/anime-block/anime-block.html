@@ -1,7 +1,6 @@
 @if (this.data) {
   <div class="container" (click)="onDetails()">
-      <div class="anime-card" 
-      >
+      <div class="anime-card" >
         <div class="anime-items" >
             <img *ngIf="data.images" draggable="false" class="anime-img" [src]="data.images.jpg.image_url">
             <div class="anime-score" *ngIf="data.score">

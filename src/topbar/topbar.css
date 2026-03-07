@@ -19,8 +19,8 @@
   width: 100vw;
   height: 100vw;
   position: fixed;
-  z-index: 0;
 }
+
 
 .home-container{
   position: absolute;
@@ -110,10 +110,52 @@
   margin-bottom:2px;
 }
 
+.settings{
+  position: absolute;
+  top: 13px;
+  right: 40px;
+  width: 30px;
+}
+
+.settings-menu{
+  position: absolute;
+  top: 90%;
+  right: 30px;
+  background-color: var(--gray8);
+  padding: 10px;
+  border: 1px solid white;
+  z-index: 9999;
+  display: flex;
+  gap: 5px;
+  flex-direction: column;
+  border-radius: 5px;
+}
+
+.settings-menu button{
+  color: white;
+  border: none;
+  font-size: 16px;
+  border-radius: 3px;
+  padding: 5px;
+  background-color: var(--gray6);
+}
+.settings-menu button:hover{
+  background-color: black;
+}
+
+.settings button{
+  border: none;
+  background-color: transparent;
+}
+.settings button:hover{
+  background-color: var(--gray7);
+  border-radius: 10px;
+}
+
 .github{
   position: absolute;
   top: 10px;
-  right: 70px;
+  right: 100px;
 }
 
 .anime-wrapper{
@@ -123,21 +165,24 @@
 .anime-hover-container{
   position: absolute;
   top: 100%;
-  left: -15px;
+  left: -7px;
   background-color: var(--gray8);
   padding: 10px;
   border: 1px solid white;
   z-index: 9999;
+  border-radius: 5px;
+  display: flex;
+  flex-direction: column;
+  gap: 5px;
 }
 
-.anime-hover-container button{
-  border:none;
+.anime-hover-container span{
   color: white;
-  background: transparent;
   font-size: 18px;
 }
 
-.anime-hover-container button:hover{
+.anime-hover-container span:hover{
+  cursor: pointer;
   color: var(--yellow);
 }
 
@@ -149,18 +194,22 @@
   padding: 10px;
   border: 1px solid white;
   z-index: 9999;
+  border-radius: 5px;
+  display: flex;
+  flex-direction: column;
+  gap: 5px;
 }
 
-.manga-hover-container button{
-  border:none;
+.manga-hover-container span{
   color: white;
-  background: transparent;
   font-size: 18px;
 }
 
-.manga-hover-container button:hover{
+.manga-hover-container span:hover{
+  cursor: pointer;
   color: var(--yellow);
 }
+
 
 
 

@@ -18,6 +18,9 @@ export class Topbar implements OnInit {
   onMangaHover: boolean = false;
   isMobile: boolean = false;
   showMobileMenu: boolean = false;
+  showSettingsMenu: boolean = false;
+  isLoggedIn: boolean = false;
+
 
   onAnime() {
     this.onMangaHover = false;
@@ -73,11 +76,15 @@ export class Topbar implements OnInit {
     this.showMobileMenu = !this.showMobileMenu;
   }
 
-  constructor(private router: Router, private deviceService: DeviceDetectorService) {
+  constructor(private router: Router,
+    private deviceService: DeviceDetectorService,
+  ) {
     this.isMobile = this.deviceService.isMobile();
   }
 
-  ngOnInit() { }
+  ngOnInit() {
+
+  }
 
 
   onSearch() {

@@ -20,7 +20,7 @@
 .anime-container{
   display: grid;
   grid-template-columns: repeat(7,200px);
-  gap: 10px;
+  gap: 20px;
   justify-content: center;
   margin: 40px;
 }

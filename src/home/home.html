@@ -22,13 +22,14 @@
     </div>
 
     @if (topAnimeData) {
-    <h1 class="chapter-header">Popular Anime </h1>
+    <h1 class="chapter-header" style="margin-top: 100px">Popular Anime </h1>
       <div class="anime-grid" #popular
         (mousedown)="startDrag($event,popular)"
         (mousemove)="drag($event,popular)"
-        (mouseup)="endDrag(popular)">
+        (mouseup)="endDrag(popular)"
+        (click)="onGridClick($event)">
         @for (data of topAnimeData; track $index) {
-            <app-anime-block (click)="onAnimeBlock($event,data,true,false)" (mouseleave)="onAnimeBlockLeave()" [isAnime]="true" [openDetailsOnHoverElement]="true" [data]="data"></app-anime-block>
+            <app-anime-block (mouseleave)="onAnimeBlockLeave()" [isAnime]="true"  [data]="data"></app-anime-block>
         }
         </div>
       <div class="scroll-buttons">
@@ -43,10 +44,11 @@
       <div class="anime-grid" #manga
         (mousedown)="startDrag($event,manga)"
         (mousemove)="drag($event,manga)"
-        (mouseup)="endDrag(manga)">
+        (mouseup)="endDrag(manga)"
+        (click)="onGridClick($event)">
 
         @for (data of topMangaData; track $index) {
-            <app-anime-block (click)="onAnimeBlock($event,data,false,false)" (mouseleave)="onAnimeBlockLeave()" [isAnime]="false" [openDetailsOnHoverElement]="true" [data]="data"></app-anime-block>
+            <app-anime-block  (mouseleave)="onAnimeBlockLeave()" [isAnime]="false"  [data]="data"></app-anime-block>
         }
         </div>
       <div class="scroll-buttons">
@@ -62,9 +64,10 @@
       (mousedown)="startDrag($event,rec)"
       (mousemove)="drag($event,rec)"
       (mouseup)="endDrag(rec)"
+      (click)="onGridClick($event)"
     >
       @for (data of recAnimeData; track $index) {
-          <app-anime-block [isAnime]="true" (mouseleave)="onAnimeBlockLeave()" (click)="onAnimeBlock($event,data,true,false)" [openDetailsOnHoverElement]="true" [data]="data"></app-anime-block>
+          <app-anime-block [isAnime]="true" (mouseleave)="onAnimeBlockLeave()"  [data]="data"></app-anime-block>
       }
     </div>
       <div class="scroll-buttons">
@@ -83,9 +86,10 @@
     <div class="anime-grid" #rec_manga
       (mousedown)="startDrag($event,rec_manga)"
       (mousemove)="drag($event,rec_manga)"
-      (mouseup)="endDrag(rec_manga)">
+      (mouseup)="endDrag(rec_manga)"
+      (click)="onGridClick($event)">
       @for (data of recMangaData; track $index) {
-          <app-anime-block (mouseleave)="onAnimeBlockLeave()" (click)="onAnimeBlock($event,data,false,false)" [isAnime]="false" [openDetailsOnHoverElement]="true" [data]="data"></app-anime-block>
+          <app-anime-block (mouseleave)="onAnimeBlockLeave()"  [isAnime]="false" [openDetailsOnHoverElement]="false" [data]="data"></app-anime-block>
       }
     </div>
       <div class="scroll-buttons">

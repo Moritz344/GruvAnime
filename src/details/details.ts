@@ -31,11 +31,9 @@ export class Details implements OnInit {
   relationsData: any;
   relationsDataMore: any[] = [];
 
-  relationsDataManga: any;
-  relationsDataMoreManga: any[] = [];
-
   loading: boolean = true;
   loadingRelations: boolean = true;
+  loadingReviews: boolean = true;
 
   currentSelectedReview: any;
   tagColor: string = "white";
@@ -57,57 +55,25 @@ export class Details implements OnInit {
     this.api.getAnimeRelations(this.id).subscribe((response: any) => {
       this.relationsData = response.data;
       this.loadingRelations = false;
-      this.initMoreDataForRelations(true);
       this.cdr.detectChanges();
     })
   }
   initMangaRelations() {
     this.api.getMangaRelations(this.id).subscribe((response: any) => {
       this.relationsData = response.data;
-      this.initMoreDataForRelations(false);
-      this.cdr.detectChanges();
+      if (this.relationsData.length > 0) {
+        this.cdr.detectChanges();
+      } else {
+        this.loadingRelations = false;
+      }
     })
   }
 
-  initMoreDataForRelations(isAnime: boolean) {
-    this.relationsDataMore = [];
-    this.loadingRelations = true;
-    let delay = 0;
-    this.relationsData.forEach((item: any) => {
-      let id = item["entry"][0]["mal_id"];
-      if (id) {
-        setTimeout(() => {
-          if (isAnime && item["entry"][0]["type"] == "anime") {
-            this.api.getAnimeById(id).subscribe({
-              next: (response: any) => {
-                this.relationsDataMore.push(response.data);
-                this.cdr.detectChanges();
-                this.loadingRelations = false;
-              },
-              error: (err) => {
-                console.error(`Failed to load anime ${id}:`, err);
-              }
-            });
-          } else {
-            this.api.getMangaById(id).subscribe({
-              next: (response: any) => {
-                this.relationsDataMore.push(response.data);
-              },
-              error: (err) => {
-                console.error(`Failed to load anime ${id}:`, err);
-              }
-            });
-
-          }
-        }, delay);
-        delay += 900;
-      }
-    });
-  }
 
   initAnimeReviews() {
     this.api.getReviews(this.id, 1).subscribe((response: any) => {
       this.reviewData = response.data;
+      this.loadingReviews = false;
       this.cdr.detectChanges();
     });
   }
@@ -141,10 +107,8 @@ export class Details implements OnInit {
           this.cdr.detectChanges();
 
           return of(null).pipe(
-            tap(() => this.initAnimeRelations()),
-            delay(1000),
             tap(() => this.initAnimeReviews()),
-            delay(1000),
+            delay(2000),
           );
         })
       ).subscribe();
@@ -152,6 +116,7 @@ export class Details implements OnInit {
       this.api.getMangaById(Number(this.id)).subscribe((response: any) => {
         this.data = response.data;
         this.loading = false;
+        this.loadingReviews = false;
         this.initMangaRelations();
         this.cdr.detectChanges();
       });

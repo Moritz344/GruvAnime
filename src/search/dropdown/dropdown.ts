@@ -1,4 +1,5 @@
 import { Component, Input, Output, EventEmitter, OnInit, OnChanges, SimpleChange, ChangeDetectorRef } from '@angular/core';
+import { DeviceDetectorService } from 'ngx-device-detector';
 import { CommonModule } from '@angular/common';
 import { FormsModule } from '@angular/forms';
 
@@ -18,13 +19,17 @@ export class Dropdown implements OnInit, OnChanges {
   @Output() reset = new EventEmitter<any>();
   @Output() modelChange = new EventEmitter<any>();
   @Input() default: string = "";
+  isMobile: boolean = false;
 
   selected: string[] = [];
   selectedNormal: string = "";
 
   expand: boolean = false;
 
-  constructor(private cdr: ChangeDetectorRef) { }
+  constructor(private cdr: ChangeDetectorRef,
+    private device: DeviceDetectorService) {
+    this.isMobile = this.device.isMobile();
+  }
 
   onReset(type: any) {
     if (type == "normal") {

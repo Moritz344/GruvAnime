@@ -6,7 +6,6 @@
   }
   ">
     <input (keydown.code.enter)="search()" [(ngModel)]="searchFilter.keyword" spellcheck="false" placeholder="Search...">
-    <button (click)="search()"><img src="search.svg"></button>
   </div>
     <div [ngClass]="{
       'filter-container': !isMobile,
@@ -31,8 +30,14 @@
       <app-dropdown header="Sort" [data]="sort" default="Descending" (reset)="onReset($event)" [(model)]="searchFilter.sort"  (dropdownSelected)="onFilter($event)"></app-dropdown>
       <app-dropdown header="Genres"  [multipleSelectable]="true" [data]="genres" (reset)="onReset($event)" [(model)]="searchFilter.genres" (dropdownSelected)="onFilter($event)"></app-dropdown>
       <app-dropdown header="Excluded Genres" [multipleSelectable]="true" (reset)="onReset($event)" [data]="excluded_genres" [(model)]="searchFilter.genres_exclude" (dropdownSelected)="onFilter($event)"></app-dropdown>
-    </div>
 
+
+    </div>
+        <div [ngClass]="{ 'search-button': !isMobile, 'search-button-mobile': isMobile }">
+          <button (click)="search()">
+            <img src="search.svg"><span>Search</span>
+          </button>
+        </div>
 
     @if (searchResult && searchResult.length > 0 && !searching ) {
     <div [ngClass]="{ 

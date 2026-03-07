@@ -96,23 +96,15 @@
         </div>
       }
 
-      @if (relationsDataMore && relationsDataMore.length > 1) {
-        <h1 [ngClass]="{ 'rel-title': !isMobile,'rel-title-mobile': isMobile}">Relations</h1>
-        <div [ngClass]="{ 'rel-container': !isMobile, 'rel-container-mobile': isMobile }">
-          @for (relation of relationsDataMore; track $index) {
-            <app-anime-block [data]="relation" [isAnime]="true"></app-anime-block>
-          }
-        </div>
-      }
-      @if (loadingRelations){
+
+
+
+    @if (loadingReviews) {
         <div class="loader-relations">
-          <h1 [ngClass]="{ 'rel-title': !isMobile,'rel-title-mobile': isMobile}">Loading Relations ...</h1>
+          <h1 [ngClass]="{ 'rel-title': !isMobile,'rel-title-mobile': isMobile}">Loading Reviews ...</h1>
           <div style="margin-left: 100px" class="loader"></div>
         </div>
-      }
-
-
-
+    }
       
     <h1 [ngClass]="{'review-title': !isMobile,'review-title-mobile': isMobile}" *ngIf="reviewData && reviewData.length > 0">Reviews ({{ reviewData.length }}) </h1>
     <div [ngClass]="{ 'review-container': !isMobile, 'review-container-mobile': isMobile }">

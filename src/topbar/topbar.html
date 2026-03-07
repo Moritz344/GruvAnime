@@ -9,15 +9,15 @@
         <a ><button (mouseenter)="onAnime()" class="btn"><img src="movie.svg">Anime</button></a>
         @if (onAnimeHover) {
           <div class="anime-hover-container">
-            <button (click)="onAnimeOption('trending')">Trending</button> <br>
-            <button (click)="onAnimeOption('airing')">Airing</button> <br>
-            <button (click)="onAnimeOption('upcoming')">Upcoming</button> <br>
+            <span (click)="onAnimeOption('trending')">Trending</span>
+            <span (click)="onAnimeOption('airing')">Airing</span> 
+            <span (click)="onAnimeOption('upcoming')">Upcoming</span> 
           </div>
         }@if (onMangaHover) {
           <div class="manga-hover-container">
-            <button (click)="onMangaOption('trending')">Trending</button> <br>
-            <button (click)="onMangaOption('complete')">Complete</button> <br>
-            <button (click)="onMangaOption('upcoming')">Upcoming</button> <br>
+            <span (click)="onMangaOption('trending')">Trending</span> 
+            <span (click)="onMangaOption('complete')">Complete</span> 
+            <span (click)="onMangaOption('upcoming')">Upcoming</span> 
           </div>
         }
       </div>
@@ -33,6 +33,7 @@
             <a (click)="onAnimeOption('trending')">Anime</a>
             <a (click)="onMangaOption('trending')">Manga</a>
             <a (click)="onSearch()">Search</a>
+            <a (click)="onCalendar()">Calendar</a>
           </div>
         </div>
     </div>
@@ -45,5 +46,8 @@
 
   <div class="github" *ngIf="!isMobile">
     <a href="https://github.com/Moritz344/GruvAnime" target="_blank"><img width="40" height="40" src="github-logo.png"> </a>
-</div>
+  </div>
+
+
+
 </div>

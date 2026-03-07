@@ -29,7 +29,7 @@ export class AnimeBlock implements OnInit, OnChanges {
     if (this.openDetailsOnHoverElement) {
       return;
     }
-    if (this.isAnime) {
+    if (this.isAnime && this.data.mal_id) {
       this.router.navigate(["/anime", + this.data.mal_id]);
     } else {
       this.router.navigate(["/manga", + this.data.mal_id]);
@@ -42,13 +42,13 @@ export class AnimeBlock implements OnInit, OnChanges {
 
 
   setTitle() {
-    if (this.data.entry) {
+    if (this.data && this.data.entry) {
       this.data = this.data.entry[0];
       this.title = this.data.title;
       if (this.title.length > 32) {
         this.title = this.title.slice(0, 32) + "..";
       }
-    } else if (this.data.titles) {
+    } else if (this.data && this.data.titles) {
       this.title = this.data.title_english || this.data.title;
       if (this.title.length > 32) {
         this.title = this.title.slice(0, 32) + "...";

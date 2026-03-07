@@ -1,5 +1,5 @@
-<div class="container">
-  <div class="header-container">
+<div [ngClass]="{ 'container': !isMobile, 'container-mobile': isMobile}">
+  <div [ngClass]="{ 'header-container': !isMobile, 'header-container-mobile': isMobile }">
       @if (multipleSelectable) {
           <div class="layout">
             <span (click)="onExpand()">{{ header }}: {{ selected[0] }} <span *ngIf="selected.length > 0">+{{ selected.length }}</span> </span> <br>
