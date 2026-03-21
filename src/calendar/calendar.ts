@@ -14,7 +14,6 @@ import { DeviceDetectorService } from 'ngx-device-detector';
   styleUrl: './calendar.css',
 })
 export class Calendar implements OnInit {
-
   calendarData: any;
   days: string[] = ["Sunday", "Monday", "Tuesday", "Wednesday", "Thursday", "Friday", "Saturday"];
   currentDay: string = "Monday";

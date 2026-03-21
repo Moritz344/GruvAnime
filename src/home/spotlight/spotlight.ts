@@ -1,12 +1,23 @@
 import { Component, OnInit, Input, inject, Output, EventEmitter } from '@angular/core';
+import { trigger, style, animate, transition, state } from '@angular/animations';
 import { CommonModule } from '@angular/common';
 import { Router } from '@angular/router';
-
-// TODO: auto page switch limit not working
 
 @Component({
   selector: 'app-spotlight',
   imports: [CommonModule],
+  animations: [
+    trigger('slideAnimation', [
+      transition('* => next', [
+        style({ opacity: 0, transform: 'translateX(1000px)' }),
+        animate('300ms ease-out', style({ opacity: 1, transform: 'translateX(0px)' }))
+      ]),
+      transition('* => prev', [
+        style({ opacity: 0, transform: 'translateX(-1000px)' }),
+        animate('300ms ease-out', style({ opacity: 1, transform: 'translateX(0)' }))
+      ])
+    ])
+  ],
   templateUrl: './spotlight.html',
   styleUrl: './spotlight.css',
 })
@@ -16,6 +27,7 @@ export class Spotlight implements OnInit {
   @Input() pageData: any;
   @Output() pageChange = new EventEmitter<number>;
 
+  public animationTrigger: 'next' | 'prev' | null = null;
 
   aired: any;
   trimmedDesc: string = '';
@@ -47,13 +59,21 @@ export class Spotlight implements OnInit {
 
   onNextPage() {
     if (this.pageData.page < this.pageData.limit) {
-      this.pageChange.emit(this.pageData.page + 1);
+      this.animationTrigger = null;
+      setTimeout(() => {
+        this.animationTrigger = 'next';
+        this.pageChange.emit(this.pageData.page + 1);
+      });
     }
   }
 
   onPrevPage() {
     if (this.pageData.page > 0) {
-      this.pageChange.emit(this.pageData.page - 1);
+      this.animationTrigger = null;
+      setTimeout(() => {
+        this.animationTrigger = 'prev';
+        this.pageChange.emit(this.pageData.page - 1);
+      });
     }
   }
 

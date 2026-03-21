@@ -1,5 +1,5 @@
 @if (data) {
-<div class="container">
+<div class="container" [@slideAnimation]="animationTrigger">
   <div class="thumbnail-container">
     <img width="500px" height="500px" [src]="data.images.jpg.large_image_url">
   </div>

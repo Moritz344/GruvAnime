@@ -10,6 +10,7 @@ import { Router } from '@angular/router';
 import { Subject, debounceTime } from 'rxjs';
 
 // TODO: character page
+// TODO: animation for spotlight
 
 @Component({
   selector: 'app-home',
@@ -23,6 +24,7 @@ export class Home implements OnInit, OnDestroy {
   @ViewChild('rec') rec!: ElementRef;
   @ViewChild('rec_manga') rec_manga!: ElementRef;
   @ViewChild('manga') manga!: ElementRef;
+
 
   topAnimeData: any;
   recAnimeData: any;

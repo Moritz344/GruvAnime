@@ -206,6 +206,7 @@ export class Request {
   getAnimeSpotlight() {
     const params = new URLSearchParams();
     params.append("status", "upcoming");
+    params.append("sfw", "true");
     params.append("order_by", "popularity");
     params.append("limit", "10");
     const url = this.base_url + "anime?" + params;
