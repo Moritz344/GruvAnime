@@ -9,13 +9,9 @@ import { Router } from '@angular/router';
   animations: [
     trigger('slideAnimation', [
       transition('* => next', [
-        style({ opacity: 0, transform: 'translateX(1000px)' }),
-        animate('300ms ease-out', style({ opacity: 1, transform: 'translateX(0px)' }))
+        style({ opacity: 0 }),
+        animate('300ms ease-out', style({ opacity: 1 }))
       ]),
-      transition('* => prev', [
-        style({ opacity: 0, transform: 'translateX(-1000px)' }),
-        animate('300ms ease-out', style({ opacity: 1, transform: 'translateX(0)' }))
-      ])
     ])
   ],
   templateUrl: './spotlight.html',
@@ -64,6 +60,9 @@ export class Spotlight implements OnInit {
         this.animationTrigger = 'next';
         this.pageChange.emit(this.pageData.page + 1);
       });
+    } else if (this.pageData.page == this.pageData.limit) {
+      this.animationTrigger = "next";
+      this.pageChange.emit(0);
     }
   }
 
@@ -71,7 +70,7 @@ export class Spotlight implements OnInit {
     if (this.pageData.page > 0) {
       this.animationTrigger = null;
       setTimeout(() => {
-        this.animationTrigger = 'prev';
+        this.animationTrigger = 'next';
         this.pageChange.emit(this.pageData.page - 1);
       });
     }

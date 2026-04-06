@@ -51,7 +51,7 @@ export class Home implements OnInit, OnDestroy {
   scrollLeft = 0;
   private readonly DRAG_THRESHOLD = 5;
 
-  pageData: { page: number, limit: number } = { page: 0, limit: 8 };
+  pageData: { page: number, limit: number } = { page: 0, limit: 7 };
 
   scrollRight: number = 0;
 
@@ -169,6 +169,7 @@ export class Home implements OnInit, OnDestroy {
       next: (response: any) => {
         this.spotlightData = response.data;
         this.spotlightData = this.removeDuplicate(this.spotlightData);
+        console.log(this.spotlightData);
         this.cdr.detectChanges();
       },
       error: (err) => {
