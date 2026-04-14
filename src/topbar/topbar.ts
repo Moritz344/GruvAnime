@@ -1,8 +1,9 @@
-import { Component, HostListener, OnInit, OnDestroy } from '@angular/core';
+import { Component, OnInit, inject } from '@angular/core';
 import { RouterModule, Router } from '@angular/router';
 import { CommonModule } from '@angular/common';
 import { FormsModule } from '@angular/forms';
 import { DeviceDetectorService } from 'ngx-device-detector';
+import { Request } from '../services/request';
 
 @Component({
   selector: 'app-topbar',
@@ -11,15 +12,16 @@ import { DeviceDetectorService } from 'ngx-device-detector';
   styleUrl: './topbar.css',
 })
 export class Topbar implements OnInit {
+  request = inject(Request);
 
-  searchValue: string = "";
+  public searchValue: string = "";
 
-  onAnimeHover: boolean = false;
-  onMangaHover: boolean = false;
-  isMobile: boolean = false;
-  showMobileMenu: boolean = false;
-  showSettingsMenu: boolean = false;
-  isLoggedIn: boolean = false;
+  public onAnimeHover: boolean = false;
+  public onMangaHover: boolean = false;
+  public isMobile: boolean = false;
+  public showMobileMenu: boolean = false;
+  public showSettingsMenu: boolean = false;
+  public isLoggedIn: boolean = false;
 
 
   onAnime() {
@@ -84,6 +86,15 @@ export class Topbar implements OnInit {
 
   ngOnInit() {
 
+  }
+
+  onOpenExternalLink(url: string) {
+    const electron = (window as any).electronAPI;
+    if (electron) {
+      this.request.onOpenExternal(url);
+    } else {
+      window.open(url, "_blank");
+    }
   }
 
 
