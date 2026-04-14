@@ -3,11 +3,20 @@
 }
 .anime-container{
   display: grid;
-  grid-template-columns: repeat(7,200px);
+  grid-template-columns: repeat(auto-fill,200px);
   gap: 20px;
   justify-content: center;
   margin: 10px;
 }
+.days-container{
+  display: grid;
+  grid-template-columns: repeat(auto-fill,230px);
+  gap: 10px;
+  height: 40px;
+  justify-content: center;
+  margin-bottom: 30px;
+}
+
 .anime-container-mobile{
   display: grid;
   grid-template-columns: repeat(3,100px);
@@ -38,14 +47,7 @@ button {
 }
 
 
-.days-container{
-  display: grid;
-  grid-template-columns: repeat(7,200px);
-  gap: 10px;
-  height: 40px;
-  justify-content: center;
-  margin-bottom: 30px;
-}
+
 
 .days-container-mobile button{
   height: 40px;
