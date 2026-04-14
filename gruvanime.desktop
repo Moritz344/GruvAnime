@@ -1,7 +1,7 @@
 [Desktop Entry]
 Name=GruvAnime
 Comment=discover anime and manga in a gruvbox style
-Exec=gruvanime
+Exec=/opt/GruvAnime/gruvanime-0.0.0.AppImage
 Terminal=false
 Type=Application
 
