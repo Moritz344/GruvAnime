@@ -6,9 +6,7 @@ discover anime and manga
 > [!WARNING]
 > **This website is a work in progress. Expect changes and possible instability.**
 
-
-<img width="1923" height="1080" alt="screenshot-2026-01-31_19-50-00" src="https://github.com/user-attachments/assets/3e12b3d6-bd56-4a04-a199-67cef58a4464" />
-
+<img width="1901" height="1014" alt="screenshot-2026-04-14_20-25-45" src="https://github.com/user-attachments/assets/00f68804-897c-43b1-8b80-0b90f2cf2f0b" />
 
 
 <details>
