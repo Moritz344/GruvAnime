@@ -1,0 +1,7 @@
+[Desktop Entry]
+Name=GruvAnime
+Comment=discover anime and manga in a gruvbox style
+Exec=gruvanime
+Terminal=false
+Type=Application
+

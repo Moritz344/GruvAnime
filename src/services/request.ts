@@ -70,6 +70,11 @@ export class Request {
 
   }
 
+  async onOpenExternal(url: string) {
+    console.log("open", url);
+    return await (window as any).electronAPI.openExternal(url);
+  }
+
   getSchedules(day: string, page: string) {
     const params = new URLSearchParams();
 
