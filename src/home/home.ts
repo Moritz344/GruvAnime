@@ -257,10 +257,6 @@ export class Home implements OnInit, OnDestroy {
   }
 
   ngOnInit(): void {
-    const toastShown = sessionStorage.getItem('toast-shown');
-    if (!toastShown) {
-      this.showToast = true;
-    }
 
     this.autoPage(8);
     setTimeout(() => {
