@@ -1,4 +1,4 @@
-.container{
+.container {
   display: inline-flex;
   flex-direction: column;
   background: var(--gray8);
@@ -7,7 +7,7 @@
   border-radius: 10px;
 }
 
-.container-mobile{
+.container-mobile {
   display: inline-flex;
   width: 90vw;
   flex-direction: column;
@@ -17,12 +17,11 @@
   border-radius: 10px;
 }
 
-
-.header-container{
+.header-container {
   width: 200px;
 }
 
-button{
+button {
   z-index: 100;
 }
 
@@ -30,36 +29,33 @@ button{
   display: none;
 }
 
-
-.layout{
+.layout {
   display: flex;
   flex-direction: row;
 }
 
-.layout .arrow{
+.layout .arrow {
   margin-left: auto;
 }
 
-.layout .reset{
+.layout .reset {
   margin-left: auto;
 }
 
-
-
-span{
+span {
   user-select: none;
 }
 
-.reset{
+.reset {
   background: transparent;
   border: none;
 }
 
-.reset:hover{
-  background-color: rgba(1,1,1,0.5);
+.reset:hover {
+  background-color: rgba(1, 1, 1, 0.5);
 }
 
-.expand-data{
+.expand-data {
   display: inline-flex;
   flex-direction: column;
   width: auto;
@@ -67,11 +63,11 @@ span{
   overflow-y: scroll;
 }
 
-.expand-data button:hover{
+.expand-data button:hover {
   transform: scale(1.02);
 }
 
-.expand-data button{
+.expand-data button {
   background: transparent;
   color: white;
   font-size: 15px;
@@ -83,14 +79,13 @@ span{
   border-radius: 10px;
 }
 
-.expand-data button:hover{
+.expand-data button:hover {
   cursor: pointer;
-  background-color: rgba(1,1,1,0.5);
+  background-color: rgba(1, 1, 1, 0.5);
 }
 
-.arrow{
+.arrow {
   border: none;
   background: transparent;
   transform: rotate(270deg);
 }
-

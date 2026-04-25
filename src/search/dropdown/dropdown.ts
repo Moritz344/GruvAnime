@@ -1,8 +1,16 @@
-import { Component, Input, Output, EventEmitter, OnInit, OnChanges, SimpleChange, ChangeDetectorRef } from '@angular/core';
+import {
+  Component,
+  Input,
+  Output,
+  EventEmitter,
+  OnInit,
+  OnChanges,
+  SimpleChange,
+  ChangeDetectorRef,
+} from '@angular/core';
 import { DeviceDetectorService } from 'ngx-device-detector';
 import { CommonModule } from '@angular/common';
 import { FormsModule } from '@angular/forms';
-
 
 @Component({
   selector: 'app-dropdown',
@@ -11,31 +19,33 @@ import { FormsModule } from '@angular/forms';
   styleUrl: './dropdown.css',
 })
 export class Dropdown implements OnInit, OnChanges {
-  @Input() header: string = "";
+  @Input() header: string = '';
   @Input() model: any;
   @Input() multipleSelectable: boolean = false;
-  @Input() data: { name: string, value: string }[] = [{ name: "", value: "" }];
-  @Output() dropdownSelected = new EventEmitter<{ item: string, title: string }>();
+  @Input() data: { name: string; value: string }[] = [{ name: '', value: '' }];
+  @Output() dropdownSelected = new EventEmitter<{ item: string; title: string }>();
   @Output() reset = new EventEmitter<any>();
   @Output() modelChange = new EventEmitter<any>();
-  @Input() default: string = "";
+  @Input() default: string = '';
   isMobile: boolean = false;
 
   selected: string[] = [];
-  selectedNormal: string = "";
+  selectedNormal: string = '';
 
   expand: boolean = false;
 
-  constructor(private cdr: ChangeDetectorRef,
-    private device: DeviceDetectorService) {
+  constructor(
+    private cdr: ChangeDetectorRef,
+    private device: DeviceDetectorService,
+  ) {
     this.isMobile = this.device.isMobile();
   }
 
   onReset(type: any) {
-    if (type == "normal") {
-      this.selectedNormal = "";
-      this.model = "";
-      this.modelChange.emit("");
+    if (type == 'normal') {
+      this.selectedNormal = '';
+      this.model = '';
+      this.modelChange.emit('');
       this.reset.emit(this.header);
     } else {
       this.selected.length = 0;
@@ -43,6 +53,10 @@ export class Dropdown implements OnInit, OnChanges {
       this.modelChange.emit([]);
       this.reset.emit(this.header);
     }
+  }
+
+  onCloseDropdown() {
+    this.expand = false;
   }
 
   initDefault() {
@@ -59,11 +73,11 @@ export class Dropdown implements OnInit, OnChanges {
       if (typeof this.model === 'object' && this.model.value) {
         modelValue = this.model.value;
       }
-      const foundItem: any = this.data.find(item => item.value === modelValue);
-      this.selectedNormal = foundItem ? foundItem.name : (modelValue || this.default);
+      const foundItem: any = this.data.find((item) => item.value === modelValue);
+      this.selectedNormal = foundItem ? foundItem.name : modelValue || this.default;
     } else if (this.model && this.data && this.multipleSelectable && Array.isArray(this.model)) {
-      this.selected = this.model.map(value => {
-        const foundItem = this.data.find(item => item.value === value);
+      this.selected = this.model.map((value) => {
+        const foundItem = this.data.find((item) => item.value === value);
         return foundItem ? foundItem.name : value;
       });
     }
@@ -73,18 +87,18 @@ export class Dropdown implements OnInit, OnChanges {
     this.setModel();
   }
 
-  setSelected(item: { name: string, value: string }) {
+  setSelected(item: { name: string; value: string }) {
     if (this.multipleSelectable) {
       this.selected.push(item.name);
       if (!this.model) this.model = [];
       this.model.push(item.value);
       this.modelChange.emit(this.model);
-      this.dropdownSelected.emit({ item: item.value, title: item.name })
+      this.dropdownSelected.emit({ item: item.value, title: item.name });
     } else {
       this.selectedNormal = item.name;
       this.model = { name: item.name, value: item.value };
       this.modelChange.emit(this.model.value);
-      this.dropdownSelected.emit({ item: item.value, title: item.name })
+      this.dropdownSelected.emit({ item: item.value, title: item.name });
     }
     this.expand = false;
   }
@@ -96,5 +110,4 @@ export class Dropdown implements OnInit, OnChanges {
   ngAfterContentInit() {
     this.initDefault();
   }
-
 }
