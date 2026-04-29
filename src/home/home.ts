@@ -1,4 +1,12 @@
-import { Component, OnInit, ChangeDetectorRef, ViewChild, ElementRef, OnDestroy } from '@angular/core';
+import {
+  Component,
+  OnInit,
+  ChangeDetectorRef,
+  ViewChild,
+  ElementRef,
+  OnDestroy,
+  HostListener,
+} from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { Topbar } from '../topbar/topbar';
 import { Request } from '../services/request';
@@ -7,10 +15,9 @@ import { Spotlight } from './spotlight/spotlight';
 import { Hover } from '../hover/hover';
 import { Toast } from '../toast/toast';
 import { Router } from '@angular/router';
-import { Subject, debounceTime } from 'rxjs';
+import { DragState } from '../services/drag-state';
 
-// TODO: character page
-// TODO: animation for spotlight
+// TODO: remove duplicate data
 
 @Component({
   selector: 'app-home',
@@ -24,7 +31,6 @@ export class Home implements OnInit, OnDestroy {
   @ViewChild('rec') rec!: ElementRef;
   @ViewChild('rec_manga') rec_manga!: ElementRef;
   @ViewChild('manga') manga!: ElementRef;
-
 
   topAnimeData: any;
   recAnimeData: any;
@@ -43,15 +49,14 @@ export class Home implements OnInit, OnDestroy {
   hoverBoxData: any;
   isAnimeBlock: boolean = false;
 
-  isDragging = false;
-  wasDrag = false;
   dragStartX = 0;
   dragStartY = 0;
   startX = 0;
   scrollLeft = 0;
   private readonly DRAG_THRESHOLD = 5;
+  private draggingElement: HTMLElement | null = null;
 
-  pageData: { page: number, limit: number } = { page: 0, limit: 7 };
+  pageData: { page: number; limit: number } = { page: 0, limit: 7 };
 
   scrollRight: number = 0;
 
@@ -62,8 +67,8 @@ export class Home implements OnInit, OnDestroy {
     private api: Request,
     private cdr: ChangeDetectorRef,
     private router: Router,
-  ) {
-  }
+    private dragState: DragState,
+  ) {}
 
   ngOnDestroy() {
     clearInterval(this.autoPageInterval);
@@ -82,7 +87,7 @@ export class Home implements OnInit, OnDestroy {
       },
       error: (err) => {
         console.log(err);
-      }
+      },
     });
   }
 
@@ -105,7 +110,6 @@ export class Home implements OnInit, OnDestroy {
     this.pageData.page = page;
   }
 
-
   onAnimeBlockLeave() {
     setTimeout(() => {
       this.hover = false;
@@ -120,7 +124,7 @@ export class Home implements OnInit, OnDestroy {
       },
       error: (err) => {
         console.log(err);
-      }
+      },
     });
   }
 
@@ -130,15 +134,14 @@ export class Home implements OnInit, OnDestroy {
       next: (response: any) => {
         this.recMangaData = response.data;
         this.recMangaData = this.recMangaData.slice(0, 14);
-        this.recMangaData = this.removeDuplicate(this.recMangaData);
+        this.recMangaData = this.api.removeDuplicate(this.recMangaData);
         this.loadingMangaRec = false;
         this.cdr.detectChanges();
       },
       error: (err) => {
         console.log(err);
-      }
+      },
     });
-
   }
 
   initAnimeRec() {
@@ -147,41 +150,35 @@ export class Home implements OnInit, OnDestroy {
       next: (response: any) => {
         this.recAnimeData = response.data;
         this.recAnimeData = this.recAnimeData.slice(0, 14);
-        this.recAnimeData = this.removeDuplicate(this.recAnimeData);
+        this.recAnimeData = this.api.removeDuplicate(this.recAnimeData);
         this.loadingAnimeRec = false;
         this.cdr.detectChanges();
       },
       error: (err) => {
         console.log(err);
-      }
+      },
     });
-  }
-
-  removeDuplicate(array: any) {
-    return array.filter(
-      (item: any, index: number) =>
-        array.findIndex((obj: any) => JSON.stringify(obj) === JSON.stringify(item)) === index,
-    );
   }
 
   initSpotlightData() {
     this.api.getAnimeSpotlightCached().subscribe({
       next: (response: any) => {
         this.spotlightData = response.data;
-        this.spotlightData = this.removeDuplicate(this.spotlightData);
+        this.spotlightData = this.api.removeDuplicate(this.spotlightData);
         console.log(this.spotlightData);
         this.cdr.detectChanges();
       },
       error: (err) => {
         console.log(err);
-      }
+      },
     });
   }
 
   startDrag(event: MouseEvent | TouchEvent, element: any) {
-    this.isDragging = true;
-    this.wasDrag = false;
+    this.dragState.isDragging.set(true);
+    this.dragState.wasDrag.set(false);
     const grid = element;
+    this.draggingElement = grid;
 
     if (event instanceof MouseEvent) {
       this.dragStartX = event.pageX;
@@ -192,10 +189,11 @@ export class Home implements OnInit, OnDestroy {
 
     grid.style.cursor = 'grabbing';
     grid.style.userSelect = 'none';
+    grid.style.scrollBehavior = 'auto';
   }
 
-  drag(event: MouseEvent | TouchEvent, element: HTMLDivElement) {
-    if (!this.isDragging) return;
+  drag(event: MouseEvent | TouchEvent, element: any) {
+    if (!this.dragState.isDragging()) return;
     event.preventDefault();
 
     const grid = element;
@@ -205,26 +203,27 @@ export class Home implements OnInit, OnDestroy {
       const movedX = Math.abs(event.pageX - this.dragStartX);
       const movedY = Math.abs(event.pageY - this.dragStartY);
       if (movedX > this.DRAG_THRESHOLD || movedY > this.DRAG_THRESHOLD) {
-        this.wasDrag = true;
+        this.dragState.wasDrag.set(true);
       }
       x = event.pageX - grid.offsetLeft;
     } else {
       return;
     }
 
-    const walk = (x - this.startX) * 2;
+    const walk = (x - this.startX) * 1.5;
     grid.scrollLeft = this.scrollLeft - walk;
   }
 
   endDrag(element: HTMLDivElement) {
-    this.isDragging = false;
+    this.dragState.isDragging.set(false);
     const grid = element;
     grid.style.cursor = 'grab';
-    grid.style.userSelect = 'auto';
+    grid.style.userSelect = 'none';
+    grid.style.scrollBehavior = 'auto';
   }
 
   onGridClick(event: MouseEvent) {
-    if (this.wasDrag) {
+    if (this.dragState.wasDrag()) {
       event.preventDefault();
       event.stopPropagation();
     }
@@ -244,7 +243,9 @@ export class Home implements OnInit, OnDestroy {
   autoPage(times: number) {
     let count = this.pageData.page;
     this.autoPageInterval = setInterval(() => {
-      if (!this.switchPagesAutomatically) { return; }
+      if (!this.switchPagesAutomatically) {
+        return;
+      }
       count++;
       this.pageData.page = count;
       if (count >= times) {
@@ -253,11 +254,9 @@ export class Home implements OnInit, OnDestroy {
       }
       this.cdr.detectChanges();
     }, 5000);
-
   }
 
   ngOnInit(): void {
-
     this.autoPage(8);
     setTimeout(() => {
       this.initTopAnimeData();
@@ -274,5 +273,27 @@ export class Home implements OnInit, OnDestroy {
     setTimeout(() => {
       this.initMangaRec();
     }, 3000);
+  }
+
+  @HostListener('document:mouseup', ['$event'])
+  onDocumentMouseUp(event: MouseEvent) {
+    if (this.dragState.isDragging()) {
+      this.dragState.isDragging.set(false);
+      this.draggingElement = null;
+      const grids = [this.popular, this.manga, this.rec, this.rec_manga, this.spotlightGrid];
+      grids.forEach((grid) => {
+        if (grid?.nativeElement) {
+          grid.nativeElement.style.cursor = 'grab';
+          grid.nativeElement.style.userSelect = 'auto';
+          grid.nativeElement.style.scrollBehavior = 'smooth';
+        }
+      });
+    }
+  }
+
+  @HostListener('document:mousemove', ['$event'])
+  onDocumentMouseMove(event: MouseEvent) {
+    if (!this.dragState.isDragging() || !this.draggingElement) return;
+    this.drag(event, this.draggingElement);
   }
 }

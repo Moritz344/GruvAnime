@@ -2,6 +2,7 @@ import { Component, Input, inject, Output, EventEmitter, OnInit, OnChanges, Chan
 import { CommonModule } from '@angular/common';
 import { Router } from '@angular/router';
 import { DeviceDetectorService } from 'ngx-device-detector';
+import { DragState } from '../services/drag-state';
 
 @Component({
   selector: 'app-anime-block',
@@ -17,7 +18,7 @@ export class AnimeBlock implements OnInit, OnChanges {
   isMobile: boolean = false;
   title: string = "";
 
-  constructor(private cdr: ChangeDetectorRef, private router: Router, private detector: DeviceDetectorService) {
+  constructor(private cdr: ChangeDetectorRef, private router: Router, private detector: DeviceDetectorService, private dragState: DragState) {
     this.isMobile = this.detector.isMobile();
   }
 
@@ -26,6 +27,9 @@ export class AnimeBlock implements OnInit, OnChanges {
   }
 
   onDetails() {
+    if (this.dragState.wasDrag()) {
+      return;
+    }
     if (this.openDetailsOnHoverElement) {
       return;
     }

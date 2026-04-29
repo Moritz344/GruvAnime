@@ -1,33 +1,35 @@
-.container{
+.container {
   position: relative;
   width: 1000px;
   border-radius: 10px;
   padding: 15px;
   border: 1px solid var(--gray7);
+  height: 300px;
+  overflow-y: scroll;
 }
 
-.container-mobile{
+.container-mobile {
   width: 250px;
   position: relative;
 }
 
-.container-mobile p{
+.container-mobile p {
   margin: 0;
 }
 
-
-.container img{
+.container img {
   float: left;
   margin-right: 5px;
 }
 
-p{
+p {
   text-align: justify;
   margin-bottom: 0;
+  line-height: 31px;
 }
 
-.read-more{
-  border:none;
+.read-more {
+  border: none;
   border-radius: 5px;
   padding: 5px;
   font-size: 15px;
@@ -37,12 +39,12 @@ p{
   margin-top: 0px;
 }
 
-a{
+a {
   text-decoration: none;
   color: var(--aqua);
 }
 
-.read-more:hover{
+.read-more:hover {
   transform: scale(1.02);
   background-color: var(--aqua-bright);
 }

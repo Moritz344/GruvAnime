@@ -6,7 +6,7 @@
   @if (!isMobile) {
     <div class="container-items" >
       <div class="anime-wrapper" (click)="onAnime()">
-        <a ><button (mouseenter)="onAnime()" class="btn"><img src="movie.svg">Anime</button></a>
+        <a ><button  (mouseenter)="onAnime()" class="btn"><img src="movie.svg"><span [class.active]="animeActive == true">Anime</span></button></a>
         @if (onAnimeHover) {
           <div class="anime-hover-container">
             <span (click)="onAnimeOption('trending')">Trending</span>
@@ -21,8 +21,8 @@
           </div>
         }
       </div>
-      <a ><button (mouseenter)="onManga()" class="btn"><img src="manga.svg">Manga</button></a>
-      <a ><button (click)="onCalendar()" (mouseenter)="onLeaveHoverElement()" class="btn"><img src="calendar.svg">Calendar</button></a>
+      <a ><button (mouseenter)="onManga()" class="btn"><img src="manga.svg"><span [class.active]="mangaActive()">Manga</span></button></a>
+      <a ><button (click)="onCalendar()" (mouseenter)="onLeaveHoverElement()" class="btn"><img src="calendar.svg"><span [class.active]="calendarActive == true">Calendar</span></button></a>
     </div>
 
   }@else{

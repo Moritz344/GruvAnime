@@ -1,16 +1,15 @@
-.container{
+.container {
   margin-top: 100px;
 }
 
-
-body{
+body {
 }
 
-h1{
+h1 {
   user-select: none;
 }
 
-@keyframes fadeIn{
+@keyframes fadeIn {
   from {
     opacity: 0;
     transform: translateX(20px);
@@ -21,36 +20,36 @@ h1{
   }
 }
 
-.loader-container-text{
+.loader-container-text {
   display: flex;
   justify-content: center;
   margin-top: 50px;
 }
 
-.loader-header{
+.loader-header {
   display: flex;
   justify-content: center;
 }
 
 .anime-grid {
   display: grid;
-  grid-template-columns: repeat(15,1fr);
+  grid-template-columns: repeat(15, 1fr);
   gap: 20px;
   overflow: auto;
-  scrollbar-width: none; 
+  scrollbar-width: none;
   -ms-overflow-style: none;
   cursor: grab;
   user-select: none;
   padding: 20px;
+  scroll-behavior: smooth;
 }
 
-app-spotlight{
+app-spotlight {
   animation: fadeIn 0.5s ease-out;
   transition: opacity 0.2s ease-in-out;
 }
 
-
-.hover-container{
+.hover-container {
   position: fixed;
   background-color: var(--bg-hard);
   width: 500px;
@@ -65,7 +64,7 @@ app-spotlight{
   margin-bottom: 500px;
 }
 
-.page-buttons-spotlight{
+.page-buttons-spotlight {
   display: flex;
   gap: 5px;
   position: absolute;
@@ -82,17 +81,17 @@ app-spotlight{
   opacity: 0.7;
 }
 
-.page-buttons-spotlight img{
+.page-buttons-spotlight img {
   width: 15px;
   height: 15px;
 }
 
-.page-buttons-spotlight button:hover{
+.page-buttons-spotlight button:hover {
   opacity: 1;
   transform: scale(1.02);
 }
 
-.scroll-buttons{
+.scroll-buttons {
   display: flex;
   justify-content: right;
   margin-top: 10px;
@@ -101,11 +100,11 @@ app-spotlight{
   gap: 5px;
 }
 
-.right{
+.right {
   transform: rotate(180deg);
 }
 
-.scroll-buttons  button{
+.scroll-buttons button {
   background-color: transparent;
   border-radius: 20px;
   border: 1px solid white;
@@ -114,48 +113,44 @@ app-spotlight{
   opacity: 0.7;
 }
 
-.scroll-buttons img{
+.scroll-buttons img {
   width: 15px;
   height: 15px;
 }
 
-.scroll-buttons button:hover{
+.scroll-buttons button:hover {
   opacity: 1;
   transform: scale(1.02);
 }
 
-
-.spotlight-grid{
+.spotlight-grid {
   display: flex;
   overflow-x: auto;
   overflow-y: hidden;
-  scrollbar-width: none; 
+  scrollbar-width: none;
   -ms-overflow-style: none;
   padding: 10px;
+  scroll-behavior: smooth;
 }
 
 .spotlight-grid::-webkit-scrollbar {
-  display: none; 
+  display: none;
 }
-
 
 .anime-grid-rec {
   display: grid;
   justify-content: center;
-  grid-template-columns: repeat(8,230px);
+  grid-template-columns: repeat(8, 230px);
   margin: 50px;
   margin-top: 20px;
   border-radius: 10px;
 }
 
 @media (max-width: 1200px) {
-
   .anime-grid {
     grid-template-columns: repeat(7, 1fr);
   }
 
-  
-  
   .page-buttons-spotlight {
     top: 420px;
   }
@@ -165,7 +160,7 @@ app-spotlight{
   .container {
     margin-top: 200px;
   }
-  
+
   .anime-grid {
     grid-template-columns: repeat(5, 1fr);
     gap: 15px;
@@ -176,11 +171,11 @@ app-spotlight{
     right: 25px;
     top: 370px;
   }
-  
+
   .scroll-buttons {
     margin-right: 25px;
   }
-  
+
   h1 {
     margin-left: 15px;
     font-size: 1.4rem;
@@ -191,39 +186,39 @@ app-spotlight{
   .container {
     margin-top: 0px;
   }
-  
+
   .anime-grid {
     grid-template-columns: repeat(4, 1fr);
     gap: 10px;
     padding: 10px;
   }
-  
+
   .spotlight-container {
     margin: 15px 10px;
     margin-bottom: 500px;
   }
-  
+
   .page-buttons-spotlight {
     right: 20px;
     top: 300px;
   }
-  
+
   .scroll-buttons {
     visibility: hidden;
   }
-  
+
   h1 {
     margin-left: 10px;
     font-size: 1.2rem;
     margin-bottom: 5px;
   }
-  
+
   .scroll-buttons button,
   .page-buttons-spotlight button {
     width: 35px;
     height: 35px;
   }
-  
+
   .scroll-buttons img,
   .page-buttons-spotlight img {
     width: 18px;
@@ -231,10 +226,10 @@ app-spotlight{
   }
 }
 
-.chapter-header{
+.chapter-header {
   margin-top: -50px;
-  margin-bottom:0px;
-  margin-left: 20px
+  margin-bottom: 0px;
+  margin-left: 20px;
 }
 
 @media (max-width: 400px) {
@@ -244,26 +239,25 @@ app-spotlight{
     padding: 8px;
   }
 
-  .chapter-header{
+  .chapter-header {
     margin-left: 10px;
   }
 
-  
   h1 {
     font-size: 1.1rem;
     margin-left: 8px;
   }
-  
+
   .spotlight-container {
     margin: 10px 8px;
     margin-bottom: 50px;
   }
-  
+
   .page-buttons-spotlight {
     right: 15px;
     top: 270px;
   }
-  
+
   .scroll-buttons {
     margin-right: 15px;
   }
@@ -276,26 +270,25 @@ app-spotlight{
     padding: 8px;
   }
 
-  .chapter-header{
+  .chapter-header {
     margin-left: 10px;
   }
 
-  
   h1 {
     font-size: 1.1rem;
     margin-left: 8px;
   }
-  
+
   .spotlight-container {
     margin: 10px 8px;
     margin-bottom: 50px;
   }
-  
+
   .page-buttons-spotlight {
     right: 15px;
     top: 270px;
   }
-  
+
   .scroll-buttons {
     margin-right: 15px;
   }

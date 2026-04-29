@@ -11,8 +11,7 @@ import { CommonModule } from '@angular/common';
 export class Review implements OnInit {
   @Input() data: any;
 
-  reviewShortText: string = "";
-  reviewText: string = "";
+  reviewText: string = '';
   showMoreText: boolean = false;
   currentSelectedReview: any;
   isMobile: boolean = false;
@@ -21,14 +20,7 @@ export class Review implements OnInit {
     this.isMobile = this.device.isMobile();
   }
 
-
   ngOnInit(): void {
     this.reviewText = this.data.review;
-    this.reviewShortText = this.data.review.slice(0, 400);
   }
-
-  onReadMore() {
-    this.showMoreText = !this.showMoreText;
-  }
-
 }

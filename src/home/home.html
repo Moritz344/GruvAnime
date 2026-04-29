@@ -25,7 +25,6 @@
     <h1 class="chapter-header" style="margin-top: 100px">Popular Anime </h1>
       <div class="anime-grid" #popular
         (mousedown)="startDrag($event,popular)"
-        (mousemove)="drag($event,popular)"
         (mouseup)="endDrag(popular)"
         (click)="onGridClick($event)">
         @for (data of topAnimeData; track $index) {
@@ -43,7 +42,6 @@
     <h1 class="chapter-header">Popular Manga</h1>
       <div class="anime-grid" #manga
         (mousedown)="startDrag($event,manga)"
-        (mousemove)="drag($event,manga)"
         (mouseup)="endDrag(manga)"
         (click)="onGridClick($event)">
 
@@ -62,7 +60,6 @@
     <h1 class="chapter-header">Recent Anime Recommendations</h1>
     <div class="anime-grid" #rec
       (mousedown)="startDrag($event,rec)"
-      (mousemove)="drag($event,rec)"
       (mouseup)="endDrag(rec)"
       (click)="onGridClick($event)"
     >
@@ -85,7 +82,6 @@
     <h1 class="chapter-header">Recent Manga Recommendations</h1>
     <div class="anime-grid" #rec_manga
       (mousedown)="startDrag($event,rec_manga)"
-      (mousemove)="drag($event,rec_manga)"
       (mouseup)="endDrag(rec_manga)"
       (click)="onGridClick($event)">
       @for (data of recMangaData; track $index) {
