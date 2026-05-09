@@ -9,7 +9,10 @@
       @for (data of calendarData.data; track $index) {
         <div class="anime-item">
           <app-anime-block [data]="data" [isAnime]="true"></app-anime-block>
-          <div class="anime-time">{{ data.broadcast?.time || 'N/A' }}</div>
+          @let local = getLocalBroadcast(data.broadcast);
+          @if (local) {
+            <div class="anime-time">{{ local.time }}</div>
+          }
         </div>
       }
   </div>

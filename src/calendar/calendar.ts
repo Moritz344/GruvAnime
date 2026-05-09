@@ -37,6 +37,27 @@ export class Calendar implements OnInit {
     });
   }
 
+    getLocalBroadcast(broadcast: any): { time: string; day: string } | null {
+    if (!broadcast?.time) {
+      return null;
+    }
+
+    const jstDateStr = new Intl.DateTimeFormat('en-CA', {
+      timeZone: 'Asia/Tokyo',
+      year: 'numeric',
+      month: '2-digit',
+      day: '2-digit'
+    }).format(new Date());
+
+    const localDate = new Date(`${jstDateStr}T${broadcast.time}:00+09:00`);
+
+    return {
+      time: localDate.toLocaleTimeString('en-US', { hour: '2-digit', minute: '2-digit', hour12: false }),
+      day: localDate.toLocaleDateString('en-US', { weekday: 'long' })
+    };
+  }
+
+
   loadMoreData() {
     let page = this.currentPage + 1;
     this.api.getSchedules(this.currentDay, page.toString()).subscribe((response: any) => {
