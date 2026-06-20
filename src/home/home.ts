@@ -165,7 +165,6 @@ export class Home implements OnInit, OnDestroy {
       next: (response: any) => {
         this.spotlightData = response.data;
         this.spotlightData = this.api.removeDuplicate(this.spotlightData);
-        console.log(this.spotlightData);
         this.cdr.detectChanges();
       },
       error: (err) => {
