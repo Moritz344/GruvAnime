@@ -1,5 +1,4 @@
 .container {
-  z-index: 0;
   animation: fadeIn 0.5s ease-out;
   transition: opacity 0.2s ease-in-out;
 }
@@ -20,9 +19,10 @@
   overflow: hidden;
   border: 1px solid var(--border);
   transition:
-    transform 0.2s ease,
-    box-shadow 0.2s ease;
+  transform 0.2s ease,
+  box-shadow 0.2s ease;
   cursor: pointer;
+  z-index: 1000;
 }
 
 img {

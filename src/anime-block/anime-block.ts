@@ -1,12 +1,12 @@
 import { Component, Input, inject, Output, EventEmitter, OnInit, OnChanges, ChangeDetectorRef } from '@angular/core';
 import { CommonModule } from '@angular/common';
-import { Router } from '@angular/router';
+import { Router, RouterLink } from '@angular/router';
 import { DeviceDetectorService } from 'ngx-device-detector';
 import { DragState } from '../services/drag-state';
 
 @Component({
   selector: 'app-anime-block',
-  imports: [CommonModule],
+  imports: [CommonModule, RouterLink],
   templateUrl: './anime-block.html',
   styleUrl: './anime-block.css',
 })
@@ -24,6 +24,10 @@ export class AnimeBlock implements OnInit, OnChanges {
 
   ngOnInit() {
     this.setTitle();
+  }
+
+  onContextmenu() {
+    this.dragState.isDragging.set(false);
   }
 
   onDetails() {
