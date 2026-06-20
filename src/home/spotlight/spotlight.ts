@@ -1,20 +1,11 @@
 import { Component, OnInit, Input, inject, Output, EventEmitter } from '@angular/core';
-import { trigger, style, animate, transition, state } from '@angular/animations';
 import { CommonModule } from '@angular/common';
 import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-spotlight',
   imports: [CommonModule],
-  animations: [
-    trigger('slideAnimation', [
-      transition('* => next', [
-        style({ opacity: 0 }),
-        animate('300ms ease-out', style({ opacity: 1 }))
-      ]),
-    ])
-  ],
-  templateUrl: './spotlight.html',
+    templateUrl: './spotlight.html',
   styleUrl: './spotlight.css',
 })
 
