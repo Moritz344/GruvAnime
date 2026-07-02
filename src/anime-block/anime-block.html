@@ -2,12 +2,9 @@
   <div class="container" (click)="onDetails()">
       <div class="anime-card" >
         <div class="anime-items">
-            <a [routerLink]="isAnime ? '/anime/' + data.mal_id : '/manga/' + data.mal_id" (click)="$event.stopPropagation()" (contextmenu)="onContextmenu()">
+            <a [routerLink]="isAnime ? '/anime/' + data.mal_id : '/manga/' + data.mal_id"  >
               <img *ngIf="data.images" draggable="false" class="anime-img" [src]="data.images.jpg.image_url">
             </a>
-            <div class="anime-score" *ngIf="data.score">
-              <span> <img src="score.png" width="15" height="15">{{ data.score }}</span>
-            </div>
               <div class="anime-title">
                  <span style="display: flex;justify-content: center;text-align: center; margin: 5px;">{{ title }}</span>
               </div>

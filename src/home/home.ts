@@ -15,7 +15,6 @@ import { Spotlight } from './spotlight/spotlight';
 import { Hover } from '../hover/hover';
 import { Toast } from '../toast/toast';
 import { Router } from '@angular/router';
-import { DragState } from '../services/drag-state';
 
 // TODO: remove duplicate data
 
@@ -67,7 +66,6 @@ export class Home implements OnInit, OnDestroy {
     private api: Request,
     private cdr: ChangeDetectorRef,
     private router: Router,
-    private dragState: DragState,
   ) {}
 
   ngOnDestroy() {
@@ -173,59 +171,10 @@ export class Home implements OnInit, OnDestroy {
     });
   }
 
-  startDrag(event: MouseEvent | TouchEvent, element: any) {
-    this.dragState.isDragging.set(true);
-    this.dragState.wasDrag.set(false);
-    const grid = element;
-    this.draggingElement = grid;
-
-    if (event instanceof MouseEvent) {
-      this.dragStartX = event.pageX;
-      this.dragStartY = event.pageY;
-      this.startX = event.pageX - grid.offsetLeft;
-      this.scrollLeft = grid.scrollLeft;
-    }
-
-    grid.style.cursor = 'grabbing';
-    grid.style.userSelect = 'none';
-    grid.style.scrollBehavior = 'auto';
-  }
-
-  drag(event: MouseEvent | TouchEvent, element: any) {
-    if (!this.dragState.isDragging()) return;
-    event.preventDefault();
-
-    const grid = element;
-    let x: number;
-
-    if (event instanceof MouseEvent) {
-      const movedX = Math.abs(event.pageX - this.dragStartX);
-      const movedY = Math.abs(event.pageY - this.dragStartY);
-      if (movedX > this.DRAG_THRESHOLD || movedY > this.DRAG_THRESHOLD) {
-        this.dragState.wasDrag.set(true);
-      }
-      x = event.pageX - grid.offsetLeft;
-    } else {
-      return;
-    }
-
-    const walk = (x - this.startX) * 1.5;
-    grid.scrollLeft = this.scrollLeft - walk;
-  }
-
-  endDrag(element: HTMLDivElement) {
-    this.dragState.isDragging.set(false);
-    const grid = element;
-    grid.style.cursor = 'grab';
-    grid.style.userSelect = 'none';
-    grid.style.scrollBehavior = 'auto';
-  }
 
   onGridClick(event: MouseEvent) {
-    if (this.dragState.wasDrag()) {
       event.preventDefault();
       event.stopPropagation();
-    }
   }
 
   scroll(direction: 'left' | 'right', element: HTMLDivElement) {
@@ -274,25 +223,5 @@ export class Home implements OnInit, OnDestroy {
     }, 3000);
   }
 
-  @HostListener('document:mouseup', ['$event'])
-  onDocumentMouseUp(event: MouseEvent) {
-    if (this.dragState.isDragging()) {
-      this.dragState.isDragging.set(false);
-      this.draggingElement = null;
-      const grids = [this.popular, this.manga, this.rec, this.rec_manga, this.spotlightGrid];
-      grids.forEach((grid) => {
-        if (grid?.nativeElement) {
-          grid.nativeElement.style.cursor = 'grab';
-          grid.nativeElement.style.userSelect = 'auto';
-          grid.nativeElement.style.scrollBehavior = 'smooth';
-        }
-      });
-    }
-  }
 
-  @HostListener('document:mousemove', ['$event'])
-  onDocumentMouseMove(event: MouseEvent) {
-    if (!this.dragState.isDragging() || !this.draggingElement) return;
-    this.drag(event, this.draggingElement);
-  }
 }
