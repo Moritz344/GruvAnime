@@ -129,6 +129,19 @@ body {
   margin-top: 200px;
 }
 
+@keyframes fadeIn {
+  from {
+    opacity: 0;
+  }
+  to {
+    opacity: 1;
+  }
+}
+
+.enter-animation{
+  animation: 0.2s fadeIn;
+}
+
 .loader {
   height: 60px;
   aspect-ratio: 2;
