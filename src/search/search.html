@@ -53,7 +53,7 @@
         }
     </div>
     }@else if (searchResult && searchResult.length == 0 && !searching){
-      <span style="display:flex;justify-content: center;margin-top: 100px;font-size: 20px">Nothing found...</span>
+      <span style="display:flex;justify-content: center;margin-top: 100px;font-size: 40px">Nothing found...</span>
     }
 
     @if (searching) {
@@ -64,7 +64,7 @@
     }
 
 
-    @if (paginationData && !searching) {
+    @if (paginationData && !searching && searchResult.length > 0) {
         <div class="page-container">
           <span>Page: {{ paginationData.current_page }}/{{ paginationData.last_visible_page }}</span>
         </div>
