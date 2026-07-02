@@ -33,7 +33,7 @@
         <p>{{ data.synopsis }}</p>
       </div>
       <div [ngClass]="{ 'info-container': !isMobile, 'info-container-mobile': isMobile }">
-        <h1 [ngClass]="{ 'info-title': !isMobile, 'info-title-mobile': isMobile }">Information</h1>
+        <h1 class="info-title">Information</h1>
         <table [ngClass]="{ 'info-table': !isMobile, 'info-table-mobile': isMobile }">
           <tr *ngIf="data && data.type">
             <td><span>Type</span></td>
@@ -63,7 +63,7 @@
       </div>
 
       <div [ngClass]="{ 'stat-container': !isMobile, 'stat-container-mobile': isMobile }" *ngIf="data.score || data.popularity || data.members">
-        <h1 [ngClass]="{ 'info-title': !isMobile, 'stat-title-mobile': isMobile }">Statistics</h1>     
+        <h1 class="info-title">Statistics</h1>     
         <table [ngClass]="{ 'stat-table': !isMobile, 'stat-table-mobile': isMobile }">
           <tr *ngIf="data.score">
             <td><img src="score.png" class="score-img" width="20" height="20" ><span>Score</span></td>
