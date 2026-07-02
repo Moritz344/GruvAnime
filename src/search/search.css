@@ -167,7 +167,7 @@ input {
 
 .search-container-mobile{
   display: grid;
-  grid-template-columns: repeat(4,100px);
+  grid-template-columns: repeat(3,auto);
   gap: 10px;
   justify-content: center;
   margin: 0px;
