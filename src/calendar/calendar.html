@@ -8,11 +8,11 @@
   <div [ngClass]="{ 'anime-container': !isMobile, 'anime-container-mobile': isMobile }">
       @for (data of calendarData.data; track $index) {
         <div class="anime-item">
-          <app-anime-block [data]="data" [isAnime]="true"></app-anime-block>
           @let local = getLocalBroadcast(data.broadcast);
           @if (local) {
             <div class="anime-time">{{ local.time }}</div>
           }
+          <app-anime-block [data]="data" [isAnime]="true"></app-anime-block>
         </div>
       }
   </div>
