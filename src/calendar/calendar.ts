@@ -72,7 +72,6 @@ export class Calendar implements OnInit {
 
   constructor(private api: Request, private cdr: ChangeDetectorRef, private device: DeviceDetectorService) {
     this.isMobile = this.device.isMobile();
-    console.log(this.isMobile);
   }
 
   ngOnInit(): void {
