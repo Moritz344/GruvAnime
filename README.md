@@ -3,9 +3,6 @@
 
 discover anime and manga
 
-> [!CAUTION]
-> **The Jikan API is shutting down and currently returning errors. I will be migrating to a different API.**
-
 
 
 <img width="1936" height="1080" alt="screenshot-2026-04-19_20-50-09" src="https://github.com/user-attachments/assets/7bd39138-99c8-4d69-b170-1ed25da75a53" />
@@ -13,10 +10,10 @@ discover anime and manga
 
 <details>
   <summary>More Screenshots: </summary>
-  
+
 <img width="1929" height="1080" alt="screenshot-2026-04-19_20-51-07" src="https://github.com/user-attachments/assets/b4cc5b1a-dce1-4b48-8343-1bfe37d1bed4" />
 <img width="1927" height="1080" alt="screenshot-2026-04-19_20-49-46" src="https://github.com/user-attachments/assets/7db0c20f-c324-46cb-bb52-f07c32e68201" />
- 
+
 </details>
 
 
@@ -31,10 +28,7 @@ ng serve
 
 ## Disclaimer
 
-This website uses the Jikan API (https://jikan.moe), an unofficial MyAnimeList API.
-
-This project is not affiliated with, endorsed by, or sponsored by MyAnimeList or Jikan.
+This website uses the Tenrai API (https://tenrai.org/).
 All anime, manga, and related metadata belong to their respective owners.
-
 No copyright infringement is intended.
 
