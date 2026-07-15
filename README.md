@@ -3,8 +3,8 @@
 
 discover anime and manga
 
-> [!WARNING]
-> **This website is a work in progress. Expect changes and possible instability.**
+> [!CAUTION]
+> **The Jikan API is shutting down and currently returning errors. I will be migrating to a different API.**
 
 
 
