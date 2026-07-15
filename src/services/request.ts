@@ -6,7 +6,7 @@ import { Observable, shareReplay } from 'rxjs';
   providedIn: 'root',
 })
 export class Request {
-  base_url = 'https://api.jikan.moe/v4/';
+  base_url = 'https://api.tenrai.org/v1/';
 
   private topAnimeCache$: Observable<any> | null = null;
   private topMangaCache$: Observable<any> | null = null;
@@ -79,7 +79,7 @@ export class Request {
     }
 
     params.append('limit', '25');
-    params.append('filter', day);
+    params.append('filter', day.toLowerCase());
     params.append('kids', 'false');
     params.append('sfw', 'false');
 
@@ -97,8 +97,6 @@ export class Request {
     if (type) {
       params.append('type', type);
     }
-
-    params.append('limit', limit);
 
     if (page) {
       params.append('page', page.toString());
