@@ -101,8 +101,8 @@ export class Request {
     if (page) {
       params.append('page', page.toString());
       params.append('sfw', 'true');
-      params.append('limit', limit);
     }
+    params.append('limit', limit);
 
     const url = this.base_url + 'top/manga?' + params;
 
@@ -155,7 +155,7 @@ export class Request {
   getMangaRec() {
     const params = new URLSearchParams();
     params.append('page', '1');
-    params.append('limit', '7');
+    params.append('limit', '14');
     const url = this.base_url + 'recommendations/manga?' + params;
     return this.http.get(url);
   }
@@ -170,7 +170,7 @@ export class Request {
   getAnimeRec() {
     const params = new URLSearchParams();
     params.append('page', '1');
-    params.append('limit', '7');
+    params.append('limit', '14');
     const url = this.base_url + 'recommendations/anime?' + params;
     return this.http.get(url);
   }
