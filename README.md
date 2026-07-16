@@ -4,15 +4,16 @@
 discover anime and manga
 
 
-
-<img width="1936" height="1080" alt="screenshot-2026-04-19_20-50-09" src="https://github.com/user-attachments/assets/7bd39138-99c8-4d69-b170-1ed25da75a53" />
+<img width="1920" height="1080" alt="screenshot-2026-07-16_20-00-11" src="https://github.com/user-attachments/assets/cbc0ce09-f15b-44f4-b1b6-5233941684e3" />
 
 
 <details>
   <summary>More Screenshots: </summary>
 
-<img width="1929" height="1080" alt="screenshot-2026-04-19_20-51-07" src="https://github.com/user-attachments/assets/b4cc5b1a-dce1-4b48-8343-1bfe37d1bed4" />
-<img width="1927" height="1080" alt="screenshot-2026-04-19_20-49-46" src="https://github.com/user-attachments/assets/7db0c20f-c324-46cb-bb52-f07c32e68201" />
+<img width="1920" height="1080" alt="screenshot-2026-07-16_20-05-36" src="https://github.com/user-attachments/assets/84a41ebe-910b-4bc5-8e54-2d6cdb779e98" />
+
+<img width="1920" height="1080" alt="screenshot-2026-07-16_20-07-36" src="https://github.com/user-attachments/assets/51b575c1-ad4a-45db-8f47-43ec67ac076e" />
+
 
 </details>
 
