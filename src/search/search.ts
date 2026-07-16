@@ -270,7 +270,7 @@ export class Search implements OnInit, AfterContentInit {
     { name: 'Ascending', value: 'asc' },
   ];
 
-  searchLimit: string = '24';
+  searchLimit: string = '35';
   paginationData: any;
   isMobile: boolean = false;
 
