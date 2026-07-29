@@ -270,7 +270,7 @@ export class Search implements OnInit, AfterContentInit {
     { name: 'Ascending', value: 'asc' },
   ];
 
-  searchLimit: string = '35';
+  searchLimit: string = '32';
   paginationData: any;
   isMobile: boolean = false;
 
@@ -337,7 +337,6 @@ export class Search implements OnInit, AfterContentInit {
     this.router.navigate(['/search', this.currentType], { queryParams });
   }
 
-  onModelChange(item: any, header: string) {}
 
   resetSearch() {
     this.router.navigate(['search/anime']);
