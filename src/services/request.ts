@@ -15,9 +15,6 @@ export class Request {
   private completeMangaCache$: Observable<any> | null = null;
   private upcomingMangaCache$: Observable<any> | null = null;
   private spotlightCache$: Observable<any> | null = null;
-  private animeAiring$: Observable<any> | null = null;
-  private animeUpcoming$: Observable<any> | null = null;
-  private scheduleCache$: { [key: string]: Observable<any> } = {};
 
   constructor(private http: HttpClient) {}
 
@@ -27,7 +24,6 @@ export class Request {
     this.animeRecCache$ = null;
     this.mangaRecCache$ = null;
     this.spotlightCache$ = null;
-    this.scheduleCache$ = {};
   }
 
   removeDuplicate(array: any) {
@@ -46,6 +42,7 @@ export class Request {
 
     params.append('filter', filter);
     params.append('limit', limit);
+    params.append("sfw","true");
 
     const url = this.base_url + 'top/anime?' + params;
 
@@ -156,6 +153,7 @@ export class Request {
     const params = new URLSearchParams();
     params.append('page', '1');
     params.append('limit', '14');
+    params.append("sfw","true");
     const url = this.base_url + 'recommendations/manga?' + params;
     return this.http.get(url);
   }
@@ -171,6 +169,7 @@ export class Request {
     const params = new URLSearchParams();
     params.append('page', '1');
     params.append('limit', '14');
+    params.append("sfw","true");
     const url = this.base_url + 'recommendations/anime?' + params;
     return this.http.get(url);
   }
