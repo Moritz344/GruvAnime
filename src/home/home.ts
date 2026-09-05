@@ -48,13 +48,6 @@ export class Home implements OnInit, OnDestroy {
   hoverBoxData: any;
   isAnimeBlock: boolean = false;
 
-  dragStartX = 0;
-  dragStartY = 0;
-  startX = 0;
-  scrollLeft = 0;
-  private readonly DRAG_THRESHOLD = 5;
-  private draggingElement: HTMLElement | null = null;
-
   pageData: { page: number; limit: number } = { page: 0, limit: 7 };
 
   scrollRight: number = 0;
