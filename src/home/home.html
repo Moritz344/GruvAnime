@@ -1,17 +1,4 @@
 <app-topbar></app-topbar>
-@if (showToast) {
-  <app-toast 
-    message="
-    This website is a <b>work in progress</b>. Expect changes and possible instability. 
-    If you found a bug report it here: <a href='https://github.com/Moritz344/GruvAnime/issues' target='_blank'>Github Issues</a>
-    "
-    header="Hey"
-    height="210"
-    width="420"
-    (kill)="onRemoveToast()"
-    >
-  </app-toast>
-}
 
 <div class="container">
     <div class="spotlight-container">
@@ -21,8 +8,9 @@
       </div>
     </div>
 
+    <br>
     @if (topAnimeData) {
-    <h1 class="chapter-header" style="margin-top: 100px">Popular Anime </h1>
+    <h1 class="chapter-header" style="margin-top: 50px">Popular Anime </h1>
       <div class="anime-grid" #popular
         (click)="onGridClick($event)">
         @for (data of topAnimeData; track $index) {
