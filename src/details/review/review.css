@@ -1,9 +1,9 @@
 .container {
   position: relative;
-  width: 1000px;
+  width: 90vw;
   border-radius: 10px;
   padding: 15px;
-  border: 1px solid var(--gray7);
+  background-color: var(--gray8);
   height: 300px;
   overflow-y: scroll;
 }
