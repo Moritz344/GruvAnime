@@ -5,8 +5,6 @@ import { AnimeBlock } from '../anime-block/anime-block';
 import { Topbar } from '../topbar/topbar';
 import { DeviceDetectorService } from 'ngx-device-detector';
 
-// TODO: show sheduled anime like aniworld
-
 @Component({
   selector: 'app-calendar',
   imports: [CommonModule, AnimeBlock, Topbar],

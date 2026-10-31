@@ -9,11 +9,6 @@ import { AnimeBlock } from '../anime-block/anime-block';
 import { switchMap, forkJoin, of, delay, tap } from 'rxjs';
 import { Subscription } from 'rxjs';
 
-// TODO: Redesign Page
-// TODO: make responsive for mobile
-// TODO: handle too many requests/better error handling
-
-
 @Component({
   selector: 'app-details',
   imports: [Topbar, CommonModule, Review, AnimeBlock],

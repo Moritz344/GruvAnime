@@ -16,8 +16,6 @@ import { Hover } from '../hover/hover';
 import { Toast } from '../toast/toast';
 import { Router } from '@angular/router';
 
-// TODO: remove duplicate data
-
 @Component({
   selector: 'app-home',
   imports: [Topbar, AnimeBlock, Spotlight, CommonModule, Hover, Toast],
