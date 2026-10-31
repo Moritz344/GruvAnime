@@ -165,9 +165,10 @@
   position: absolute;
   top: 100%;
   left: -7px;
+  align-items: center;
+  border: 1px solid var(--gray5) ;
   background-color: var(--gray8);
   padding: 10px;
-  border: 1px solid white;
   z-index: 9999;
   border-radius: 5px;
   display: flex;
@@ -189,9 +190,10 @@
   position: absolute;
   top: 100%;
   left: 110px;
+  border: 1px solid var(--gray5) ;
   background-color: var(--gray8);
   padding: 10px;
-  border: 1px solid white;
+  align-items: center;
   z-index: 9999;
   border-radius: 5px;
   display: flex;
