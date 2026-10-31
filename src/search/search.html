@@ -5,7 +5,7 @@
     'container-top-items-mobile': isMobile
   }
   ">
-    <input (keydown.code.enter)="search()" [(ngModel)]="searchFilter.keyword" spellcheck="false" placeholder="Search...">
+    <input style="padding: 7px;font-size: 25px" (keydown.code.enter)="search()" [(ngModel)]="searchFilter.keyword" spellcheck="false" placeholder="Search...">
   </div>
     <div [ngClass]="{
       'filter-container': !isMobile,
@@ -40,7 +40,7 @@
         </div>
 
     @if (searchResult && searchResult.length > 0 && !searching ) {
-    <div [ngClass]="{ 
+    <div [ngClass]="{
       'search-container': !isMobile,
       'search-container-mobile': isMobile
       }">
