@@ -179,11 +179,12 @@ input {
 
 .filter-container{
   position: absolute;
-  display: grid;
-  grid-template-columns: repeat(7,250px);
-  gap: 5px;
+  display: flex;
+  flex-direction: row;
+  gap: 9px;
   margin-left: 20px;
   z-index: 1000;
+  flex-wrap: wrap;
   margin-top: 10px;
 }
 
@@ -201,5 +202,3 @@ input {
   border-radius: 5px;
   max-height: 40px;
 }
-
-
