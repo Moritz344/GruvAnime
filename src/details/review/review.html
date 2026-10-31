@@ -1,7 +1,6 @@
 <div [ngClass]="{ 'container': !isMobile, 'container-mobile': isMobile }">
-  <img width="50" height="50" [src]="data.user.images.jpg.image_url">
+  <img width="70" height="70" [src]="data.user.images.jpg.image_url">
   <a [href]="data.user.url" target="_blank">{{ data.user.username }}</a> <br>
   <br><br>
   <p>{{ reviewText }}</p> <br>
-
 </div>
